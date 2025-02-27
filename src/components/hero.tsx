@@ -1,4 +1,3 @@
-// components/Hero.tsx
 import Image from 'next/image';
 
 export default function Hero() {
@@ -8,12 +7,15 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-dark/20 to-dark z-10"></div>
       
       {/* Profile image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0" style={{ maxHeight: '100vh' }}>
         <Image 
           src="/placeholder.png"
           alt="Adhara Eka"
           fill
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          style={{ 
+            objectFit: 'contain',
+            objectPosition: 'center'
+          }}
           priority
           quality={100}
           className="opacity-50"
