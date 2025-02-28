@@ -18,58 +18,121 @@ const projects: ProjectData[] = [
 ];
 
 export function Portfolio() {
+  const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const slidesRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const [isInView, setIsInView] = useState(false);
+  const [totalScrollHeight, setTotalScrollHeight] = useState(0);
+  
+  // Setup intersection observer to detect when portfolio section is in view
   useEffect(() => {
-    const container = containerRef.current;
-    const slidesContainer = slidesRef.current;
+    if (!sectionRef.current) return;
     
-    if (!container || !slidesContainer) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsInView(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
     
-    // Handle wheel event for horizontal scrolling
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      
-      // Determine scroll direction
-      const direction = e.deltaY > 0 ? 1 : -1;
-      
-      // Update current slide with boundaries
-      setCurrentSlide(prev => {
-        const next = prev + direction;
-        return Math.max(0, Math.min(projects.length - 1, next));
-      });
-    };
-
-    // Apply wheel event listener to container
-    container.addEventListener('wheel', handleWheel, { passive: false });
+    observer.observe(sectionRef.current);
     
     return () => {
-      container.removeEventListener('wheel', handleWheel);
+      observer.disconnect();
     };
   }, []);
-
-  // Update slide position when currentSlide changes
+  
+  // Calculate scroll heights
   useEffect(() => {
-    const slidesContainer = slidesRef.current;
-    if (!slidesContainer) return;
+    if (!sectionRef.current) return;
     
-    const slideWidth = window.innerWidth;
-    const translateX = -currentSlide * slideWidth;
+    // Set section height based on number of projects
+    const sectionHeight = window.innerHeight * (projects.length + 1);
+    setTotalScrollHeight(sectionHeight);
     
-    slidesContainer.style.transform = `translateX(${translateX}px)`;
-  }, [currentSlide]);
+    // Update section height
+    sectionRef.current.style.height = `${sectionHeight}px`;
+  }, []);
+  
+  // Handle scroll behavior
+  useEffect(() => {
+    if (!slidesRef.current || !containerRef.current || !sectionRef.current) return;
+    
+    const handleScroll = () => {
+      if (!isInView || !sectionRef.current) return;
+      
+      // Get section position
+      const sectionTop = sectionRef.current.getBoundingClientRect().top;
+      const sectionHeight = sectionRef.current.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate progress through section (0 to 1)
+      const scrollProgress = Math.max(0, Math.min(1, -sectionTop / (sectionHeight - viewportHeight)));
+      
+      // Calculate which slide we should be on
+      const targetSlide = Math.min(
+        projects.length - 1,
+        Math.floor(scrollProgress * projects.length)
+      );
+      
+      // Update current slide if needed
+      if (targetSlide !== currentSlide) {
+        setCurrentSlide(targetSlide);
+      }
+      
+      // Calculate smooth transition between slides
+      const slideWidth = window.innerWidth;
+      const exactProgress = scrollProgress * (projects.length - 1);
+      const translateX = -exactProgress * slideWidth;
+      
+      // Apply transform to slides container
+      slidesRef.current!.style.transform = `translateX(${translateX}px)`;
+      
+      if (!slidesRef.current || !containerRef.current || !sectionRef.current) return;
+      
+      // Add parallax effect to titles
+      const titles = document.querySelectorAll('.project-title');
+      titles.forEach((title, index) => {
+        const titleEl = title as HTMLElement;
+        const distanceFromCurrent = exactProgress - index;
+        
+        // Apply parallax movement
+        titleEl.style.transform = `translateX(${-distanceFromCurrent * 200}px)`;
+        
+        // Fade titles in/out based on current position
+        const opacityValue = 1 - Math.min(1, Math.abs(distanceFromCurrent) * 2);
+        titleEl.style.opacity = opacityValue.toString();
+      });
+    };
+    
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initial call to set positions
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentSlide, isInView]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
-      {/* Fixed height container */}
-      <div ref={containerRef} className="relative w-full h-screen">
-        {/* Slides container */}
+    <section 
+      ref={sectionRef} 
+      className="relative w-full"
+      style={{ height: `${totalScrollHeight}px` }}
+    >
+      <div 
+        ref={containerRef} 
+        className="sticky top-0 h-screen w-full overflow-hidden"
+      >
         <div 
           ref={slidesRef}
           className="absolute top-0 left-0 w-full h-screen flex will-change-transform"
-          style={{ transition: 'transform 0.5s ease-out' }}
+          style={{ transition: 'transform 0.05s ease-out' }}
         >
           {projects.map((project, index) => (
             <div
@@ -77,7 +140,7 @@ export function Portfolio() {
               className="relative w-screen h-screen flex-shrink-0"
             >
               <div className="absolute inset-0 z-10 flex items-center justify-center">
-                <h2 className="text-[8vw] font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                <h2 className="project-title text-[8vw] font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                   {project.title}
                 </h2>
               </div>
@@ -95,40 +158,7 @@ export function Portfolio() {
             </div>
           ))}
         </div>
-        
-        {/* Navigation indicators */}
-        <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-2">
-          {projects.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                currentSlide === index 
-                  ? 'bg-white scale-125' 
-                  : 'bg-white/50 hover:bg-white/70'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
       </div>
-      
-      <style jsx global>{`
-        body {
-          overflow: hidden;
-        }
-        
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        ::-webkit-scrollbar {
-          display: none;
-        }
-        
-        /* Hide scrollbar for IE, Edge and Firefox */
-        * {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-        }
-      `}</style>
     </section>
   );
 }
