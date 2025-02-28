@@ -1,4 +1,4 @@
-import About from "@/components/about";
+import AboutMe from "@/components/about";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 import Hero from "@/components/hero";
@@ -11,7 +11,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
-      <About />
+      <AboutMe />
       <Services />
       <Portfolio />
       <Contact />

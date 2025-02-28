@@ -7,6 +7,20 @@
   --background-rgb: 18, 18, 18;
 }
 
+* {
+  user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-select: none;
+}
+
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
 body {
   font-family: 'Inter', sans-serif;
   color: rgb(var(--foreground-rgb));
