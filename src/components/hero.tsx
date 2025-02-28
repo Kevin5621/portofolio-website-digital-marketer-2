@@ -7,16 +7,6 @@ const Hero = () => {
   
   return (
     <div className="bg-light min-h-screen relative">
-      {/* Subtle Grid Lines */}
-      <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-12 z-0 opacity-5">
-        {Array(12).fill(0).map((_, i) => (
-          <div key={i} className="h-full border-r border-neutral-300"></div>
-        ))}
-      </div>
-      
-      {/* Minimal Horizontal Line */}
-      <div className="absolute top-20 left-0 w-full h-px bg-neutral-200 opacity-30"></div>
-      <div className="absolute bottom-20 left-0 w-full h-px bg-neutral-200 opacity-30"></div>
       
       {/* Main Hero Content */}
       <motion.div 
@@ -41,12 +31,12 @@ const Hero = () => {
           
           {/* Main Headline */}
           <motion.h2 
-            className="text-4xl md:text-6xl lg:text-7xl font-medium text-neutral-900 mb-6 leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-space text-neutral-900 mb-6 leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Transforming brands through <span className="text-primary">strategic digital</span> storytelling
+            Transforming brands through <span className="font-space text-primary">strategic digital</span> storytelling
           </motion.h2>
           
           {/* Description */}
