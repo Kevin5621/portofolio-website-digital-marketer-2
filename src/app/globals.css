@@ -22,14 +22,14 @@ html::-webkit-scrollbar {
 }
 
 body {
-  font-family: 'extenda 40 hecto';
+  font-family: 'Poppins';
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'extenda 40 hecto';
+  font-family: 'Poppins', 
 }
 
 .container-custom {

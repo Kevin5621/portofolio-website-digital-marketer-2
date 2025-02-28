@@ -1,63 +1,43 @@
-"use client"
-
 import React from 'react';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
 
-const Hero = () => {
-  
+const Hero: React.FC = () => {
   return (
-    <div className="bg-light min-h-screen relative">
+    <div className="relative w-full h-screen bg-zinc-900 overflow-hidden">
+      {/* Full-screen background image */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="/placeholder.png" 
+          alt="Profile portrait" 
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+          className="grayscale opacity-90"
+          priority
+        />
+        {/* Darkening overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      </div>
       
-      {/* Main Hero Content */}
-      <motion.div 
-        className="pt-32 pb-16 px-6 md:px-12 lg:px-24 flex flex-col min-h-screen justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="max-w-5xl">
-          {/* Tagline with line */}
-          <motion.div
-            className="flex items-center gap-3 mb-5"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="w-8 h-px bg-neutral-400"></div>
-            <p className="text-neutral-500 md:text-lg">
-            Digital Marketing Strategist
-            </p>
-          </motion.div>
+      {/* Centered content overlay */}
+      <div className="relative z-10 h-full w-full flex flex-col items-center justify-center">
+        <div className="text-center">
+          {/* Large AUST, text */}
+          <h1 className="text-white text-8xl md:text-9xl font-serif tracking-tight leading-none">
+            Adhara<span className="text-white">,</span>
+          </h1>
           
-          {/* Main Headline */}
-          <motion.h2 
-            className="text-4xl md:text-6xl lg:text-7xl font-space text-neutral-900 mb-6 leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Transforming brands through <span className="font-space text-primary">strategic digital</span> storytelling
-          </motion.h2>
+          <div className="flex justify-end -mt-4 mr-6">
+            <h2 className="text-white text-3xl italic font-light">Eka</h2>
+          </div>
           
-          {/* Description */}
-          <motion.p 
-            className="text-neutral-600 text-lg md:text-xl max-w-3xl mb-10 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-          </motion.p>
-          
-          {/* CTA Buttons */}
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-          </motion.div>
+          <div className="mt-8 text-white uppercase tracking-widest text-center">
+            <p className="font-light text-sm">Digital</p>
+            <p className="font-light text-sm">Marketing</p>
+          </div>
         </div>
-      </motion.div>
+      </div>
+      
     </div>
   );
 };

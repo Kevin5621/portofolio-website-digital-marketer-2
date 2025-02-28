@@ -17,8 +17,8 @@ const config: Config = {
         'gray-light': '#a3a3a3',
       },
       fontFamily: {
-        'space': ['extenda 40 hecto'],
-        'inter': ['extenda 40 hecto']
+        'space': ['Poppins', 'Sans-serif'],
+        'inter': ['Poppins', 'Sans-serif']
       }
     },
   },
