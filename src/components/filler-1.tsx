@@ -36,7 +36,8 @@ const Filler1 = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Transforming brands through <span className="font-space text-primary font-bold">strategic digital</span> storytelling
+            <p>Turning Vision</p>
+            <span className="font-space text-primary font-bold">Into Motion</span>
           </motion.h2>
           
           {/* Description */}

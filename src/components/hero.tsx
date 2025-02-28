@@ -5,8 +5,8 @@ const Hero: React.FC = () => {
   return (
     <div className="relative w-full h-screen bg-zinc-900 overflow-hidden">
       {/* Full-screen background image */}
-      <div className="absolute inset-0 z-0">
-        <Image 
+      <div className="absolute inset-0 z-0 left-[-90px]">
+       <Image 
           src="/placeholder.png" 
           alt="Profile portrait" 
           layout="fill"
@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
           priority
         />
         {/* Darkening overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div className="absolute inset-0 bg-dark bg-opacity-30"></div>
       </div>
       
       {/* Centered content overlay */}

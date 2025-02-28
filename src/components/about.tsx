@@ -11,82 +11,76 @@ const AboutMe = () => {
     <ReactLenis root>
       <main>
         {/* First Section - AboutMe (Sticky) */}
-        <section className="bg-light min-h-screen sticky top-0 relative font-sans">
-          <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:54px_54px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+        <section className="bg-light min-h-screen sticky top-0 relative">
+          {/* Very subtle background texture - almost invisible */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f05_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f05_1px,transparent_1px)] bg-[size:80px_80px]"></div>
           
-          <div className="container mx-auto px-10 md:px-16 py-24 md:py-32 relative z-10">
+          <div className="container mx-auto px-6 md:px-10 py-16 md:py-24 h-screen flex items-center">
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center"
+              className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
             >
-              {/* Left Column - Photo */}
-              <div className="relative h-full overflow-hidden flex justify-center">
-                <Image 
-                  src="/placeholder.png" 
-                  alt="Profile Photo" 
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-
-              {/* Right Column - Text Content */}
+              {/* Left Column - Text Content */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="px-4 md:px-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="md:col-span-7 space-y-8"
               >
-                {/* Section Label */}
+                {/* Section Label - No line */}
                 <motion.div
-                  className="flex items-center gap-3 mb-6"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <div className="w-8 h-px bg-neutral-400"></div>
-                  <p className="text-neutral-500 uppercase tracking-widest text-xs font-medium">
+                  <p className="text-neutral-500 uppercase tracking-widest text-xs font-medium font-space">
                     About Me
                   </p>
                 </motion.div>
                 
-                {/* Name/Title */}
-                <h1 className="text-5xl md:text-6xl font-extralight text-neutral-900 mb-8 leading-tight tracking-tight">
-                  <span className="font-medium tracking-normal">Hello,</span> I&apos;m
-                  <br />
-                  <span className="text-primary relative inline-block mt-3 font-normal">
+                {/* Name/Title - No underline */}
+                <div className="space-y-3">
+                  <h2 className="text-xl md:text-2xl font-space font-light text-neutral-600">
+                    Hello, I&apos;m
+                  </h2>
+                  <h1 className="text-4xl md:text-6xl font-space font-medium text-neutral-900 tracking-tight">
                     Adhara Eka Sakti
-                    <span className=" w-full h-px bg-primary opacity-40"></span>
-                  </span>
-                </h1>
+                  </h1>
+                </div>
+                
+                {/* Role */}
+                <h3 className="text-xl md:text-2xl font-space font-normal text-primary">
+                  Social Media Marketer & Graphic Designer
+                </h3>
                 
                 {/* Bio */}
-                <div className="space-y-5 text-neutral-600 text-base md:text-lg max-w-xl font-light">
-                  <p className="leading-relaxed">
-                    A <span className="font-medium text-neutral-800">Social Media Marketer</span>, <span className="font-medium text-neutral-800">Video Editor</span>, and <span className="font-medium text-neutral-800">Freelance Graphic Designer</span> based in Indonesia.
-                  </p>
-                  <p className="leading-relaxed">
-                    I&apos;m highly motivated to help businesses thrive through innovative marketing strategies.
-                  </p>
-                  <p className="leading-relaxed">
-                   I believe the combination of my analytical skills and creativity will be an asset in crafting innovative and successful marketing strategies.
+                <div className="text-neutral-600 text-base md:text-lg max-w-2xl font-light font-space leading-relaxed">
+                  <p>
+                    A <span className="font-medium text-neutral-800">Social Media Marketer</span>, <span className="font-medium text-neutral-800">Video Editor</span>, and <span className="font-medium text-neutral-800">Freelance Graphic Designer</span> based in Indonesia. I&apos;m highly motivated to help businesses thrive through innovative marketing strategies.
                   </p>
                 </div>
-              
+              </motion.div>
+
+              {/* Right Column - Photo */}
+              <motion.div 
+                className="md:col-span-4 relative overflow-hidden"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.4 }}
+                >
+                <motion.div className="md:col-span-4 relative overflow-hidden h-96 w-96">
+                  <Image 
+                    src="/placeholder2.png" 
+                    alt="Profile Photo" 
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </motion.div>
               </motion.div>
             </motion.div>
-          </div>
-          
-          {/* Decorative corner lines */}
-          <div className="absolute top-8 right-8 w-16 h-16">
-            <div className="absolute top-0 right-0 w-px h-16 bg-neutral-300 opacity-20"></div>
-            <div className="absolute top-0 right-0 w-16 h-px bg-neutral-300 opacity-20"></div>
-          </div>
-          <div className="absolute bottom-8 left-8 w-16 h-16">
-            <div className="absolute bottom-0 left-0 w-px h-16 bg-neutral-300 opacity-20"></div>
-            <div className="absolute bottom-0 left-0 w-16 h-px bg-neutral-300 opacity-20"></div>
           </div>
         </section>
 
@@ -94,16 +88,54 @@ const AboutMe = () => {
         <section className="relative">
           {/* Sticky background */}
           <div className="sticky top-0 h-screen w-full bg-dark rounded-tr-2xl rounded-tl-2xl overflow-hidden">
+            {/* Top-down water ripple animation container */}
+            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+              {/* Ripple 1 - Slowest and largest */}
+              <div className="absolute w-full h-full flex items-center justify-center">
+                <div 
+                  className="absolute w-[200%] h-[200%] rounded-full border-4 border-slate-800 opacity-30"
+                  style={{
+                    animation: 'ripple 10s linear infinite',
+                  }}
+                />
+              </div>
+              
+              {/* Ripple 2 - Medium speed */}
+              <div className="absolute w-full h-full flex items-center justify-center">
+                <div 
+                  className="absolute w-[150%] h-[150%] rounded-full border-4 border-slate-700 opacity-20"
+                  style={{
+                    animation: 'ripple 8s linear infinite',
+                    animationDelay: '2s',
+                  }}
+                />
+              </div>
+              
+              {/* Ripple 3 - Fast speed */}
+              <div className="absolute w-full h-full flex items-center justify-center">
+                <div 
+                  className="absolute w-[100%] h-[100%] rounded-full border-4 border-slate-600 opacity-15"
+                  style={{
+                    animation: 'ripple 6s linear infinite',
+                    animationDelay: '1s',
+                  }}
+                />
+              </div>
+              
+              {/* Ripple 4 - Fastest and smallest */}
+              <div className="absolute w-full h-full flex items-center justify-center">
+                <div 
+                  className="absolute w-[50%] h-[50%] rounded-full border-4 border-slate-500 opacity-10"
+                  style={{
+                    animation: 'ripple 4s linear infinite',
+                    animationDelay: '0.5s',
+                  }}
+                />
+              </div>
+            </div>
+            
             {/* Background gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-gray-dark to-dark opacity-80"></div>
-            
-            {/* Subtle texture */}
-            <div className="absolute inset-0 opacity-30" 
-                style={{ 
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23333' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-                  backgroundSize: '150px 150px'
-                }}>
-            </div>
           </div>
 
           {/* Scrollable content */}
