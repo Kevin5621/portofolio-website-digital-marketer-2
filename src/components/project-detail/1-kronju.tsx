@@ -15,21 +15,11 @@ const brandData = {
     { metric: "3.2M", description: "Impressions" },
   ],
   projects: [
-    {
-      image: "/project/project-detail/foto-1-1.png"
-    },
-    {
-      image: "/project/project-detail/foto-1-2.png"
-    },
-    {
-      image: "/project/project-detail/foto-1-3.png"
-    },
-    {
-      image: "/project/project-detail/foto-1-4.png"
-    },
-    {
-      image: "/project/project-detail/foto-1-5.png"
-    },
+    { image: "/project/project-detail/foto-1-1.png" },
+    { image: "/project/project-detail/foto-1-2.png" },
+    { image: "/project/project-detail/foto-1-3.png" },
+    { image: "/project/project-detail/foto-1-4.png" },
+    { image: "/project/project-detail/foto-1-5.png" },
   ]
 };
 
@@ -121,7 +111,7 @@ export default function BrandPortfolioPage() {
         </section>
 
         {/* Compact Achievements Section */}
-        <section className="py-16 px-4 md:px-8 bg-gray-50">
+        <section className="py-16 px-4 md:px-8 bg-white">
           <div className="max-w-4xl mx-auto">
             {/* Judul dengan teks yang lebih kecil namun tetap menarik */}
             <h2 className="text-lg md:text-xl font-semibold mb-6 text-center text-gray-700 tracking-wide">
