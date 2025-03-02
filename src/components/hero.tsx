@@ -169,58 +169,55 @@ const Hero = () => {
               </div>
             </div>
             
-            {/* Right Side - Scrollable Content with Brutalist Text Design */}
-            <div className="md:w-1/2 bg-neutral-50">
+            {/* Right Side - Scrollable Content with Raw Brutalism for Landscape Images */}
+            <div className="md:w-1/2 bg-white">
               <div className="py-16 px-8 md:px-12">
-                {/* Modified portfolio section with brutalist text */}
                 <div className="grid grid-cols-1">
                   {portfolioItems.map((item, index) => (
-                    <div key={index} className="mb-0">
-                      {/* Image Container */}
-                      <motion.div 
+                    <div key={index} className="mb-0 border-t-8 border-black">
+                      {/* Image Container with heavy borders and minimal hover effect */}
+                      <motion.div
                         className="group"
-                        initial={{ opacity: 0, y: 100 }}
+                        initial={{ opacity: 0, y: 80 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: 0.6 }}
                         viewport={{ once: true, margin: "-100px" }}
                       >
-                        <div className="relative overflow-hidden">
-                          <motion.div 
-                            className="aspect-[4/5] overflow-hidden"
-                            whileHover={{ scale: 0.95 }}
-                            transition={{ duration: 0.4 }}
+                        <div className="relative overflow-hidden border-4 border-black">
+                          <motion.div
+                            className="aspect-[16/9] overflow-hidden"
+                            whileHover={{ scale: 0.98 }}
+                            transition={{ duration: 0.3 }}
                           >
                             <Image
                               src={item.image}
                               alt={item.alt}
-                              width={600}
-                              height={750}
-                              className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110"
+                              width={800}
+                              height={450}
+                              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                             />
                           </motion.div>
-                          <motion.div 
-                            className="absolute inset-0 bg-dark/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            whileHover={{ opacity: 0.2 }}
+                          <motion.div
+                            className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"
                           ></motion.div>
                         </div>
                       </motion.div>
-                      
+
                       {/* Brutalist Text Container */}
-                      <div className="bg-dark py-12 flex items-center justify-center">
-                        <h3 className="text-white font-mono font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight text-center leading-none px-2">
+                      <div className="bg-black flex items-center justify-center">
+                        <h3 className="text-white font-mono font-bold text-4x1 md:text-4xl tracking-wider text-center leading-none">
                           {item.description}
                         </h3>
                       </div>
-                      
-                      {/* No spacing between items */}
-                      {index < portfolioItems.length - 1 && (
-                        <div className="h-0"></div>
-                      )}
+
+                      {/* No extra spacing between items */}
+                      {index < portfolioItems.length - 1 && <div className="h-0"></div>}
                     </div>
                   ))}
                 </div>
               </div>
             </div>
+
           </div>
         </section>
       </main>
