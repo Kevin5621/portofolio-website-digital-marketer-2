@@ -11,76 +11,53 @@ const AboutMe = () => {
     <ReactLenis root>
       <main>
         {/* First Section - AboutMe (Sticky) */}
-        <section className="bg-light min-h-screen sticky top-0 relative">
-          {/* Very subtle background texture - almost invisible */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f05_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f05_1px,transparent_1px)] bg-[size:80px_80px]"></div>
-          
-          <div className="container mx-auto px-6 md:px-10 py-16 md:py-24 h-screen flex items-center">
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              {/* Left Column - Text Content */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="md:col-span-7 space-y-8"
-              >
-                {/* Section Label - No line */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <p className="text-neutral-500 uppercase tracking-widest text-xs font-medium font-space">
-                    About Me
-                  </p>
-                </motion.div>
-                
-                {/* Name/Title - No underline */}
-                <div className="space-y-3">
-                  <h2 className="text-xl md:text-2xl font-space font-light text-neutral-600">
-                    Hello, I&apos;m
-                  </h2>
-                  <h1 className="text-4xl md:text-6xl font-space font-medium text-neutral-900 tracking-tight">
-                    Adhara Eka Sakti
-                  </h1>
-                </div>
-                
-                {/* Role */}
-                <h3 className="text-xl md:text-2xl font-space font-normal text-primary">
-                  Social Media Marketer & Graphic Designer
-                </h3>
-                
-                {/* Bio */}
-                <div className="text-neutral-600 text-base md:text-lg max-w-2xl font-light font-space leading-relaxed">
-                  <p>
-                    A <span className="font-medium text-neutral-800">Social Media Marketer</span>, <span className="font-medium text-neutral-800">Video Editor</span>, and <span className="font-medium text-neutral-800">Freelance Graphic Designer</span> based in Indonesia. I&apos;m highly motivated to help businesses thrive through innovative marketing strategies.
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Right Column - Photo */}
+        <section className="relative bg-white sticky top-0 h-screen">
+          <div className="flex flex-col md:flex-row h-full">
+            {/* Left Side - Bold Typography */}
+            <div className="md:w-1/2 relative bg-white z-10 flex items-center">
               <motion.div 
-                className="md:col-span-4 relative overflow-hidden"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.4 }}
-                >
-                <motion.div className="md:col-span-4 relative overflow-hidden h-96 w-96">
-                  <Image 
-                    src="/placeholder2.png" 
-                    alt="Profile Photo" 
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </motion.div>
+                className="p-8 md:p-16 max-w-xl"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none mb-6 text-neutral-900">
+                  {Array.from("SHAPING THE FUTURE.").map((char, index) => (
+                    <span key={index} className="transition duration-300 hover:text-primary">{char}</span>
+                  ))}
+                </h2>
+
+                <p className="mt-8 text-neutral-700 text-xl">
+                  {Array.from("Digital Innovator, Visual Storyteller, and Marketing Strategist. Transforming brands through bold creativity and cutting-edge design.").map((char, index) => (
+                    <span key={index} className="transition duration-300 hover:text-primary">{char}</span>
+                  ))}
+                </p>
               </motion.div>
-            </motion.div>
+            </div>
+
+
+            {/* Right Side - Large Image */}
+            <div className="md:w-1/2 relative">
+              <motion.div 
+                className="h-full"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative h-full">
+                  <Image
+                    src="/placeholder2.png" 
+                    alt="Profile portrait"
+                    fill
+                    className="object-cover object-center filter grayscale"
+                    sizes="50vw"
+                    priority
+                  />
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
@@ -150,8 +127,8 @@ const AboutMe = () => {
             <div className="h-screen flex items-center justify-center">
               <main className="relative z-10 px-6 max-w-5xl mx-auto text-center">
                 <h1 className="font-space font-bold text-5xl md:text-7xl lg:text-8xl">
-                  <span className="text-secondary">3+ Year</span> <span className="text-white">of Agency</span> <br className="hidden sm:block" />
-                  <span className="text-white">Experience</span>
+                  <span className="text-secondary">3+ Years</span> <span className="text-white">of Strategic</span> <br className="hidden sm:block" />
+                  <span className="text-white">Agency Excellence</span>
                 </h1>
               </main>
             </div>
@@ -160,8 +137,8 @@ const AboutMe = () => {
             <div className="h-screen flex items-center justify-center">
               <main className="relative z-10 px-6 max-w-5xl mx-auto text-center">
                 <h2 className="font-space font-bold text-5xl md:text-7xl lg:text-8xl">
-                  <span className="text-white">Over</span> <span className="text-secondary">10+</span> <br className="hidden sm:block" />
-                  <span className="text-white">Completed Projects</span>
+                  <span className="text-white">Delivering</span> <span className="text-secondary">10+</span> <br className="hidden sm:block" />
+                  <span className="text-white">High-Impact Campaigns</span>
                 </h2>
               </main>
             </div>
