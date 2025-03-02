@@ -47,14 +47,14 @@ const AboutMe = () => {
                 viewport={{ once: true }}
               >
                 <div className="relative h-full">
-                  <Image
-                    src="/placeholder2.png" 
-                    alt="Profile portrait"
-                    fill
-                    className="object-cover object-center filter grayscale"
-                    sizes="50vw"
-                    priority
-                  />
+                <Image
+                  src="/placeholder2.png" 
+                  alt="Profile portrait"
+                  fill
+                  className="object-cover object-center filter grayscale hover:grayscale-0 transition duration-500 ease-in-out"
+                  sizes="50vw"
+                  priority
+                />
                 </div>
               </motion.div>
             </div>
