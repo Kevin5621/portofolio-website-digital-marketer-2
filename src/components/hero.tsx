@@ -75,7 +75,7 @@ const Hero = () => {
               priority
             />
             {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-80"></div>
           </motion.div>
           
           {/* Text content that scrolls normally */}
@@ -174,16 +174,9 @@ const Hero = () => {
               <div className="py-16 px-8 md:px-12">
                 <div className="grid grid-cols-1">
                   {portfolioItems.map((item, index) => (
-                    <div key={index} className="mb-0 border-t-8 border-black">
+                    <div key={index} className="mb-0 border-t-8 border-dark">
                       {/* Image Container with heavy borders and minimal hover effect */}
-                      <motion.div
-                        className="group"
-                        initial={{ opacity: 0, y: 80 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                      >
-                        <div className="relative overflow-hidden border-4 border-black">
+                        <div className="relative overflow-hidden border-4 border-dark">
                           <motion.div
                             className="aspect-[16/9] overflow-hidden"
                             whileHover={{ scale: 0.98 }}
@@ -194,17 +187,16 @@ const Hero = () => {
                               alt={item.alt}
                               width={800}
                               height={450}
-                              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                              className="w-full h-full object-cover transition-transform"
                             />
                           </motion.div>
                           <motion.div
-                            className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"
+                            className="absolute inset-0 bg-dark opacity-0 transition-opacity duration-300"
                           ></motion.div>
                         </div>
-                      </motion.div>
 
                       {/* Brutalist Text Container */}
-                      <div className="bg-black flex items-center justify-center">
+                      <div className="bg-dark flex items-center justify-center">
                         <h3 className="text-white font-mono font-bold text-4x1 md:text-4xl tracking-wider text-center leading-none">
                           {item.description}
                         </h3>
