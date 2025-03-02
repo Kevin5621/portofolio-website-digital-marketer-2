@@ -1,66 +1,85 @@
 "use client"
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 
 const Hero = () => {
+  const containerRef = useRef(null);
+  
+  // Using scroll progress to create the parallax effect
+  const { scrollYProgress } = useScroll();
+  
+  // This will make the background scroll at a slower rate than the content
+  // Creating the "lagging behind" effect
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "300%"]);
+  
+  // Maintain the existing opacity effect but tie it to scroll progress
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [1, 0.8, 0.6, 0.4]);
+
   return (
-    <ReactLenis root>
-      <main>
-        {/* First Section - Hero (Sticky) */}
-        <section className="bg-zinc-900 min-h-screen sticky top-0 relative">
-          <div className="absolute inset-0 z-0 left-[-90px] top-[-100px]">
+    <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+      <main className="font-sans" ref={containerRef}>
+        {/* Hero section container */}
+        <section className="relative min-h-screen overflow-hidden bg-zinc-900">
+          {/* Background image with parallax effect */}
+          <motion.div 
+            className="absolute inset-0 left-[-90px] top-[-100px]"
+            style={{ y: backgroundY }} // This creates the lag effect
+          >
             <Image 
               src="/placeholder.png" 
               alt="Profile portrait" 
               fill
-              className="object-cover object-top grayscale opacity-90"
+              className="object-cover object-top filter grayscale brightness-75"
               sizes="100vw"
               priority
             />
-            {/* Darkening overlay */}
-            <div className="absolute inset-0 bg-dark bg-opacity-30"></div>
-          </div>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+          </motion.div>
           
-          {/* Centered content overlay */}
+          {/* Text content that scrolls normally */}
           <motion.div 
-            className="relative z-10 h-screen w-full flex flex-col items-center justify-end pb-24"
+            className="relative z-10 h-screen w-full flex flex-col items-center justify-end pb-16 px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <div className="text-center">
-              {/* Large AUST, text */}
+            <motion.div 
+              className="text-center"
+              style={{ opacity }}
+            >
+              {/* Name with refined typography */}
               <motion.h1 
-                className="text-white text-8xl md:text-9xl font-serif tracking-tight leading-none"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 30 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-white text-7xl md:text-8xl lg:text-9xl font-serif tracking-tighter leading-none"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
               >
-                Adhara<span className="text-white">,</span>
+                Adhara<span className="text-white opacity-80">,</span>
               </motion.h1>
               
               <motion.div 
-                className="flex justify-end mt-4 mr-6"
+                className="flex justify-end mt-2 mr-8"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
               >
-                <h2 className="text-white text-3xl italic font-light mt-4">Eka</h2>
+                <h2 className="text-white text-3xl italic font-extralight">Eka</h2>
               </motion.div>
               
               <motion.div 
-                className="mt-6 text-white uppercase tracking-widest text-center"
+                className="mt-8 text-white uppercase tracking-widest text-center"
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 30 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
               >
-                <p className="font-light text-sm">Digital</p>
-                <p className="font-light text-sm">Marketing</p>
+                <p className="font-light text-sm mb-1 tracking-[0.3em]">Digital</p>
+                <p className="font-light text-sm tracking-[0.3em]">Marketing</p>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </section>
 
