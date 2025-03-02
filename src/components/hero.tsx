@@ -7,6 +7,7 @@ import { ReactLenis } from 'lenis/react';
 
 const Hero = () => {
   const containerRef = useRef(null);
+  const scrollContainerRef = useRef(null);
   
   // Using scroll progress to create the parallax effect
   const { scrollYProgress } = useScroll();
@@ -17,6 +18,43 @@ const Hero = () => {
   
   // Maintain the existing opacity effect but tie it to scroll progress
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [1, 0.8, 0.6, 0.4]);
+
+  // For the second section animations
+  const { scrollYProgress: section2Progress } = useScroll({
+    target: scrollContainerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Transform values for the left side content based on scroll
+  const leftContentY = useTransform(section2Progress, [0, 0.2], [50, 0]);
+  const leftContentOpacity = useTransform(section2Progress, [0, 0.2], [0, 1]);
+  
+  // Line animation
+  const lineWidth = useTransform(section2Progress, [0, 0.2], [0, 100]);
+
+  // Simplified text alternatives for brutalist style
+  const portfolioItems = [
+    {
+      image: "/filler/filler-1.jpg",
+      description: "BRAND AWARENESS ENHANCEMENT",
+      alt: "Portfolio image 1"
+    },
+    {
+      image: "/filler/filler-2.jpg",
+      description: "AUDIENCE ENGAGEMENT FOCUSED",
+      alt: "Portfolio image 2"
+    },
+    {
+      image: "/filler/filler-3.jpg",
+      description: "STORYTELLING WITH PURPOSE",
+      alt: "Portfolio image 3"
+    },
+    {
+      image: "/filler/filler-4.jpg",
+      description: "DATA-DRIVEN APPROACH",
+      alt: "Portfolio image 4"
+    }
+  ];
 
   return (
     <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
@@ -83,93 +121,103 @@ const Hero = () => {
           </motion.div>
         </section>
 
-        {/* Second Section - Filler1 with Split Layout */}
-        <section className="relative">
-          {/* Sticky background */}
-          <div className="sticky top-0 h-screen w-full bg-light rounded-tr-2xl rounded-tl-2xl overflow-hidden">
-            {/* Very subtle background texture - almost invisible */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f05_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f05_1px,transparent_1px)] bg-[size:80px_80px]"></div>
-            
-            {/* Left Side - Static Content "Turning Vision Into Motion"*/}
-            <div className="absolute left-0 top-0 md:w-1/2 h-full flex items-center justify-center">
-              <div className="pt-32 pb-16 px-6 md:px-6 lg:px-12 flex flex-col min-h-screen justify-center relative z-10">
-                <div className="max-w-xl">
-                  {/* Tagline with line */}
-                  <motion.div
-                    className="flex items-center gap-3 mb-5"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="w-8 h-px bg-neutral-400"></div>
-                    <p className="text-neutral-500 md:text-lg font-bold">
+        {/* Second Section - Modified Version with Sticky Left Side */}
+        <section className="relative" ref={scrollContainerRef}>
+          <div className="flex flex-col md:flex-row min-h-screen">
+            {/* Left Side - Sticky Content */}
+            <div className="md:w-1/2 relative bg-white md:sticky md:top-0 md:h-screen">
+              <div className="h-full flex items-center">
+                <motion.div 
+                  className="p-8 md:p-16 max-w-xl"
+                  style={{ 
+                    y: leftContentY,
+                    opacity: leftContentOpacity
+                  }}
+                >
+                  {/* Horizontal line with animation */}
+                  <motion.div className="flex items-center gap-3 mb-8">
+                    <motion.div 
+                      className="h-px bg-neutral-400"
+                      style={{ width: lineWidth }}
+                    ></motion.div>
+                    <p className="text-neutral-500 whitespace-nowrap font-medium">
                       Digital Marketing Strategist
                     </p>
                   </motion.div>
                   
                   {/* Main Headline */}
-                  <motion.h2 
-                    className="text-4xl md:text-5xl lg:text-6xl font-space text-neutral-900 mb-6 leading-tight font-bold"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                  <div className="space-y-2">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-space text-neutral-900 leading-tight font-bold">
+                      Turning <span className="text-primary">Vision</span>
+                    </h2>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-space text-neutral-900 leading-tight font-bold">
+                      Into <span className="text-primary">Motion</span>
+                    </h2>
+                  </div>
+                  
+                  {/* Added description */}
+                  <motion.p 
+                    className="mt-8 text-neutral-600 max-w-md"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.8 }}
                     viewport={{ once: true }}
                   >
-                    <p>Turning Vision</p>
-                    <span className="font-space text-primary font-bold">Into Motion</span>
-                  </motion.h2>
-                </div>
+                    Creating impactful digital marketing strategies that convert vision into tangible results.
+                  </motion.p>
+                </motion.div>
               </div>
             </div>
-          </div>
-
-          {/* Scrollable content */}
-          <div className="relative mt-[-100vh]">
-            <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
-              {/* Left Side - Empty space to maintain layout */}
-              <div className="md:block"></div>
-              
-              {/* Right Side - Scrollable Content */}
-              <div className="relative z-10">
-                <div className="grid gap-8 pt-24 pb-24 px-6">
-                  {/* Scrollable images */}
-                  <figure className="grid place-content-center -skew-x-12">
-                    <Image
-                      src="/filler/filler-1.jpg"
-                      alt="Portfolio image 1"
-                      width={320}
-                      height={384}
-                      className="transition-all duration-300 w-80 h-96 align-bottom object-cover"
-                    />
-                  </figure>
-                  <figure className="grid place-content-center skew-x-12">
-                    <Image
-                      src="/filler/filler-2.jpg"
-                      alt="Portfolio image 2"
-                      width={320}
-                      height={384}
-                      className="transition-all duration-300 w-80 h-96 align-bottom object-cover"
-                    />
-                  </figure>
-                  <figure className="grid place-content-center -skew-x-12">
-                    <Image
-                      src="/filler/filler-3.jpg"
-                      alt="Portfolio image 3"
-                      width={320}
-                      height={384}
-                      className="transition-all duration-300 w-80 h-96 align-bottom object-cover"
-                    />
-                  </figure>
-                  <figure className="grid place-content-center skew-x-12">
-                    <Image
-                      src="/filler/filler-4.jpg"
-                      alt="Portfolio image 4"
-                      width={320}
-                      height={384}
-                      className="transition-all duration-300 w-80 h-96 align-bottom object-cover"
-                    />
-                  </figure>
+            
+            {/* Right Side - Scrollable Content with Brutalist Text Design */}
+            <div className="md:w-1/2 bg-neutral-50">
+              <div className="py-16 px-8 md:px-12">
+                {/* Modified portfolio section with brutalist text */}
+                <div className="grid grid-cols-1">
+                  {portfolioItems.map((item, index) => (
+                    <div key={index} className="mb-0">
+                      {/* Image Container */}
+                      <motion.div 
+                        className="group"
+                        initial={{ opacity: 0, y: 100 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                      >
+                        <div className="relative overflow-hidden">
+                          <motion.div 
+                            className="aspect-[4/5] overflow-hidden"
+                            whileHover={{ scale: 0.95 }}
+                            transition={{ duration: 0.4 }}
+                          >
+                            <Image
+                              src={item.image}
+                              alt={item.alt}
+                              width={600}
+                              height={750}
+                              className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110"
+                            />
+                          </motion.div>
+                          <motion.div 
+                            className="absolute inset-0 bg-dark/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            whileHover={{ opacity: 0.2 }}
+                          ></motion.div>
+                        </div>
+                      </motion.div>
+                      
+                      {/* Brutalist Text Container */}
+                      <div className="bg-dark py-12 flex items-center justify-center">
+                        <h3 className="text-white font-mono font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight text-center leading-none px-2">
+                          {item.description}
+                        </h3>
+                      </div>
+                      
+                      {/* No spacing between items */}
+                      {index < portfolioItems.length - 1 && (
+                        <div className="h-0"></div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
