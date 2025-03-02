@@ -3,6 +3,7 @@
 import { ReactLenis } from 'lenis/react';
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const brandData = {
   name: "Kronju",
@@ -23,10 +24,12 @@ const brandData = {
   ]
 };
 
-export default function BrandPortfolioPage() {
+export default function Kronju() {
   const [scrollY, setScrollY] = useState(0);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const sectionsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionsRef = useRef<HTMLDivElement[]>([]);
+  const finalSectionRef = useRef<HTMLDivElement>(null);
+  const finalSectionBgRef = useRef<HTMLDivElement>(null);
 
   // Update scroll position for parallax effects
   useEffect(() => {
@@ -52,22 +55,35 @@ export default function BrandPortfolioPage() {
           section.style.transform = `translateY(${-scrollProgress * 100}vh)`;
         });
       }
+
+      // Handle zoom effect for the final section
+      if (finalSectionRef.current && finalSectionBgRef.current) {
+        const sectionTop = finalSectionRef.current.offsetTop;
+        const viewportHeight = window.innerHeight;
+        
+        // Check if we're approaching the final section (start effect slightly before)
+        const distanceFromSection = sectionTop - scrollY;
+        
+        // Calculate zoom factor when scrolling close to and within the section
+        // Start the effect when we're within 50% of a viewport height to the section
+        if (distanceFromSection < viewportHeight * 0.5 && distanceFromSection > -viewportHeight) {
+          // Calculate how far we are into this trigger zone (0 to 1)
+          const progress = Math.max(0, Math.min(1, 1 - (distanceFromSection / (viewportHeight * 0.5))));
+          
+          // Apply a subtle zoom - starting at 1 (normal) and going up to 1.1 (10% zoom)
+          const zoomFactor = 1 + (progress * 0.1); 
+          finalSectionBgRef.current.style.transform = `scale(${zoomFactor})`;
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollY]);
 
-  // Add a section to the sectionsRef
-  const addToSectionsRef = (el: HTMLDivElement | null) => {
-    if (el && !sectionsRef.current.includes(el)) {
-      sectionsRef.current.push(el);
-    }
-  };
-
   return (
     <ReactLenis root>
-      <main className="bg-amber-50 text-gray-800 font-space">
+      <main className="bg-amber-50 text-gray-800 font-space" ref={wrapperRef}>
         {/* Hero Section - Split Layout */}
         <section className="min-h-screen flex flex-col md:flex-row">
           {/* Left Side - Brand Info */}
@@ -95,7 +111,7 @@ export default function BrandPortfolioPage() {
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
                 backgroundImage: `url('/project/cover1.jpg')`,
-                transform: `translateY(${scrollY * 0.05}px)`,
+                transform: `translateY(${scrollY * 0.4}px) scale(${1 + scrollY * 0.00015})`,
               }}
             />
 
@@ -104,9 +120,6 @@ export default function BrandPortfolioPage() {
               className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-50"
             />
 
-            {/* Floating Circle Animation */}
-            <div className="absolute bottom-10 right-10 w-24 h-24 rounded-full bg-yellow-500 opacity-30 blur-md animate-bounce-slow"></div>
-            <div className="absolute top-10 left-10 w-16 h-16 rounded-full bg-red-500 opacity-30 blur-md animate-pulse"></div>
           </div>
         </section>
 
@@ -135,6 +148,58 @@ export default function BrandPortfolioPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Brand Summary Section - with Parallax */}
+        <section className="py-24 px-4 md:px-8 bg-white relative">
+          <div className="max-w-6xl mx-auto">
+            {/* Minimalist container with more whitespace */}
+            <div className="flex flex-col md:flex-row md:items-center gap-16">
+              
+              {/* Left Column - Direct Parallax Image without container */}
+              <div className="w-full h-[60vh] relative top-[-150px]">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url('/project/reveal-cover/reveal-cover1.png')`,
+                    transform: `translateY(${scrollY * 0.16}px)`,
+                  }}
+                />
+              </div>
+              
+              {/* Right Column - Minimalist Content */}
+              <div className="w-full md:w-1/2 space-y-6">
+                {/* Minimalist heading with thin weight and no gradient */}
+                <h2 className="text-2xl md:text-3xl font-light text-gray-800">
+                  The Essence of Kronju
+                </h2>
+                
+                {/* Simple thin divider */}
+                <div className="w-12 h-px bg-yellow-500"></div>
+                
+                {/* Clean typography */}
+                <p className="text-gray-600 leading-relaxed">
+                  Kronju represents simplicity and quality. Our cheese snacks are crafted with carefully selected ingredients, allowing the natural flavors to speak for themselves.
+                </p>
+                
+                {/* Minimalist feature highlight */}
+                <div className="grid grid-cols-3 gap-2 pt-4">
+                  <div className="border-t border-gray-100 pt-2">
+                    <span className="text-xs text-gray-400 uppercase tracking-wider">Origin</span>
+                    <p className="text-sm text-gray-600">Artisanal</p>
+                  </div>
+                  <div className="border-t border-gray-100 pt-2">
+                    <span className="text-xs text-gray-400 uppercase tracking-wider">Process</span>
+                    <p className="text-sm text-gray-600">Traditional</p>
+                  </div>
+                  <div className="border-t border-gray-100 pt-2">
+                    <span className="text-xs text-gray-400 uppercase tracking-wider">Taste</span>
+                    <p className="text-sm text-gray-600">Distinctive</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -192,28 +257,30 @@ export default function BrandPortfolioPage() {
 
         {/* Full Screen Image Section with Next Project Text */}
         <section 
-          ref={addToSectionsRef}
-          className="h-screen relative z-0 flex items-end justify-start"
+          ref={finalSectionRef}
+          className="h-screen relative z-0 flex items-end justify-start overflow-hidden"
         >
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-fixed"
+            ref={finalSectionBgRef}
+            className="absolute inset-0 bg-cover bg-center bg-fixed transition-transform duration-700 ease-out origin-center"
             style={{
               backgroundImage: `url('/project/cover2.jpg')`,
+              // Start with no transform to ensure the ref-based transform works properly
             }}
           >
             {/* Optional dark overlay for better text visibility */}
             <div className="absolute inset-0 bg-black bg-opacity-30"></div>
           </div>
           
-          <div className="relative p-8 md:p-16 lg:p-24 mb-8 md:mb-16">
-            <div className="flex flex-col items-start">
+          <div className="relative p-8 md:p-16 lg:p-24 mb-8 md:mb-16 z-10">
+            <Link href="/project/2-ortist-specialist" className="flex flex-col items-start group">
               <p className="text-xs uppercase tracking-widest text-white mb-2 font-light">
                 Next Project
               </p>
               <h3 className="text-lg md:text-xl font-medium text-white">
-                <span className="border-b border-white pb-1">Discover More</span>
+                <span className="border-b border-white pb-1 group-hover:border-yellow-500 transition-colors">Ortist Specialist</span>
               </h3>
-            </div>
+            </Link>
           </div>
         </section>
 
