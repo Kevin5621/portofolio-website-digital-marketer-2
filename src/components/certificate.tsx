@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useRef } from 'react';
-import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 
@@ -9,26 +8,7 @@ const CertificateAndExperience = () => {
   const scrollRef = useRef(null);
   const experienceSectionRef = useRef(null);
   const experienceContentRef = useRef(null);
-  
-  // Certificate data
-  const certificates = [
-    {
-      logo: "/videolabs-logo.png",
-      title: "Videolabs",
-      description: "Videography & Video Editing Course"
-    },
-    {
-      logo: "/kelasbos-logo.png",
-      title: "Kelasbos",
-      description: "Digital Marketing Bootcamp"
-    },
-    {
-      logo: "/syca-logo.png",
-      title: "Syca Academy",
-      description: "Content Marketer Course"
-    }
-  ];
-  
+   
   // Work experience data
   const experiences = [
     {
@@ -87,52 +67,6 @@ const CertificateAndExperience = () => {
   return (
     <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
       <main className="font-sans bg-white" ref={scrollRef}>
-        {/* Certificate Section */}
-        <section className="py-20 md:py-24">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-normal tracking-tight text-center text-gray-900 mb-2"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              Certifications
-            </motion.h2>
-            
-            <motion.div
-              className="w-16 h-px bg-gray-400 mx-auto mb-16"
-              initial={{ width: 0 }}
-              animate={{ width: 64 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            />
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {certificates.map((cert, index) => (
-                <motion.div
-                  key={index}
-                  className="border border-gray-100 p-6 rounded-sm hover:shadow-sm transition-shadow duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="mb-5 relative h-12 w-full flex items-center justify-start">
-                    <div className="relative h-10 w-10">
-                      <Image
-                        src={cert.logo}
-                        alt={`${cert.title} logo`}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-medium mb-1 text-gray-900">{cert.title}</h3>
-                  <p className="text-sm text-gray-600">{cert.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Work Experience Section - Modified to have proper sticky header */}
         <section 

@@ -28,9 +28,6 @@ const Hero = () => {
   // Transform values for the left side content based on scroll
   const leftContentY = useTransform(section2Progress, [0, 0.2], [50, 0]);
   const leftContentOpacity = useTransform(section2Progress, [0, 0.2], [0, 1]);
-  
-  // Line animation
-  const lineWidth = useTransform(section2Progress, [0, 0.2], [0, 100]);
 
   // Simplified text alternatives for brutalist style
   const portfolioItems = [
@@ -134,15 +131,62 @@ const Hero = () => {
                     opacity: leftContentOpacity
                   }}
                 >
-                  {/* Horizontal line with animation */}
+
+                  {/* Certificate section instead of horizontal line */}
                   <motion.div className="flex items-center gap-3 mb-8">
-                    <motion.div 
-                      className="h-px bg-neutral-400"
-                      style={{ width: lineWidth }}
-                    ></motion.div>
-                    <p className="text-neutral-500 whitespace-nowrap font-medium">
-                      Digital Marketing Strategist
+                    <p className="text-neutral-500 text-xs uppercase tracking-wider font-medium">
+                      Certificate
                     </p>
+                    {/* Small certificate images row */}
+                    <div className="flex items-center gap-2">
+                      {/* laurel left side */}
+                      <div className="h-10 w-10 relative">
+                        <Image 
+                          src="/laurel.png" 
+                          alt="Laurel certificate" 
+                          width={40} 
+                          height={40}
+                          className="object-contain"
+                        />
+                      </div>
+                      <div className="h-10 w-10 relative">
+                        <Image 
+                          src="/videolabs.jpg" 
+                          alt="" 
+                          width={40} 
+                          height={40}
+                          className="object-contain"
+                        />
+                      </div>
+                      <div className="h-10 w-10 relative">
+                        <Image 
+                          src="/kelasbos.jpg" 
+                          alt="" 
+                          width={40} 
+                          height={40}
+                          className="object-contain"
+                        />
+                      </div>
+                      <div className="h-10 w-10 relative">
+                        <Image 
+                          src="/syca.jpg" 
+                          alt="" 
+                          width={40} 
+                          height={40}
+                          className="object-contain"
+                        />
+                      </div>
+                      {/* laurel right side */}
+                      <div className="h-10 w-10 relative">
+                        <Image 
+                          src="/laurel.png" 
+                          alt="" 
+                          width={40} 
+                          height={40}
+                          className="object-contain scale-x-[-1]"
+                        />
+                      </div>
+                    </div>
                   </motion.div>
                   
                   {/* Main Headline */}
