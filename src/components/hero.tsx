@@ -151,7 +151,7 @@ const Hero = () => {
                       </div>
                       <div className="h-10 w-10 relative">
                         <Image 
-                          src="/videolabs.jpg" 
+                          src="/certificate/1.png" 
                           alt="" 
                           width={40} 
                           height={40}
@@ -160,7 +160,7 @@ const Hero = () => {
                       </div>
                       <div className="h-10 w-10 relative">
                         <Image 
-                          src="/kelasbos.jpg" 
+                          src="/certificate/2.png" 
                           alt="" 
                           width={40} 
                           height={40}
@@ -169,7 +169,7 @@ const Hero = () => {
                       </div>
                       <div className="h-10 w-10 relative">
                         <Image 
-                          src="/syca.jpg" 
+                          src="/certificate/3.png" 
                           alt="" 
                           width={40} 
                           height={40}
