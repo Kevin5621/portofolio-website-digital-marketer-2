@@ -111,7 +111,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
               >
-                <p className="font-light text-sm mb-1 tracking-[0.3em]">Digital</p>
+                <p className="font-light text-sm mb-1 tracking-[0.3em]">Social Media</p>
                 <p className="font-light text-sm tracking-[0.3em]">Marketing</p>
               </motion.div>
             </motion.div>
