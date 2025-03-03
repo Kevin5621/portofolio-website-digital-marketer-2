@@ -1,0 +1,294 @@
+.contactSection {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  /* Vertical blinds transition effect */
+  .blindsContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .blind {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 11;
+  }
+  
+  .pageContainer {
+    position: relative;
+    min-height: 100vh;
+    background-color: #f8f8f8;
+    color: #121212;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 1;
+  }
+  
+  
+  /* Scan lines effect */
+  .scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.05) 51%
+    );
+    background-size: 100% 4px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.3;
+    mix-blend-mode: multiply;
+  }
+  
+  /* Glitch title */
+  .glitchTitle {
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 4rem;
+    color: #121212;
+  }
+  
+  .glitchLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+  }
+  
+  .glitchTitle .glitchLayer:nth-child(1) {
+    color: #ff00ff;
+    animation: glitch-anim-1 2s infinite linear alternate;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-0.02em, -0.025em);
+    opacity: 0.15;
+  }
+  
+  .glitchTitle .glitchLayer:nth-child(2) {
+    color: #00ffff;
+    animation: glitch-anim-2 2.3s infinite linear alternate;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    transform: translate(0.02em, 0.025em);
+    opacity: 0.15;
+  }
+  
+  /* Contact grid */
+  .contactGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Contact card */
+  .contactCard {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .contactCard:hover .pulseRing {
+    animation-play-state: running;
+  }
+  
+  .contactCard:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .contactCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, #000, #555);
+    opacity: 0.2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+  }
+  
+  /* Icon container */
+  .iconContainer {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    color: #121212;
+  }
+  
+  .pulseRing {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    animation: pulseRing 2s infinite;
+    animation-play-state: paused;
+  }
+  
+  /* Contact info */
+  .contactInfo {
+    flex: 1;
+  }
+  
+  .contactInfo h3 {
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+  }
+  
+  .contactInfo p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  /* Typewriter effect */
+  .typewriter {
+    position: relative;
+    overflow: hidden;
+    border-right: 2px solid #121212;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40) 1s 1 normal both, blink-caret 0.75s step-end infinite;
+  }
+  
+  /* Corner decoration */
+  .cornerDecoration {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.05) 50%);
+  }
+  
+  /* Wavy path at bottom */
+  .wavyPath {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  
+  @keyframes glitch-anim-1 {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      transform: translate(-2px, -2px);
+    }
+    60% {
+      transform: translate(2px, 2px);
+    }
+    80% {
+      transform: translate(2px, -2px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+  
+  @keyframes glitch-anim-2 {
+    0% {
+      transform: translate(0);
+    }
+    10% {
+      transform: translate(-1px, -3px);
+    }
+    20% {
+      transform: translate(3px, 1px);
+    }
+    30% {
+      transform: translate(-3px, 2px);
+    }
+    40% {
+      transform: translate(1px, 3px);
+    }
+    50% {
+      transform: translate(-1px, -1px);
+    }
+    60% {
+      transform: translate(3px, 3px);
+    }
+    70% {
+      transform: translate(-3px, -3px);
+    }
+    80% {
+      transform: translate(1px, -1px);
+    }
+    90% {
+      transform: translate(-1px, 3px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+  
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #121212 }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .glitchTitle {
+      font-size: 3rem;
+    }
+    
+    .contactGrid {
+      grid-template-columns: 1fr;
+    }
+  }
