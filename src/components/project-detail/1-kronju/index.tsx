@@ -145,7 +145,7 @@ export default function Kronju() {
       rootMargin: '0px',
       threshold: 0.15
     };
-
+  
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const sectionIndex = sectionsRef.current.findIndex(section => section === entry.target);
@@ -153,7 +153,7 @@ export default function Kronju() {
         if (entry.isIntersecting && sectionIndex !== -1) {
           // Update current section for nav highlight
           setCurrentSection(sectionIndex);
-          
+  
           // Mark section as viewed
           setSectionViewed(prev => {
             const newState = [...prev];
@@ -163,19 +163,22 @@ export default function Kronju() {
         }
       });
     }, observerOptions);
-
+  
+    // Simpan referensi saat ini ke variabel lokal
+    const sections = sectionsRef.current;
+  
     // Register all sections with the observer
-    sectionsRef.current.forEach(section => {
+    sections.forEach(section => {
       if (section) sectionObserver.observe(section);
     });
-
+  
     // Cleanup
     return () => {
-      sectionsRef.current.forEach(section => {
+      sections.forEach(section => {
         if (section) sectionObserver.unobserve(section);
       });
     };
-  }, []);
+  }, []);  
   
   // Function to navigate to a specific section
   const navigateToSection = (index: number) => {
