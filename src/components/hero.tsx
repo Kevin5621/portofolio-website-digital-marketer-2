@@ -54,7 +54,7 @@ const Hero = () => {
   ];
 
   return (
-    <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+    <ReactLenis root options={{ lerp: 0.1, duration: 2, smoothWheel: true }}>
       <main className="font-sans" ref={containerRef}>
         {/* Hero section container */}
         <section className="relative min-h-screen overflow-hidden bg-zinc-900">
