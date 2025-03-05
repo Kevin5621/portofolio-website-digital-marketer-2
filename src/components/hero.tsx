@@ -213,39 +213,58 @@ const Hero = () => {
               </div>
             </div>
             
-            {/* Right Side - Scrollable Content with Raw Brutalism for Landscape Images */}
-            <div className="md:w-1/2 bg-white">
+            {/* Right Side - Scrollable Content */}
+            <div className="md:w-1/2 bg-white relative">
               <div className="py-16 px-8 md:px-12">
-                <div className="grid grid-cols-1">
+                <div className="grid grid-cols-1 border-[24px] border-black">
                   {portfolioItems.map((item, index) => (
-                    <div key={index} className="mb-0 border-t-8 border-dark">
-                      {/* Image Container with heavy borders and minimal hover effect */}
-                        <div className="relative overflow-hidden border-4 border-dark">
-                          <motion.div
-                            className="aspect-[16/9] overflow-hidden"
-                            whileHover={{ scale: 0.98 }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            <Image
-                              src={item.image}
-                              alt={item.alt}
-                              width={800}
-                              height={450}
-                              className="w-full h-full object-cover transition-transform"
-                            />
-                          </motion.div>
-                          <motion.div
-                            className="absolute inset-0 bg-dark opacity-0 transition-opacity duration-300"
-                          ></motion.div>
+                    <div key={index} className="relative group film-strip">
+                      {/* Film Roll Border Effect */}
+                      <div className="absolute inset-0 pointer-events-none z-10 film-perforations">
+                        {/* Left Side Perforations */}
+                        <div className="absolute left-[-12px] top-0 bottom-0 w-3 bg-black flex flex-col justify-between py-1">
+                          {[...Array(10)].map((_, i) => (
+                            <div 
+                              key={i} 
+                              className="w-3 h-6 bg-white border-black"
+                            ></div>
+                          ))}
                         </div>
-
+                        
+                        {/* Right Side Perforations */}
+                        <div className="absolute right-[-12px] top-0 bottom-0 w-3 bg-black flex flex-col justify-between py-1">
+                          {[...Array(10)].map((_, i) => (
+                            <div 
+                              key={i} 
+                              className="w-3 h-6 bg-white border-black"
+                            ></div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {/* Image Container with film-like border */}
+                      <div className="relative overflow-hidden border-[12px] border-black">
+                        <motion.div
+                          className="aspect-[16/9] overflow-hidden"
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Image
+                            src={item.image}
+                            alt={item.alt}
+                            width={800}
+                            height={450}
+                            className="w-full h-full object-cover transition-transform"
+                          />
+                        </motion.div>
+                      </div>
+                      
                       {/* Brutalist Text Container */}
-                      <div className="bg-dark flex items-center justify-center">
-                        <h3 className="text-white font-mono font-bold text-4x1 md:text-4xl tracking-wider text-center leading-none">
+                      <div className="bg-black flex items-center justify-center">
+                        <h3 className="text-white font-mono font-bold text-4x1 md:text-4xl tracking-wider text-center leading-none p-4">
                           {item.description}
                         </h3>
                       </div>
-
+                      
                       {/* No extra spacing between items */}
                       {index < portfolioItems.length - 1 && <div className="h-0"></div>}
                     </div>
