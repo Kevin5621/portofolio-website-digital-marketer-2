@@ -42,12 +42,6 @@ const projects: ProjectData[] = [
     revealImage: '/project/reveal-cover/reveal-cover5.png',
     route: '/project/5-benjasimen-samapta'
   },
-  { 
-    title: 'Shinji Film', 
-    image: '/project/cover6.jpg', 
-    revealImage: '/project/reveal-cover/reveal-cover6.png',
-    route: '/project/6-shinji-film'
-  },
 ];
 
 export function Portfolio() {
