@@ -26,10 +26,10 @@ export const brandData = {
   ],
   skills: ["CONTENT STRATEGY", "SCHEDULING", "GRAPHIC DESIGN"],
   projects: [
-    { image: "/project/project-detail/foto-1-1.png" },
-    { image: "/project/project-detail/foto-1-2.png" },
-    { image: "/project/project-detail/foto-1-3.png" },
-    { image: "/project/project-detail/foto-1-4.png" },
-    { image: "/project/project-detail/foto-1-5.png" },
+    { image: "/project/project-detail/1-kronju/foto-1-1.png" },
+    { image: "/project/project-detail/1-kronju/foto-1-2.png" },
+    { image: "/project/project-detail/1-kronju/foto-1-3.png" },
+    { image: "/project/project-detail/1-kronju/foto-1-4.png" },
+    { image: "/project/project-detail/1-kronju/foto-1-5.png" },
   ]
 };

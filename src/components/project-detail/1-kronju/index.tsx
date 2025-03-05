@@ -444,52 +444,44 @@ export default function Kronju() {
         </section>
 
         {/* Approach Section - Minimal Split */}
-        <section ref={(el) => registerSection(el as HTMLDivElement | null, 4)} className="py-24 px-6 bg-stone-100">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
-              <div className={`md:col-span-5 transition-all duration-700 ${sectionViewed[4] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                <p className="text-amber-500 uppercase tracking-widest mb-3 text-sm">Method</p>
-                <h2 className="text-4xl font-light text-stone-900 mb-6 relative">
-                  Marketing Approach
-                  <span className={`block absolute -bottom-2 left-0 h-px bg-amber-500 transition-all duration-700 delay-300 ${sectionViewed[4] ? 'opacity-100 w-16' : 'opacity-0 w-0'}`}></span>
-                </h2>
-                
-                <p className={`text-stone-600 font-light leading-relaxed mb-12 transition-all duration-700 delay-300 ${sectionViewed[4] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  Systematically developed strategy with German precision to elevate Kronju&apos;s digital presence, emphasizing quality and authenticity.
-                </p>
-                
-                <div className="space-y-12">
-                  <div className={`relative pl-12 transition-all duration-700 delay-500 ${sectionViewed[4] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <div className={`absolute left-0 top-0 w-6 h-px bg-amber-500 transition-all duration-700 ${sectionViewed[4] ? 'opacity-100 w-6' : 'opacity-0 w-0'}`}></div>
-                    <h3 className="text-lg font-medium text-stone-900 mb-2">Research</h3>
-                    <p className="text-stone-600 font-light">Methodical audience analysis and competitor research</p>
-                  </div>
-                  <div className={`relative pl-12 transition-all duration-700 delay-700 ${sectionViewed[4] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <div className={`absolute left-0 top-0 w-6 h-px bg-amber-500 transition-all duration-700 ${sectionViewed[4] ? 'opacity-100 w-6' : 'opacity-0 w-0'}`}></div>
-                    <h3 className="text-lg font-medium text-stone-900 mb-2">Strategy</h3>
-                    <p className="text-stone-600 font-light">Integrated multi-channel approach with consistent messaging</p>
-                  </div>
-                  <div className={`relative pl-12 transition-all duration-700 delay-900 ${sectionViewed[4] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <div className={`absolute left-0 top-0 w-6 h-px bg-amber-500 transition-all duration-700 ${sectionViewed[4] ? 'opacity-100 w-6' : 'opacity-0 w-0'}`}></div>
-                    <h3 className="text-lg font-medium text-stone-900 mb-2">Execution</h3>
-                    <p className="text-stone-600 font-light">Data-driven implementation with systematic A/B testing</p>
-                  </div>
-                </div>
+        <section className="h-screen flex bg-stone-100">
+          {/* Image Section - Left */}
+          <div className="w-1/2 h-full relative">
+            <Image
+              src="/project/project-detail/1-kronju/cover-produk.jpg"
+              alt="Marketing Campaign Preview"
+              layout="fill"
+              objectFit="cover"
+              className="object-center"
+              loading="lazy"
+            />
+          </div>
+
+          {/* Text Section - Right */}
+          <div className="w-1/2 flex flex-col justify-center px-12">
+            <p className="text-amber-500 uppercase tracking-widest mb-3 text-sm">Method</p>
+            <h2 className="text-4xl font-light text-stone-900 mb-6 relative">
+              Marketing Approach
+              <span className="block absolute -bottom-2 left-0 h-px bg-amber-500 w-16"></span>
+            </h2>
+            <p className="text-stone-600 font-light leading-relaxed mb-12">
+              Systematically developed strategy with German precision to elevate Kronju&apos;s digital presence, emphasizing quality and authenticity.
+            </p>
+            <div className="space-y-12">
+              <div className="relative pl-12">
+                <div className="absolute left-0 top-0 w-6 h-px bg-amber-500"></div>
+                <h3 className="text-lg font-medium text-stone-900 mb-2">Research</h3>
+                <p className="text-stone-600 font-light">Methodical audience analysis and competitor research</p>
               </div>
-              
-              <div className={`md:col-span-7 relative transition-all duration-1000 delay-300 ${sectionViewed[4] ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-                <div className="aspect-4/3 w-full relative">
-                  <div className={`absolute bottom-8 left-8 right-8 top-8 border border-amber-500 transition-all duration-1000 delay-500 ${sectionViewed[4] ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
-                  <div className="absolute inset-0 overflow-hidden">
-                    <Image
-                      src="/project/reveal-cover/reveal-cover1.png"
-                      alt="Marketing Campaign Preview"
-                      fill
-                      className={`object-cover object-center transition-transform duration-1500 ${sectionViewed[4] ? 'scale-100' : 'scale-110'}`}
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
+              <div className="relative pl-12">
+                <div className="absolute left-0 top-0 w-6 h-px bg-amber-500"></div>
+                <h3 className="text-lg font-medium text-stone-900 mb-2">Strategy</h3>
+                <p className="text-stone-600 font-light">Integrated multi-channel approach with consistent messaging</p>
+              </div>
+              <div className="relative pl-12">
+                <div className="absolute left-0 top-0 w-6 h-px bg-amber-500"></div>
+                <h3 className="text-lg font-medium text-stone-900 mb-2">Execution</h3>
+                <p className="text-stone-600 font-light">Data-driven implementation with systematic A/B testing</p>
               </div>
             </div>
           </div>
