@@ -61,61 +61,71 @@ const AboutMe = () => {
           </div>
         </section>
 
-        {/* Second Section - Filler1 (With sticky background and scrolling content) */}
+        {/* Second Section - Innovative */}
         <section className="relative">
-          {/* Sticky background */}
-          <div className="sticky top-0 h-screen w-full bg-dark rounded-tr-2xl rounded-tl-2xl overflow-hidden">
-            {/* Top-down water ripple animation container */}
-            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-              {/* Ripple 1 - Slowest and largest */}
-              <div className="absolute w-full h-full flex items-center justify-center">
-                <div 
-                  className="absolute w-[200%] h-[200%] rounded-full border-4 border-slate-800 opacity-30"
-                  style={{
-                    animation: 'ripple 10s linear infinite',
-                  }}
-                />
-              </div>
-              
-              {/* Ripple 2 - Medium speed */}
-              <div className="absolute w-full h-full flex items-center justify-center">
-                <div 
-                  className="absolute w-[150%] h-[150%] rounded-full border-4 border-slate-700 opacity-20"
-                  style={{
-                    animation: 'ripple 8s linear infinite',
-                    animationDelay: '2s',
-                  }}
-                />
-              </div>
-              
-              {/* Ripple 3 - Fast speed */}
-              <div className="absolute w-full h-full flex items-center justify-center">
-                <div 
-                  className="absolute w-[100%] h-[100%] rounded-full border-4 border-slate-600 opacity-15"
-                  style={{
-                    animation: 'ripple 6s linear infinite',
-                    animationDelay: '1s',
-                  }}
-                />
-              </div>
-              
-              {/* Ripple 4 - Fastest and smallest */}
-              <div className="absolute w-full h-full flex items-center justify-center">
-                <div 
-                  className="absolute w-[50%] h-[50%] rounded-full border-4 border-slate-500 opacity-10"
-                  style={{
-                    animation: 'ripple 4s linear infinite',
-                    animationDelay: '0.5s',
-                  }}
-                />
-              </div>
+          {/* Sticky Background */}
+          <div className="sticky top-0 h-screen w-full bg-[#0A0C10] rounded-tr-2xl rounded-tl-2xl overflow-hidden">
+            {/* Layered Neural Network Visualization */}
+            <div className="absolute inset-0 opacity-30 mix-blend-screen">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="100%" 
+                height="100%" 
+                className="absolute"
+              >
+                <defs>
+                  {/* Gradient for Neural Connection Effect */}
+                  <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#2563EB" stopOpacity="0.3"/>
+                    <stop offset="50%" stopColor="#6366F1" stopOpacity="0.2"/>
+                    <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.1"/>
+                  </linearGradient>
+                </defs>
+
+                {/* Complex Neural Network Paths */}
+                {[...Array(12)].map((_, i) => (
+                  <path
+                    key={i}
+                    d={`
+                      M${Math.random() * 100} ${Math.random() * 100} 
+                      Q${Math.random() * 200} ${Math.random() * 200} 
+                      ${Math.random() * 300} ${Math.random() * 300}
+                    `}
+                    fill="none"
+                    stroke="url(#neuralGradient)"
+                    strokeWidth={Math.random() * 2}
+                    className="opacity-50 animate-pulse"
+                    style={{
+                      animationDuration: `${5 + Math.random() * 5}s`,
+                      animationDelay: `${Math.random() * 3}s`
+                    }}
+                  />
+                ))}
+              </svg>
             </div>
-            
-            {/* Background gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-dark to-dark opacity-80"></div>
+
+            {/* Glowing Neuromorphic Nodes */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(8)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute bg-blue-600/20 rounded-full blur-2xl"
+                  style={{
+                    width: `${50 + Math.random() * 100}px`,
+                    height: `${50 + Math.random() * 100}px`,
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    animation: `pulse ${5 + Math.random() * 5}s infinite alternate`,
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Subtle Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0A0C10] via-[#141824] to-[#0A0C10] opacity-90"></div>
           </div>
 
-          {/* Scrollable content */}
+          {/* Scrollable Content - Unchanged */}
           <div className="relative mt-[-100vh]">
             <Head>
               <title>Agency Experience</title>
