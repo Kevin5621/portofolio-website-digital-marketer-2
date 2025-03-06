@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { RevealImage } from './hooks/RevealImage';
 
 interface ProjectData {
   title: string;
@@ -13,25 +14,7 @@ interface ProjectData {
 
 const projects: ProjectData[] = [
   { 
-    title: 'Kronju', 
-    image: '/project/cover1.jpg', 
-    revealImage: '/project/reveal-cover/reveal-cover1.png',
-    route: '/project/1-kronju'
-  },
-  { 
-    title: 'Ortist Specialist', 
-    image: '/project/cover2.jpg', 
-    revealImage: '/project/reveal-cover/reveal-cover2.png',
-    route: '/project/2-ortist-specialist'
-  },
-  { 
-    title: 'Rumah Bahasa Asing', 
-    image: '/project/cover3.jpg', 
-    revealImage: '/project/reveal-cover/reveal-cover3.png',
-    route: '/project/3-rumah-bahasa-asing'
-  },
-  { 
-    title: 'Aerospace', 
+    title: 'Aerospacs', 
     image: '/project/cover4.jpg', 
     revealImage: '/project/reveal-cover/reveal-cover4.png',
     route: '/project/4-aerospace'
@@ -41,6 +24,24 @@ const projects: ProjectData[] = [
     image: '/project/cover5.jpg', 
     revealImage: '/project/reveal-cover/reveal-cover5.png',
     route: '/project/5-benjasimen-samapta'
+  },
+  { 
+    title: 'Ortist Specialist', 
+    image: '/project/cover2.jpg', 
+    revealImage: '/project/reveal-cover/reveal-cover2.png',
+    route: '/project/ortist'
+  },
+  { 
+    title: 'Kronju', 
+    image: '/project/cover1.jpg', 
+    revealImage: '/project/reveal-cover/reveal-cover1.png',
+    route: '/project/kronju'
+  },
+  { 
+    title: 'Rumah Bahasa Asing', 
+    image: '/project/cover3.jpg', 
+    revealImage: '/project/reveal-cover/reveal-cover3.png',
+    route: '/project/3-rumah-bahasa-asing'
   },
 ];
 
@@ -53,12 +54,9 @@ export function Portfolio() {
   const [isInView, setIsInView] = useState(false);
   const [totalScrollHeight, setTotalScrollHeight] = useState(0);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState(0);
-  const [scale, setScale] = useState(0.5);
+  const [, setOpacity] = useState(0);
+  const [, setScale] = useState(0.5);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const requestRef = useRef<number | null>(null);
-  const prevCursorPosition = useRef({ x: 0, y: 0 });
   
   // Setup intersection observer to detect when portfolio section is in view
   useEffect(() => {
@@ -154,41 +152,6 @@ export function Portfolio() {
     };
   }, [currentSlide, isInView]);
 
-  // Mouse movement handling with easing
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    const { clientX, clientY } = e;
-    const dx = clientX - prevCursorPosition.current.x;
-    const dy = clientY - prevCursorPosition.current.y;
-
-    // Apply easing to the cursor movement
-    const easeAmount = 0.2;
-    const newX = prevCursorPosition.current.x + dx * easeAmount;
-    const newY = prevCursorPosition.current.y + dy * easeAmount;
-
-    setCursorPosition({ x: newX, y: newY });
-    prevCursorPosition.current = { x: newX, y: newY };
-  }, []);
-
-  useEffect(() => {
-    const updateCursorPosition = (e: MouseEvent) => {
-      if (requestRef.current) return;
-      requestRef.current = requestAnimationFrame(() => {
-        handleMouseMove(e);
-        requestRef.current = null;
-      });
-    };
-
-    window.addEventListener('mousemove', updateCursorPosition);
-    
-    // Initialize cursor position to avoid jumpy start
-    prevCursorPosition.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    
-    return () => {
-      window.removeEventListener('mousemove', updateCursorPosition);
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
-    };
-  }, [handleMouseMove]);
-
   // Handle project hover
   const handleImageHover = useCallback((index: number) => {
     setHoveredProject(index);
@@ -276,28 +239,17 @@ export function Portfolio() {
           ))}
         </div>
         
-        {/* Floating reveal image that follows cursor */}
-        {hoveredProject !== null && (
-          <div
-            className="fixed pointer-events-none z-20"
-            style={{
-              left: `${cursorPosition.x}px`,
-              top: `${cursorPosition.y}px`,
-              transform: `translate(-50%, -50%) scale(${scale})`,
-              opacity: opacity,
-              width: '200px',
-              height: '200px',
-              transition: 'opacity 0.3s ease, transform 0.3s ease',
-            }}
-          >
-            <Image
-              src={projects[hoveredProject].revealImage}
-              alt={`${projects[hoveredProject].title} Reveal`}
-              className="w-full h-full object-cover rounded-lg"
-              fill
-            />
-          </div>
-        )}
+        {/* Using the new RevealImage component */}
+        <RevealImage 
+          isVisible={hoveredProject !== null}
+          imageSrc={hoveredProject !== null ? projects[hoveredProject].revealImage : ''}
+          imageAlt={hoveredProject !== null ? `${projects[hoveredProject].title} Reveal` : ''}
+          initialScale={0.5}
+          finalScale={1}
+          width="200px"
+          height="200px"
+          transitionDuration={0.3}
+        />
       </div>
     </section>
   );
