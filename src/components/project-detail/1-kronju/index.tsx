@@ -8,8 +8,11 @@ import './kronju.css';
 import CountUp from 'react-countup';
 import { Project } from './types';
 import ReactLenis from 'lenis/react';
+import { RevealImage } from '@/components/hooks/RevealImage';
+import { useRouter } from 'next/navigation';
 
 export default function Kronju() {
+  const router = useRouter();
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [currentX, setCurrentX] = useState(0);
@@ -22,6 +25,9 @@ export default function Kronju() {
   const projects = brandData.projects as Project[];
   const medianIndex = Math.floor(projects.length / 2);
   const [activeSlide, setActiveSlide] = useState(medianIndex);
+  const [isHovered, setIsHovered] = useState(false);
+  const [bottomImageHovered, setBottomImageHovered] = useState(false);
+  const [nextProjectHovered, setNextProjectHovered] = useState(false);
   
   // Track which sections have been viewed
   const [sectionViewed, setSectionViewed] = useState<boolean[]>(
@@ -279,31 +285,53 @@ export default function Kronju() {
 
             {/* Right Side - Asymmetric Grid */}
             <div className="md:col-span-7 grid grid-cols-12 grid-rows-6 h-screen">
-              <div className={`col-span-12 row-span-4 relative bg-stone-200 transition-all duration-1000 overflow-hidden ${sectionViewed[0] ? 'opacity-100' : 'opacity-0'}`}>
+              <div 
+                className={`col-span-12 row-span-4 relative bg-stone-200 transition-all duration-1000 overflow-hidden ${sectionViewed[0] ? 'opacity-100' : 'opacity-0'}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
                 <div className="h-full w-full relative overflow-hidden">
                   <Image
                     src="/project/cover1.jpg"
                     alt="Kronju Hero"
                     fill
                     className={`object-cover object-center transition-transform duration-1500 ${sectionViewed[0] ? 'scale-100' : 'scale-110'}`}
-                    loading="eager" // Load immediately for hero image
+                    loading="eager"
                   />
                   <div className="absolute inset-0 bg-amber-500 mix-blend-multiply opacity-10"></div>
                 </div>
+                
+                {/* Reveal image on hover */}
+                <RevealImage 
+                  isVisible={isHovered}
+                  imageSrc="/project/reveal-cover/reveal-cover1.png"
+                  imageAlt="Kronju Hero Reveal"
+                  initialScale={0.5}
+                  finalScale={1}
+                  width="200px"
+                  height="200px"
+                  transitionDuration={0.3}
+                  className="z-50"
+                />
               </div>
               <div className={`col-span-6 row-span-2 relative bg-amber-500 transition-all duration-700 delay-300 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 <div className="h-full w-full flex items-center justify-center">
                   <div className="font-light text-white text-3xl tracking-widest">KRONJU</div>
                 </div>
               </div>
-              <div className={`col-span-6 row-span-2 relative bg-stone-800 transition-all duration-700 delay-500 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <div 
+                className={`col-span-6 row-span-2 relative bg-stone-800 transition-all duration-700 delay-500 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} cursor-pointer`}
+                onMouseEnter={() => setBottomImageHovered(true)}
+                onMouseLeave={() => setBottomImageHovered(false)}
+                onClick={() => router.push('/project/ortist')}
+              >
                 <div className="h-full w-full relative overflow-hidden">
                   <Image
                     src="/project/cover2.jpg"
                     alt="Kronju Product"
                     fill
-                    className="object-cover opacity-80"
-                    loading="eager" // Load immediately for hero section
+                    className={`object-cover transition-all duration-500 ${bottomImageHovered ? 'scale-110 opacity-100' : 'scale-100 opacity-80'}`}
+                    loading="eager"
                   />
                 </div>
               </div>
@@ -329,7 +357,7 @@ export default function Kronju() {
                 </h2>
               </div>
               <p className={`text-stone-600 font-light leading-relaxed md:col-span-6 transition-all duration-700 delay-300 ${sectionViewed[1] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                Applying cutting-edge digital marketing methodologies with precise German execution to deliver exceptional campaign outcomes.
+                Applying cutting-edge digital marketing methodologies with precise profesional execution to deliver exceptional campaign outcomes.
               </p>
             </div>
             
@@ -461,7 +489,7 @@ export default function Kronju() {
         </section>
 
         {/* Approach Section - Minimal Split */}
-        <section className="h-screen flex bg-stone-100">
+        <section ref={(el) => registerSection(el as HTMLDivElement | null, 4)} className="h-screen flex bg-stone-100">
           {/* Image Section - Left */}
           <div className="w-1/2 h-full relative">
             <Image
@@ -470,7 +498,7 @@ export default function Kronju() {
               layout="fill"
               objectFit="cover"
               className="object-center"
-              loading="lazy"
+              priority={false}
             />
           </div>
 
@@ -482,7 +510,7 @@ export default function Kronju() {
               <span className="block absolute -bottom-2 left-0 h-px bg-amber-500 w-16"></span>
             </h2>
             <p className="text-stone-600 font-light leading-relaxed mb-12">
-              Systematically developed strategy with German precision to elevate Kronju&apos;s digital presence, emphasizing quality and authenticity.
+              Systematically developed strategy with profesional precision to elevate Kronju&apos;s digital presence, emphasizing quality and authenticity.
             </p>
             <div className="space-y-12">
               <div className="relative pl-12">
@@ -516,7 +544,7 @@ export default function Kronju() {
                 </h2>
               </div>
               <p className={`text-stone-600 font-light leading-relaxed md:col-span-6 transition-all duration-700 delay-300 ${sectionViewed[5] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                Strategic visual assets developed with German precision for maximum impact across digital channels.
+                Strategic visual assets developed with profesional precision for maximum impact across digital channels.
               </p>
             </div>
             
@@ -584,6 +612,7 @@ export default function Kronju() {
                           height={240}
                           className={`rounded shadow-lg transition-all duration-500 ${sectionViewed[5] ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
                           style={{ transitionDelay: `${0.3 + index * 0.1}s` }}
+                          loading='lazy'
                         />
                       </div>
                     );
@@ -602,20 +631,38 @@ export default function Kronju() {
         >
           <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
             <div className="hidden md:block bg-stone-100"></div>
-            <div className="relative">
-              <div className="absolute inset-0 overflow-hidden">
+            <div 
+              className="relative cursor-pointer"
+              onMouseEnter={() => setNextProjectHovered(true)}
+              onMouseLeave={() => setNextProjectHovered(false)}
+              onClick={() => router.push('/project/ortist')}
+            >
+              <div className="z-50 absolute inset-0 overflow-hidden">
                 <Image
                   src="/project/cover2.jpg"
                   alt="Next Project"
                   fill
-                  className={`object-cover object-center transition-all duration-1500 ${sectionViewed[6] ? 'scale-100' : 'scale-110'}`}
+                  className={`object-cover object-center transition-all duration-1500 ${sectionViewed[6] ? 'scale-100' : 'scale-110'} ${nextProjectHovered ? 'scale-110' : 'scale-100'}`}
                 />
                 <div className={`absolute inset-0 bg-stone-900/20 transition-opacity duration-1000 ${sectionViewed[6] ? 'opacity-100' : 'opacity-0'}`}></div>
               </div>
+              
+              {/* Reveal image on hover */}
+              <RevealImage 
+                isVisible={nextProjectHovered}
+                imageSrc="/project/reveal-cover/reveal-cover2.png"
+                imageAlt="Ortist Project Reveal"
+                initialScale={0.5}
+                finalScale={1}
+                width="200px"
+                height="200px"
+                transitionDuration={0.3}
+                className="z-50"
+              />
             </div>
           </div>
           
-          <div className="relative z-10 max-w-6xl mx-auto w-full px-6 grid grid-cols-1 md:grid-cols-2 gap-24">
+          <div className="relative max-w-6xl w-full px-6 grid md:grid-cols-2 gap-24">
             <div className="flex flex-col justify-center">
               <p className={`text-amber-500 uppercase tracking-widest mb-3 text-sm transition-all duration-700 ${sectionViewed[6] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>Next Case</p>
               <h2 className={`text-5xl font-light text-stone-900 mb-8 max-w-md transition-all duration-700 delay-200 ${sectionViewed[6] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
@@ -629,12 +676,17 @@ export default function Kronju() {
                 <span className="ml-3 w-8 h-px bg-stone-900 group-hover:w-12 group-hover:bg-amber-500 transition-all duration-300"></span>
               </Link>
             </div>
-            <div className={`md:hidden aspect-video relative overflow-hidden transition-all duration-700 delay-300 ${sectionViewed[6] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div 
+              className={`md:hidden aspect-video relative overflow-hidden transition-all duration-700 delay-300 ${sectionViewed[6] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} cursor-pointer`}
+              onMouseEnter={() => setNextProjectHovered(true)}
+              onMouseLeave={() => setNextProjectHovered(false)}
+              onClick={() => router.push('/project/ortist')}
+            >
               <Image
                 src="/project/cover2.jpg"
                 alt="Next Project"
                 fill
-                className={`object-cover object-center transition-all duration-1500 ${sectionViewed[6] ? 'scale-100' : 'scale-110'}`}
+                className={`object-cover object-center transition-all duration-1500 ${sectionViewed[6] ? 'scale-100' : 'scale-110'} ${nextProjectHovered ? 'scale-110' : 'scale-100'}`}
               />
               <div className={`absolute inset-0 bg-stone-900/20 transition-opacity duration-1000 ${sectionViewed[6] ? 'opacity-100' : 'opacity-0'}`}></div>
             </div>
