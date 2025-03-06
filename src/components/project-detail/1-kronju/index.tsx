@@ -268,7 +268,7 @@ export default function Kronju() {
                 </div>
                 
                 <p className={`text-stone-600 font-light leading-relaxed transition-all duration-700 delay-900 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                  A revolutionary digital marketing campaign for Kronju premium cheese snacks. Elevating brand presence across multiple digital channels with a bold, minimalist approach.
+                  {brandData.description}
                 </p>
                 
                 <div className={`pt-6 transition-all duration-700 delay-1000 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
@@ -316,7 +316,7 @@ export default function Kronju() {
               </div>
               <div className={`col-span-6 row-span-2 relative bg-amber-500 transition-all duration-700 delay-300 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 <div className="h-full w-full flex items-center justify-center">
-                  <div className="font-light text-white text-3xl tracking-widest">KRONJU</div>
+                  <div className="font-light text-white text-3xl tracking-widest">{brandData.name}</div>
                 </div>
               </div>
               <div 
@@ -394,7 +394,7 @@ export default function Kronju() {
                 </h2>
               </div>
               <p className={`text-stone-600 font-light leading-relaxed md:col-span-6 transition-all duration-700 delay-300 ${sectionViewed[2] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                Precision-engineered approach to elevate Kronju&apos;s digital presence through systematic implementation.
+                {brandData.campaignStrategy}
               </p>
             </div>
             
@@ -512,29 +512,27 @@ export default function Kronju() {
           {/* Text Section - Right */}
           <div className="w-1/2 flex flex-col justify-center px-12">
             <p className="text-amber-500 uppercase tracking-widest mb-3 text-sm">Method</p>
+            
+            {/* Menggunakan title dari brandData */}
             <h2 className="text-4xl font-light text-stone-900 mb-6 relative">
-              Marketing Approach
+              {brandData.marketingMethod.title}
               <span className="block absolute -bottom-2 left-0 h-px bg-amber-500 w-16"></span>
             </h2>
+
+            {/* Menggunakan description dari brandData */}
             <p className="text-stone-600 font-light leading-relaxed mb-12">
-              Systematically developed strategy with profesional precision to elevate Kronju&apos;s digital presence, emphasizing quality and authenticity.
+              {brandData.marketingMethod.description}
             </p>
+
+            {/* Mapping steps dari brandData */}
             <div className="space-y-12">
-              <div className="relative pl-12">
-                <div className="absolute left-0 top-0 w-6 h-px bg-amber-500"></div>
-                <h3 className="text-lg font-medium text-stone-900 mb-2">Research</h3>
-                <p className="text-stone-600 font-light">Methodical audience analysis and competitor research</p>
-              </div>
-              <div className="relative pl-12">
-                <div className="absolute left-0 top-0 w-6 h-px bg-amber-500"></div>
-                <h3 className="text-lg font-medium text-stone-900 mb-2">Strategy</h3>
-                <p className="text-stone-600 font-light">Integrated multi-channel approach with consistent messaging</p>
-              </div>
-              <div className="relative pl-12">
-                <div className="absolute left-0 top-0 w-6 h-px bg-amber-500"></div>
-                <h3 className="text-lg font-medium text-stone-900 mb-2">Execution</h3>
-                <p className="text-stone-600 font-light">Data-driven implementation with systematic A/B testing</p>
-              </div>
+              {brandData.marketingMethod.steps.map((step, index) => (
+                <div key={index} className="relative pl-12">
+                  <div className="absolute left-0 top-0 w-6 h-px bg-amber-500"></div>
+                  <h3 className="text-lg font-medium text-stone-900 mb-2">{step.title}</h3>
+                  <p className="text-stone-600 font-light">{step.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
