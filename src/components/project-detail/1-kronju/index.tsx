@@ -183,10 +183,27 @@ export default function Kronju() {
   // Function to navigate to a specific section
   const navigateToSection = (index: number) => {
     if (sectionsRef.current[index]) {
-      window.scrollTo({
-        top: sectionsRef.current[index]?.offsetTop || 0,
-        behavior: 'smooth'
-      });
+      const section = sectionsRef.current[index];
+      const targetPosition = section.getBoundingClientRect().top + window.pageYOffset;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      const duration = 1000;
+      let startTime: number | null = null;
+  
+      const easeInOutQuad = (t: number) => {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      };
+  
+      const animation = (currentTime: number) => {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const scrollProgress = Math.min(timeElapsed / duration, 1);
+        const ease = easeInOutQuad(scrollProgress);
+        window.scrollTo(0, startPosition + distance * ease);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+      };
+  
+      requestAnimationFrame(animation);
     }
   };
 
@@ -325,9 +342,9 @@ export default function Kronju() {
                   onMouseEnter={() => setHoveredSkill(index)}
                   onMouseLeave={() => setHoveredSkill(null)}
                 >
-                  <div className={`absolute inset-0 bg-amber-500 transform scale-0 transition-transform duration-500 ease-out ${hoveredSkill === index ? 'scale-100' : ''}`}></div>
-                  <div className="relative border border-stone-200 h-32 p-6 flex items-center justify-center overflow-hidden transition-colors duration-300">
-                    <span className={`text-sm font-medium uppercase tracking-wider text-center z-10 transition-colors duration-300 ${hoveredSkill === index ? 'text-white' : 'text-stone-800'}`}>
+                  <div className={`absolute inset-0 bg-amber-500 transition-all duration-0 ${hoveredSkill === index ? 'opacity-100' : 'opacity-0'}`}></div>
+                  <div className="relative border border-stone-200 h-32 p-6 flex items-center justify-center overflow-hidden transition-colors duration-0">
+                    <span className={`text-sm font-medium uppercase tracking-wider text-center z-10 transition-colors duration-0 ${hoveredSkill === index ? 'text-white' : 'text-stone-800'}`}>
                       {skill}
                     </span>
                   </div>
@@ -605,7 +622,7 @@ export default function Kronju() {
                 Discover Our Next Project
               </h2>
               <Link 
-                href="/project/2-ortist-specialist" 
+                href="/project/ortist" 
                 className={`group inline-flex items-center text-sm font-medium uppercase tracking-widest transition-all duration-700 delay-400 ${sectionViewed[6] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
               >
                 <span className="text-stone-900 group-hover:text-amber-500 transition-colors duration-300">Ortist Specialist</span>
