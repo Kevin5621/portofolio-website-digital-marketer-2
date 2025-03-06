@@ -32,6 +32,12 @@ export function RevealImage({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const requestRef = useRef<number | null>(null);
   const prevCursorPosition = useRef({ x: 0, y: 0 });
+  
+  // Initialize cursor position
+  useEffect(() => {
+    prevCursorPosition.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    setCursorPosition(prevCursorPosition.current);
+  }, []);
 
   // Mouse movement handling with easing
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -44,14 +50,17 @@ export function RevealImage({
     const newX = prevCursorPosition.current.x + dx * easeAmount;
     const newY = prevCursorPosition.current.y + dy * easeAmount;
 
-    setCursorPosition({ x: newX, y: newY });
     prevCursorPosition.current = { x: newX, y: newY };
+    setCursorPosition({ x: newX, y: newY });
   }, []);
 
   // Setup mouse movement tracking
   useEffect(() => {
     const updateCursorPosition = (e: MouseEvent) => {
-      if (requestRef.current) return;
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
+      
       requestRef.current = requestAnimationFrame(() => {
         handleMouseMove(e);
         requestRef.current = null;
@@ -60,12 +69,11 @@ export function RevealImage({
 
     window.addEventListener('mousemove', updateCursorPosition);
     
-    // Initialize cursor position to avoid jumpy start
-    prevCursorPosition.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    
     return () => {
       window.removeEventListener('mousemove', updateCursorPosition);
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
     };
   }, [handleMouseMove]);
 
