@@ -4,12 +4,21 @@ export interface Project {
   description?: string;
 }
 
+export interface VideoMetrics {
+  plays: string;
+  likes?: string;
+  comments?: string;
+  shares?: string;
+  saves?: string;
+}
+
 export interface VideoItem {
   id: string;
   title: string;
   description: string;
   thumbnail: string;
-  videoUrl?: string;
+  videoUrl: string;
+  metrics: VideoMetrics;
 }
 
 export interface MarketingMethodStep {
