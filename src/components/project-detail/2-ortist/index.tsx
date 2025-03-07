@@ -25,8 +25,9 @@ export default function Ortist() {
   const sectionsRef = useRef<(HTMLDivElement | null)[]>([]);
   const sectionTitles = ["Intro", "Expertise", "Strategy", "Results", "Approach", "Gallery", "Video", "Next"];
   const projects = brandData.projects;
-  const [activeSlide, setActiveSlide] = useState(0);
   const [nextProjectHovered, setNextProjectHovered] = useState(false);
+  const medianIndex = Math.floor(projects.length / 2);
+  const [activeSlide, setActiveSlide] = useState(medianIndex);
   
   // Track which sections have been viewed
   const [sectionViewed, setSectionViewed] = useState<boolean[]>(
