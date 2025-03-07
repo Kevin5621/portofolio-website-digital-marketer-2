@@ -40,7 +40,7 @@ export const brandData = {
     "+721,089 TikTok Likes (114,594% increase)"
   ],
 
-  skills: ["MARKET ANALYSIS", "SCHEDULING", "CONTENT STRATEGY", "CONTENT PRODUCTION", "CROSS-PLATFORM MANAGEMENT"],
+  skills: ["MARKET ANALYSIS", "SCHEDULING", "CONTENT STRATEGY", "CONTENT PRODUCTION"],
 
   marketingMethod: {
     title: "Content Strategies",
@@ -66,5 +66,33 @@ export const brandData = {
     { image: "/project/project-detail/2-ortist/foto-2-2.png" },
     { image: "/project/project-detail/2-ortist/foto-2-3.png" },
     { image: "/project/project-detail/2-ortist/foto-2-4.png" },
-  ]
+  ],
+  
+  videoShowcase: {
+    title: "Campaign Videos",
+    description: "Engaging video content created for social media platforms to drive awareness and engagement among the target audience.",
+    videos: [
+      {
+        id: "video1",
+        title: "Orthodontic Transformation",
+        description: "Before and after results showcasing the impact of our treatments",
+        thumbnail: "/project/project-detail/2-ortist/video-thumb-1.jpg",
+        videoUrl: "/project/project-detail/2-ortist/video-2-1.mp4"
+      },
+      {
+        id: "video2",
+        title: "Treatment Process",
+        description: "Educational content explaining the orthodontic process",
+        thumbnail: "/project/project-detail/2-ortist/video-thumb-2.jpg",
+        videoUrl: "/project/project-detail/2-ortist/video-2-2.mp4"
+      },
+      {
+        id: "video3",
+        title: "Patient Testimonial",
+        description: "Real patient sharing their experience with Ortist Specialist",
+        thumbnail: "/project/project-detail/2-ortist/video-thumb-3.jpg",
+        videoUrl: "/project/project-detail/2-ortist/video-2-3.mp4"
+      }
+    ]
+  }
 };

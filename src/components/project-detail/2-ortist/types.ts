@@ -1,7 +1,52 @@
-
-// Define proper types for the project items
 export interface Project {
   image: string;
   title?: string;
   description?: string;
+}
+
+export interface VideoItem {
+  id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  videoUrl?: string;
+}
+
+export interface MarketingMethodStep {
+  title: string;
+  description: string;
+}
+
+export interface MarketingMethod {
+  title: string;
+  description: string;
+  steps: MarketingMethodStep[];
+}
+
+export interface Achievement {
+  metric: string;
+  description: string;
+}
+
+export interface VideoShowcase {
+  title: string;
+  description: string;
+  videos: VideoItem[];
+}
+
+export interface BrandData {
+  name: string;
+  tagline: string;
+  description: string;
+  timeframe: string;
+  fullDescription: string;
+  achievements: Achievement[];
+  objectives: string[];
+  campaignStrategy: string[];
+  executionHighlights: string[];
+  results: string[];
+  skills: string[];
+  marketingMethod: MarketingMethod;
+  projects: Project[];
+  videoShowcase: VideoShowcase;
 }
