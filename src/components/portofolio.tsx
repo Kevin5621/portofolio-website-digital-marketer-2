@@ -239,7 +239,6 @@ export function Portfolio() {
           ))}
         </div>
         
-        {/* Using the new RevealImage component */}
         <RevealImage 
           isVisible={hoveredProject !== null}
           imageSrc={hoveredProject !== null ? projects[hoveredProject].revealImage : ''}
