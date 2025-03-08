@@ -41,7 +41,7 @@ const projects: ProjectData[] = [
     title: 'Rumah Bahasa Asing', 
     image: '/project/cover3.jpg', 
     revealImage: '/project/reveal-cover/reveal-cover3.png',
-    route: '/project/3-rumah-bahasa-asing'
+    route: '/project/rumah-bahasa-asing'
   },
 ];
 
