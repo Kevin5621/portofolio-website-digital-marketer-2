@@ -11,7 +11,7 @@ const AboutMe = () => {
     <ReactLenis root>
       <main>
         {/* First Section - AboutMe (Sticky) */}
-        <section className="relative bg-white sticky top-0 h-screen">
+        <section id="about-section" className="relative bg-white sticky top-0 h-screen">
           <div className="flex flex-col md:flex-row h-full">
             {/* Left Side - Bold Typography */}
             <div className="md:w-1/2 relative bg-white z-10 flex items-center">

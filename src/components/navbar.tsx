@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./styles/Navbar.css";
 
@@ -11,33 +11,54 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [navVisible, setNavVisible] = useState(true);
+  const [textColor, setTextColor] = useState("text-white");
+  const [, setCurrentPath] = useState("");
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Handle scroll events for navbar behavior
+  // Initialize current path
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // Determine if we've scrolled down enough to apply the background
-      if (currentScrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-      
-      // Handle nav visibility (hide on scroll down, show on scroll up)
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setNavVisible(false);
-      } else {
-        setNavVisible(true);
-      }
-      
-      setLastScrollY(currentScrollY);
+    if (typeof window !== 'undefined') {
+      setCurrentPath(window.location.pathname);
+    }
+  }, []);
+
+  // Handle scroll events for navbar behavior with debounce
+  const handleScroll = useCallback(() => {
+    const currentScrollY = window.scrollY;
+    
+    // Determine if we've scrolled down enough to apply the background
+    if (currentScrollY > 20) {
+      setScrolled(true);
+      setTextColor("text-gray-800");
+    } else {
+      setScrolled(false);
+      setTextColor("text-white");
+    }
+    
+    // Handle nav visibility (hide on scroll down, show on scroll up)
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      setNavVisible(false);
+    } else {
+      setNavVisible(true);
+    }
+    
+    setLastScrollY(currentScrollY);
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    
+    const debouncedScrollHandler = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleScroll, 10);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+    window.addEventListener("scroll", debouncedScrollHandler, { passive: true });
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("scroll", debouncedScrollHandler);
+    };
+  }, [handleScroll]);
 
   // Preload fonts
   useEffect(() => {
@@ -86,55 +107,63 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  // Animation variants
-  const navVariants = {
-    visible: { y: 0, opacity: 1 },
-    hidden: { y: -100, opacity: 0 }
+  // Function to handle navigation and scrolling
+  const handleNavigation = (e: React.MouseEvent, path: string, elementId?: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    
+    // If we're navigating to a section on the home page
+    if (path === '/' && elementId) {
+      // If we're already on the home page, just scroll to the element
+      if (window.location.pathname === '/') {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else {
+        // If we're on another page, navigate to home first
+        window.location.href = path + '#' + elementId;
+      }
+    } 
+    // If we're navigating to a different page (like /project)
+    else if (path !== '/') {
+      window.location.href = path;
+    }
+    // If we're navigating to home without a specific section
+    else {
+      window.location.href = path;
+    }
+    
+    setActiveItem(null);
+    setCurrentPath(path);
   };
 
   return (
     <>
       {/* Main Navigation Bar */}
       <motion.nav 
-        className={`fixed top-0 left-0 w-full z-50 py-4 px-6 flex justify-between items-center transition-colors duration-300 ${
-          scrolled ? 'bg-white/50 backdrop-blur-md shadow-sm' : 'bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 w-full z-50 py-6 px-8 flex justify-between items-center transition-all duration-500`}
         initial="visible"
         animate={navVisible ? "visible" : "hidden"}
-        variants={navVariants}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <motion.div
-          whileHover={{ scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          className="overflow-hidden"
         >
-          <Link href="/" className={`text-xl font-bold ${scrolled ? 'text-black' : 'text-white'}`}>
-            <span className="text-2xl">adhara.</span>
+          <Link href="/" onClick={(e) => handleNavigation(e, '/')} className={`text-xl font-bold ${textColor} relative group`}>
+            <span className="text-2xl inline-block transition-transform duration-500 ease-out">
+              adhara<span className="text-indigo-500">.</span>
+            </span>
+            <motion.span 
+              className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500"
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3 }}
+            />
           </Link>
         </motion.div>
-        
-        <div className="hidden md:flex space-x-6">
-          {[
-            { path: '/', name: 'Home' },
-            { path: '/about', name: 'About' },
-            { path: '/work', name: 'Work' },
-            { path: '/contact', name: 'Contact' }
-          ].map((item) => (
-            <motion.div
-              key={item.name.toLowerCase()}
-              whileHover={{ y: -3 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            >
-              <Link 
-                href={item.path} 
-                className={`font-medium text-sm ${scrolled ? 'text-gray-800 hover:text-black' : 'text-gray-200 hover:text-white'}`}
-              >
-                {item.name}
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-        
+            
         <motion.button 
           onClick={toggleMenu}
           className={`menu-button ${isOpen ? "open" : ""} ${scrolled ? "dark" : "light"} md:hidden`}
@@ -156,25 +185,25 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             ref={menuRef}
           >
             <motion.div 
-              className="absolute inset-0 bg-black/90 backdrop-blur-md"
+              className="absolute inset-0 bg-gradient-to-br from-black/95 to-gray-900/95 backdrop-blur-md"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.5 }}
             ></motion.div>
             
             <motion.div 
               className="grid-background absolute inset-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.15 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             ></motion.div>
             
             <div className="menu-container">
-              <div className="py-4 px-6 flex justify-between items-center">
+              <div className="py-6 px-8 flex justify-between items-center">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -195,12 +224,12 @@ const Navbar = () => {
               
               <div className="menu-content">
                 <div className="w-full lg:w-3/4 flex flex-col justify-center">
-                  <div className="space-y-8 px-6">
+                  <div className="space-y-10 px-8">
                     {[
                       { path: '/', name: 'HOME', index: '01', delay: 0.1, id: 'home' },
-                      { path: '/about', name: 'ABOUT', index: '02', delay: 0.2, id: 'about' },
-                      { path: '/work', name: 'WORK', index: '03', delay: 0.3, id: 'work' },
-                      { path: '/contact', name: 'CONTACT', index: '04', delay: 0.4, id: 'contact' }
+                      { path: '/', name: 'ABOUT', index: '02', delay: 0.2, id: 'about', elementId: 'about-section' },
+                      { path: '/project', name: 'PROJECTS', index: '03', delay: 0.3, id: 'project' },
+                      { path: '/', name: 'CONTACT', index: '04', delay: 0.4, id: 'contact', elementId: 'contact-section' }
                     ].map((item) => (
                       <motion.div
                         key={item.id}
@@ -208,17 +237,14 @@ const Navbar = () => {
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -50, opacity: 0 }}
                         transition={{ 
-                          duration: 0.5, 
+                          duration: 0.6, 
                           delay: item.delay,
-                          ease: "easeOut" 
+                          ease: [0.22, 1, 0.36, 1]
                         }}
                       >
                         <Link 
                           href={item.path} 
-                          onClick={() => {
-                            setActiveItem(null);
-                            setIsOpen(false);
-                          }} 
+                          onClick={(e) => handleNavigation(e, item.path, item.elementId)} 
                           className="block"
                           onMouseEnter={() => setActiveItem(item.id)}
                           onMouseLeave={() => setActiveItem(null)}
@@ -251,7 +277,7 @@ const Navbar = () => {
                               {item.name}
                             </motion.span>
                             <motion.span 
-                              className="absolute bottom-0 left-8 w-0 h-0.5 bg-white"
+                              className="absolute bottom-0 left-8 w-0 h-0.5 bg-indigo-500"
                               animate={{ 
                                 width: activeItem === item.id ? "80%" : "0%" 
                               }}
@@ -266,7 +292,7 @@ const Navbar = () => {
                   </div>
                 </div>
                 <motion.div 
-                  className="hidden lg:flex w-1/4 flex-col justify-between border-l border-gray-700"
+                  className="hidden lg:flex w-1/4 flex-col justify-between border-l border-gray-800"
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
@@ -288,11 +314,25 @@ const Navbar = () => {
                     >
                       <p className="text-gray-400">Let&apos;s create something amazing together.</p>
                       <motion.p 
-                        className="text-gray-300 font-medium"
+                        className="text-gray-300 font-medium group flex items-center cursor-pointer"
                         whileHover={{ x: 5 }}
                         transition={{ type: "spring", stiffness: 400, damping: 10 }}
                       >
-                        Book a consultation →
+                        Book a consultation 
+                        <motion.span 
+                          className="ml-1 inline-block"
+                          initial={{ x: 0 }}
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{ 
+                            duration: 1.5, 
+                            repeat: Infinity,
+                            repeatType: "loop",
+                            ease: "easeInOut",
+                            repeatDelay: 1
+                          }}
+                        >
+                          →
+                        </motion.span>
                       </motion.p>
                     </motion.div>
                   </div>

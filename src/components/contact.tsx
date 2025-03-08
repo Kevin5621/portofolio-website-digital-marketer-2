@@ -69,7 +69,7 @@ const Contact = () => {
   return (
     <div className={styles.contactSection} id="contact" ref={sectionRef}>
       {/* Vertical blinds transition effect */}
-      <div className={styles.blindsContainer}>
+      <div id="contact-section" className={styles.blindsContainer}>
         {blinds.map((_, index) => (
           <motion.div
             key={index}
