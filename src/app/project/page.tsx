@@ -70,7 +70,7 @@ export default function ProjectsPage() {
   return (
     <ReactLenis root options={{ lerp: 0.05, duration: 1.2, smoothWheel: true }}>
     <main className="min-h-screen bg-gray-50">
-      <Navbar />
+      <Navbar variant="dark" />
       
       <div className="pt-36 pb-12 px-8 max-w-7xl mx-auto">
         <motion.div 

@@ -8,7 +8,7 @@ import { Portfolio } from "@/components/portofolio";
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Navbar />
+      <Navbar variant="light" />
       <Hero />
       <CertificateAndExperience  />
       <AboutMe />

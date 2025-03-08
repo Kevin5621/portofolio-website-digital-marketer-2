@@ -5,13 +5,17 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./styles/Navbar.css";
 
-const Navbar = () => {
+type NavbarProps = {
+  variant?: 'light' | 'dark';
+}
+
+const Navbar = ({ variant = 'light' }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [navVisible, setNavVisible] = useState(true);
-  const [textColor, setTextColor] = useState("text-white");
+  const [textColor, setTextColor] = useState(variant === 'light' ? "text-white" : "text-gray-800");
   const [, setCurrentPath] = useState("");
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -29,10 +33,13 @@ const Navbar = () => {
     // Determine if we've scrolled down enough to apply the background
     if (currentScrollY > 20) {
       setScrolled(true);
+      // If it's a light variant, text changes to dark on scroll
+      // If it's a dark variant, text stays dark
       setTextColor("text-gray-800");
     } else {
       setScrolled(false);
-      setTextColor("text-white");
+      // Reset to initial state based on variant
+      setTextColor(variant === 'light' ? "text-white" : "text-gray-800");
     }
     
     // Handle nav visibility (hide on scroll down, show on scroll up)
@@ -43,7 +50,7 @@ const Navbar = () => {
     }
     
     setLastScrollY(currentScrollY);
-  }, [lastScrollY]);
+  }, [lastScrollY, variant]);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -59,6 +66,13 @@ const Navbar = () => {
       window.removeEventListener("scroll", debouncedScrollHandler);
     };
   }, [handleScroll]);
+
+  // Reset text color when variant changes
+  useEffect(() => {
+    if (!scrolled) {
+      setTextColor(variant === 'light' ? "text-white" : "text-gray-800");
+    }
+  }, [variant, scrolled]);
 
   // Preload fonts
   useEffect(() => {
@@ -138,13 +152,24 @@ const Navbar = () => {
     setCurrentPath(path);
   };
 
+  // Determine navbar background color based on variant and scroll state
+  const navbarBgClass = scrolled 
+    ? "bg-transparent"
+    : variant === 'dark' 
+      ? "bg-transparent" 
+      : "bg-transparent";
+
   return (
     <>
       {/* Main Navigation Bar */}
       <motion.nav 
-        className={`fixed top-0 left-0 w-full z-50 py-6 px-8 flex justify-between items-center transition-all duration-500`}
+        className={`fixed top-0 left-0 w-full z-50 py-6 px-8 flex justify-between items-center transition-all duration-500 ${navbarBgClass}`}
         initial="visible"
         animate={navVisible ? "visible" : "hidden"}
+        variants={{
+          visible: { y: 0, opacity: 1 },
+          hidden: { y: -100, opacity: 0 }
+        }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <motion.div
@@ -166,14 +191,14 @@ const Navbar = () => {
             
         <motion.button 
           onClick={toggleMenu}
-          className={`menu-button ${isOpen ? "open" : ""} ${scrolled ? "dark" : "light"} md:hidden`}
+          className={`menu-button ${isOpen ? "open" : ""} ${scrolled || variant === 'dark' ? "dark" : "light"} md:hidden`}
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
           whileTap={{ scale: 0.95 }}
         >
-          <span className={`menu-line ${scrolled ? 'bg-black' : 'bg-white'}`}></span>
-          <span className={`menu-line ${scrolled ? 'bg-black' : 'bg-white'}`}></span>
-          <span className={`menu-line ${scrolled ? 'bg-black' : 'bg-white'}`}></span>
+          <span className={`menu-line ${scrolled || variant === 'dark' ? 'bg-black' : 'bg-white'}`}></span>
+          <span className={`menu-line ${scrolled || variant === 'dark' ? 'bg-black' : 'bg-white'}`}></span>
+          <span className={`menu-line ${scrolled || variant === 'dark' ? 'bg-black' : 'bg-white'}`}></span>
         </motion.button>
       </motion.nav>
 
