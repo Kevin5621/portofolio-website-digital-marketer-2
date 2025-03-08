@@ -63,9 +63,9 @@ export const brandData = {
 
   projects: [
     { image: "/project/project-detail/2-ortist/foto-2-1.png" },
-    { image: "/project/project-detail/2-ortist/foto-2-2.png" },
-    { image: "/project/project-detail/2-ortist/foto-2-3.png" },
     { image: "/project/project-detail/2-ortist/foto-2-4.png" },
+    { image: "/project/project-detail/2-ortist/foto-2-3.png" },
+    { image: "/project/project-detail/2-ortist/foto-2-2.png" },
   ],
   
   videoShowcase: {
@@ -74,24 +74,61 @@ export const brandData = {
     videos: [
       {
         id: "video1",
-        title: "Orthodontic Transformation",
-        description: "Before and after results showcasing the impact of our treatments",
+        title: "Funny Reel Video",
+        description: "This viral funny reel video encouraged people to visit Ortist Spesialist. With 1.8M plays, 258K likes, 5K comments, 33K shares, and 34K saves.",
         thumbnail: "/project/project-detail/2-ortist/video-thumb-1.jpg",
-        videoUrl: "/project/project-detail/2-ortist/video-2-1.mp4"
+        videoUrl: "/project/project-detail/2-ortist/video-2-1.mp4",
+        metrics: {
+          plays: "1.8M",
+          likes: "258K",
+          comments: "5K", 
+          shares: "33K",
+          saves: "34K"
+        }
       },
       {
         id: "video2",
-        title: "Treatment Process",
-        description: "Educational content explaining the orthodontic process",
+        title: "Educational Video",
+        description: "Educational video mixed with entertainment to engage the audience. Reached 766K plays, 92K likes, 3K comments, 4K shares, and 9K saves.",
         thumbnail: "/project/project-detail/2-ortist/video-thumb-2.jpg",
-        videoUrl: "/project/project-detail/2-ortist/video-2-2.mp4"
+        videoUrl: "/project/project-detail/2-ortist/video-2-2.mp4",
+        metrics: {
+          plays: "766K",
+          likes: "92K",
+          comments: "3K",
+          shares: "4K",
+          saves: "9K"
+        }
       },
       {
         id: "video3",
-        title: "Patient Testimonial",
-        description: "Real patient sharing their experience with Ortist Specialist",
+        title: "Master!",
+        description: "Fun content that engages young audiences with entertaining dental health information.",
         thumbnail: "/project/project-detail/2-ortist/video-thumb-3.jpg",
-        videoUrl: "/project/project-detail/2-ortist/video-2-3.mp4"
+        videoUrl: "/project/project-detail/2-ortist/video-2-3.mp4",
+        metrics: {
+          plays: "43.8K"
+        }
+      },
+      {
+        id: "video4",
+        title: "Before and After Transformation",
+        description: "Tambal Komposit Pasca Kecelakaan - Showcasing the before and after results of dental procedures.",
+        thumbnail: "/project/project-detail/2-ortist/video-thumb-4.jpg",
+        videoUrl: "/project/project-detail/2-ortist/video-2-4.mp4",
+        metrics: {
+          plays: "23.9K"
+        }
+      },
+      {
+        id: "video5",
+        title: "Prep Content",
+        description: "Sebelum Pasang Behel - Educational content showing the preparation process before getting braces.",
+        thumbnail: "/project/project-detail/2-ortist/video-thumb-5.jpg",
+        videoUrl: "/project/project-detail/2-ortist/video-2-5.mp4",
+        metrics: {
+          plays: "6.9K"
+        }
       }
     ]
   }
