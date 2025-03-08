@@ -1,5 +1,5 @@
 import Navbar from '@/components/navbar';
-import RBA from '@/components/project-detail/2-ortist';
+import RBA from '@/components/project-detail/3-rumah-bahasa';
 
 export default function RBAPage() {
   return (
