@@ -6,7 +6,31 @@ import { motion } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 import Head from 'next/head';
 
+// Add this at the top of your component
 const AboutMe = () => {
+  // Generate fixed random values that will be consistent between server and client
+  const generateFixedRandomValues = () => {
+    // Pre-computed random values for paths, animations, etc.
+    return {
+      paths: Array(12).fill(0).map((_, i) => ({
+        d: `M${30 + i * 5} ${20 + i * 6} Q${100 + i * 10} ${150 - i * 5} ${200 + i * 8} ${250 - i * 7}`,
+        strokeWidth: 0.5 + (i * 0.1),
+        animationDuration: `${5 + (i * 0.5)}s`,
+        animationDelay: `${0.2 + (i * 0.25)}s`
+      })),
+      nodes: Array(8).fill(0).map((_, i) => ({
+        width: `${50 + (i * 15)}px`,
+        height: `${50 + (i * 15)}px`,
+        top: `${10 + (i * 10)}%`,
+        left: `${5 + (i * 12)}%`,
+        animation: `pulse ${5 + (i * 0.6)}s infinite alternate`
+      }))
+    };
+  };
+
+  // Create the fixed random values
+  const fixedRandomValues = generateFixedRandomValues();
+
   return (
     <ReactLenis root>
       <main>
@@ -82,40 +106,36 @@ const AboutMe = () => {
                   </linearGradient>
                 </defs>
 
-                {/* Complex Neural Network Paths */}
-                {[...Array(12)].map((_, i) => (
+                {/* Complex Neural Network Paths - Using fixed values */}
+                {fixedRandomValues.paths.map((path, i) => (
                   <path
                     key={i}
-                    d={`
-                      M${Math.random() * 100} ${Math.random() * 100} 
-                      Q${Math.random() * 200} ${Math.random() * 200} 
-                      ${Math.random() * 300} ${Math.random() * 300}
-                    `}
+                    d={path.d}
                     fill="none"
                     stroke="url(#neuralGradient)"
-                    strokeWidth={Math.random() * 2}
+                    strokeWidth={path.strokeWidth}
                     className="opacity-50 animate-pulse"
                     style={{
-                      animationDuration: `${5 + Math.random() * 5}s`,
-                      animationDelay: `${Math.random() * 3}s`
+                      animationDuration: path.animationDuration,
+                      animationDelay: path.animationDelay
                     }}
                   />
                 ))}
               </svg>
             </div>
 
-            {/* Glowing Neuromorphic Nodes */}
+            {/* Glowing Neuromorphic Nodes - Using fixed values */}
             <div className="absolute inset-0 pointer-events-none">
-              {[...Array(8)].map((_, i) => (
+              {fixedRandomValues.nodes.map((node, i) => (
                 <div
                   key={i}
                   className="absolute bg-blue-600/20 rounded-full blur-2xl"
                   style={{
-                    width: `${50 + Math.random() * 100}px`,
-                    height: `${50 + Math.random() * 100}px`,
-                    top: `${Math.random() * 100}%`,
-                    left: `${Math.random() * 100}%`,
-                    animation: `pulse ${5 + Math.random() * 5}s infinite alternate`,
+                    width: node.width,
+                    height: node.height,
+                    top: node.top,
+                    left: node.left,
+                    animation: node.animation,
                   }}
                 />
               ))}
