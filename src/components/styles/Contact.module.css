@@ -1,294 +1,296 @@
 .contactSection {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  /* Vertical blinds transition effect */
-  .blindsContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  
-  .blind {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    background-color: #ffffff;
-    z-index: 11;
-  }
-  
-  .pageContainer {
-    position: relative;
-    min-height: 100vh;
-    background-color: #f8f8f8;
-    color: #121212;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    z-index: 1;
-  }
-  
-  
-  /* Scan lines effect */
-  .scanlines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 50%,
-      rgba(0, 0, 0, 0.05) 51%
-    );
-    background-size: 100% 4px;
-    z-index: 2;
-    pointer-events: none;
-    opacity: 0.3;
-    mix-blend-mode: multiply;
-  }
-  
-  /* Glitch title */
-  .glitchTitle {
-    font-size: 5rem;
-    font-weight: 900;
-    letter-spacing: 0.5rem;
-    text-transform: uppercase;
-    position: relative;
-    margin-bottom: 4rem;
-    color: #121212;
-  }
-  
-  .glitchLayer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
-  }
-  
-  .glitchTitle .glitchLayer:nth-child(1) {
-    color: #ff00ff;
-    animation: glitch-anim-1 2s infinite linear alternate;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-    transform: translate(-0.02em, -0.025em);
-    opacity: 0.15;
-  }
-  
-  .glitchTitle .glitchLayer:nth-child(2) {
-    color: #00ffff;
-    animation: glitch-anim-2 2.3s infinite linear alternate;
-    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-    transform: translate(0.02em, 0.025em);
-    opacity: 0.15;
-  }
-  
-  /* Contact grid */
-  .contactGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    width: 100%;
-    max-width: 1200px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  /* Contact card */
-  .contactCard {
-    background: linear-gradient(145deg, #ffffff, #f0f0f0);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-  
-  .contactCard:hover .pulseRing {
-    animation-play-state: running;
-  }
-  
-  .contactCard:hover::before {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  
-  .contactCard::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    background: linear-gradient(to bottom, #000, #555);
-    opacity: 0.2;
-    transform: translateX(-5px);
-    transition: all 0.3s ease;
-  }
-  
-  /* Icon container */
-  .iconContainer {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1.5rem;
-    background-color: #f0f0f0;
-    border-radius: 50%;
-    color: #121212;
-  }
-  
-  .pulseRing {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    animation: pulseRing 2s infinite;
-    animation-play-state: paused;
-  }
-  
-  /* Contact info */
-  .contactInfo {
-    flex: 1;
-  }
-  
-  .contactInfo h3 {
-    font-weight: 600;
-    margin: 0 0 0.5rem;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.6;
-  }
-  
-  .contactInfo p {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 500;
-  }
-  
-  /* Typewriter effect */
-  .typewriter {
-    position: relative;
-    overflow: hidden;
-    border-right: 2px solid #121212;
-    white-space: nowrap;
-    animation: typing 3.5s steps(40) 1s 1 normal both, blink-caret 0.75s step-end infinite;
-  }
-  
-  /* Corner decoration */
-  .cornerDecoration {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.05) 50%);
-  }
-  
-  /* Wavy path at bottom */
-  .wavyPath {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    pointer-events: none;
-  }
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Fixed height to viewport height */
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-  
-  @keyframes glitch-anim-1 {
-    0% {
-      transform: translate(0);
-    }
-    20% {
-      transform: translate(-2px, 2px);
-    }
-    40% {
-      transform: translate(-2px, -2px);
-    }
-    60% {
-      transform: translate(2px, 2px);
-    }
-    80% {
-      transform: translate(2px, -2px);
-    }
-    100% {
-      transform: translate(0);
-    }
+/* Infinite Slider Animation - Replacing Marquee */
+.sliderContainer {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  padding: 0.75rem 0;
+  z-index: 10;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sliderTrack {
+  display: flex;
+  width: fit-content;
+}
+
+.sliderGroup {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.sliderItem {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.1em;
+  padding: 0 1rem;
+  display: inline-block;
+}
+
+.sliderDot {
+  color: light;
+  font-size: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+/* Main container */
+.contactContainer {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  z-index: 5;
+  padding: 2rem;
+  margin-top: 2rem;
+  flex: 1;
+}
+
+/* Header styling */
+.contactHeaderContainer {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.contactHeading {
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.headerUnderline {
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  height: 0.5rem;
+  background-color: #000;
+  border-radius: 0.25rem;
+}
+
+/* Cards grid - More compact */
+.contactCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .contactCardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Contact card styling - Reduced padding */
+.contactCard {
+  position: relative;
+  display: block;
+  background-color: #fff;
+  padding: 1.75rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: #000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  z-index: 1;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.contactCard:hover {
+  border-color: #000;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.titleBox {
+  width: 100%;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.titleUnderline {
+  height: 3px;
+  background-color: #ff3e00;
+  border-radius: 1px;
+}
+
+.valueContainer {
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+.contactValue {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #333;
+  word-break: break-word;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid #eee;
+}
+
+.connectText {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.arrowIcon {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.cardBackground {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* Improved Footer styling */
+.contactFooter {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem 2rem;
+  text-align: center;
+}
+
+.footerLine {
+  height: 1px;
+  background-color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.footerText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #000;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background-color: #f8f8f8;
+  display: inline-block;
+  position: relative;
+}
+
+.footerText::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -20px;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(248, 248, 248, 0), #f8f8f8);
+}
+
+.footerText::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20px;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(248, 248, 248, 0), #f8f8f8);
+}
+
+/* Additional animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.cardActive {
+  animation: pulse 2s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .contactHeading {
+    font-size: 3rem;
   }
   
-  @keyframes glitch-anim-2 {
-    0% {
-      transform: translate(0);
-    }
-    10% {
-      transform: translate(-1px, -3px);
-    }
-    20% {
-      transform: translate(3px, 1px);
-    }
-    30% {
-      transform: translate(-3px, 2px);
-    }
-    40% {
-      transform: translate(1px, 3px);
-    }
-    50% {
-      transform: translate(-1px, -1px);
-    }
-    60% {
-      transform: translate(3px, 3px);
-    }
-    70% {
-      transform: translate(-3px, -3px);
-    }
-    80% {
-      transform: translate(1px, -1px);
-    }
-    90% {
-      transform: translate(-1px, 3px);
-    }
-    100% {
-      transform: translate(0);
-    }
+  .contactSection {
+    height: auto;
+    min-height: 100vh;
+    padding: 0 0 2rem 0;
   }
   
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+  .contactContainer {
+    padding: 1rem;
+    margin-top: 1.5rem;
   }
   
-  @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #121212 }
+  .footerText {
+    font-size: 1rem;
   }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .glitchTitle {
-      font-size: 3rem;
-    }
-    
-    .contactGrid {
-      grid-template-columns: 1fr;
-    }
-  }
+}
