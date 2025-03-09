@@ -4,8 +4,9 @@ import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/navbar';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import ReactLenis from 'lenis/react';
+import { RevealImage } from '@/components/hooks/RevealImage';
 
 interface Project {
   title: string;
@@ -24,207 +25,183 @@ export default function ProjectsPage() {
       route: '/project/4-aerospace',
       image: '/project/cover4.jpg',
       backgroundImage: '/project/cover4.jpg',
-      description: 'Innovative aerospace design and engineering solutions'
+      description: 'Premium men\'s underwear brand focusing on comfort and style'
     },
     {
       title: 'Benjasimen Samapta',
       route: '/project/5-benjasimen-samapta',
       image: '/project/cover5.jpg',
       backgroundImage: '/project/cover5.jpg', 
-      description: 'Strategic brand identity and visual communication'
+      description: 'Military preparation training services for aspiring soldiers'
     },
     {
       title: 'Ortist Specialist',
       route: '/project/ortist',
       image: '/project/cover2.jpg',
       backgroundImage: '/project/cover2.jpg',
-      description: 'Professional healthcare marketing and branding'
+      description: 'Professional orthodontic services for all ages'
     },
     {
       title: 'Kronju',
       route: '/project/kronju',
       image: '/project/cover1.jpg',
       backgroundImage: '/project/cover1.jpg',
-      description: 'Creative digital solutions and brand development'
+      description: 'Healthy cheese snacks made with natural ingredients'
     },
     {
       title: 'Rumah Bahasa Asing',
       route: '/project/3-rumah-bahasa-asing',
       image: '/project/cover3.jpg',
       backgroundImage: '/project/cover3.jpg',
-      description: 'Educational platform design and marketing strategy'
+      description: 'Korean language learning services and cultural programs'
     }
   ];
 
-  const fadeInVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        ease: [0.25, 0.1, 0.25, 1.0],
-      }
-    }
-  };
-
   return (
     <ReactLenis root options={{ lerp: 0.05, duration: 1.2, smoothWheel: true }}>
-    <main className="min-h-screen bg-gray-50">
-      <Navbar variant="dark" />
-      
-      <div className="pt-36 pb-12 px-8 max-w-7xl mx-auto">
-        <motion.div 
-          className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-4xl md:text-6xl font-light text-primary mb-6 tracking-tight">Projects</h1>
-          <div className="h-px w-12 bg-stone-400"></div>
-          <p className="mt-8 text-stone-600 max-w-lg font-light leading-relaxed">
-            Explore our portfolio of creative work across various industries. Each project represents our commitment to excellence and innovative solutions.
-          </p>
-        </motion.div>
-      </div>
-
-      <motion.div 
-        className="flex flex-col"
-        variants={fadeInVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {projects.map((project, index) => (
-          <ProjectItem 
-            key={project.title}
-            project={project}
-            index={index}
-            isActive={activeProject === index}
-            onHover={() => setActiveProject(index)}
-            onLeave={() => setActiveProject(null)}
+      <main className="min-h-screen bg-white overflow-hidden">
+        <Navbar variant="dark" />
+        
+        {/* Reveal image that follows cursor */}
+        {activeProject !== null && (
+          <RevealImage
+            isVisible={activeProject !== null}
+            imageSrc={projects[activeProject]?.image}
+            imageAlt={projects[activeProject]?.title}
+            initialScale={0.8}
+            finalScale={1}
+            width="340px"
+            height="240px"
+            transitionDuration={0.4}
+            className="shadow-lg"
           />
-        ))}
-      </motion.div>
-    </main>
+        )}
+        
+        {/* Header with bold typography */}
+        <section className="pt-36 pb-16 px-8">
+          <div className="max-w-7xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2 }}
+              className="relative"
+            >
+              <h1 className="text-[8vw] md:text-[10vw] font-bold text-black leading-none tracking-tighter overflow-hidden">
+                <span className="block">MY</span>
+                <span className="block -mt-4">WORK.</span>
+              </h1>
+            </motion.div>
+            
+            <motion.p 
+              className="mt-6 text-lg text-stone-600 max-w-lg font-light leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
+              Explore our portfolio of creative work across various industries. Each project represents our commitment to excellence and innovative solutions.
+            </motion.p>
+          </div>
+        </section>
+        
+        {/* Projects section - List view only */}
+        <AnimatePresence>
+          <motion.section 
+            key="list-view"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="px-8 pb-24"
+          >
+            <div className="max-w-7xl mx-auto">
+              {projects.map((project, index) => (
+                <ListProjectItem 
+                  key={`list-${project.title}`}
+                  project={project}
+                  index={index}
+                  onHover={() => setActiveProject(index)}
+                  onLeave={() => setActiveProject(null)}
+                />
+              ))}
+            </div>
+          </motion.section>
+        </AnimatePresence>
+      </main>
     </ReactLenis>
   );
 }
 
-// Separate component for each project item with its own scroll-based parallax
-const ProjectItem = ({ 
+// List view project item
+const ListProjectItem = ({ 
   project, 
   index, 
-  isActive,
-  onHover,
-  onLeave
+  onHover, 
+  onLeave 
 }: { 
   project: Project; 
   index: number; 
-  isActive: boolean;
-  onHover: () => void;
-  onLeave: () => void;
+  onHover: () => void; 
+  onLeave: () => void; 
 }) => {
-  const ref = useRef(null);
-  const isOdd = index % 2 !== 0;
-
-  // Using framer-motion's useScroll for smooth parallax
+  const [isHovered, setIsHovered] = useState(false);
+  const itemRef = useRef(null);
+  
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: itemRef,
     offset: ["start end", "end start"]
   });
-
-  // Enhanced parallax effect
-  const parallaxY = useTransform(
-    scrollYProgress, 
-    [0, 1], 
-    ["0%", "-15%"]
-  );
-
+  
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 1, 1, 0.4]);
+  const translateY = useTransform(scrollYProgress, [0, 0.5, 1], [40, 0, 40]);
+  
   return (
-    <motion.div 
-      ref={ref}
-      className="group relative"
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-      variants={{
-        hidden: { opacity: 0, y: 40 },
-        visible: { 
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1.0] }
-        }
+    <motion.div
+      ref={itemRef}
+      style={{ opacity, y: translateY }}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        onHover();
       }}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        onLeave();
+      }}
+      className="border-b border-gray-200 group"
     >
-      {isOdd ? (
-        // Clean minimalist layout for odd-indexed items 
-        <div className="relative py-32 px-6 bg-white">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="relative aspect-[4/5] w-full overflow-hidden">
+      <Link href={project.route}>
+        <div className="py-12 flex flex-col md:flex-row items-start md:items-center justify-between">
+          <div className="flex flex-col md:flex-row md:items-center gap-6">
+            <div className="text-5xl font-bold text-black/20 group-hover:text-black transition-colors duration-300">
+              {(index + 1).toString().padStart(2, '0')}
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-black tracking-tight transform group-hover:translate-x-2 transition-transform duration-300">
+              {project.title}
+            </h2>
+          </div>
+          
+          <div className="mt-4 md:mt-0 pl-16 md:pl-0 flex items-center gap-6">
+            <p className="text-stone-600 max-w-md hidden md:block">
+              {project.description}
+            </p>
+            
+            <motion.div 
+              className="w-12 h-12 rounded-full flex items-center justify-center border border-black overflow-hidden opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+              animate={{ 
+                borderRadius: isHovered ? 8 : 24
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className={`object-cover transition-all duration-700 ${isActive ? 'scale-105' : 'scale-100'}`}
+                  className="object-cover"
                 />
               </div>
-              <div className="p-2">
-                <h2 className="text-2xl font-light text-stone-900 mb-6 tracking-tight transition-colors duration-300 group-hover:text-stone-700">
-                  {project.title}
-                </h2>
-                <div className="h-px w-8 bg-stone-300 mb-6"></div>
-                <p className="text-stone-600 font-light mb-8">{project.description}</p>
-                <Link href={project.route} className="inline-block px-6 py-2 border border-stone-300 text-stone-700 hover:bg-stone-100 transition-colors duration-300 text-sm uppercase tracking-wider">
-                  View Project
-                </Link>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      ) : (
-        // Full background layout with enhanced parallax for even-indexed items
-        <Link href={project.route} className="block">
-          <div className="relative h-screen w-full overflow-hidden">
-            {/* Full background image with parallax effect */}
-            <div className="absolute inset-0 w-full h-full overflow-hidden">
-              <motion.div 
-                className="w-full h-[120%] absolute top-0 left-0"
-                style={{ y: parallaxY }}
-              >
-                <Image
-                  src={project.backgroundImage}
-                  alt={`${project.title} background`}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-stone-900/50"></div>
-              </motion.div>
-            </div>
-            
-            {/* Centered content with minimalist approach */}
-            <div className="relative z-10 flex flex-col items-center justify-center h-full w-full">
-              <motion.div 
-                className="max-w-3xl w-full mx-auto px-4"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="text-center p-8 bg-white/90 backdrop-blur-sm max-w-md mx-auto">
-                  <h2 className="text-2xl font-light text-stone-900 mb-4 tracking-tight transition-colors duration-300 group-hover:text-stone-700">
-                    {project.title}
-                  </h2>
-                  <div className="h-px w-8 bg-stone-300 mx-auto mb-4"></div>
-                  <p className="text-stone-600 font-light">{project.description}</p>
-                  
-                  <div className="mt-6 text-sm uppercase tracking-wider text-stone-500">
-                    View Project
-                    <div className="h-px w-0 bg-stone-400 mx-auto mt-1 group-hover:w-16 transition-all duration-500"></div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </Link>
-      )}
+      </Link>
     </motion.div>
   );
 };
