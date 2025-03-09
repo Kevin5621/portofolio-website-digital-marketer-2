@@ -16,6 +16,7 @@
 html {
   scrollbar-width: none; /* Firefox */
   scroll-behavior: smooth;
+  font-size: 80%;
 }
 
 html::-webkit-scrollbar {
