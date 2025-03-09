@@ -34,54 +34,51 @@ const AboutMe = () => {
   return (
     <ReactLenis root>
       <main>
-        {/* First Section - AboutMe (Sticky) */}
-        <section id="about-section" className="relative bg-white sticky top-0 h-screen">
-          <div className="flex flex-col md:flex-row h-full">
-            {/* Left Side - Bold Typography */}
-            <div className="md:w-1/2 relative bg-white z-10 flex items-center">
-              <motion.div 
-                className="p-8 md:p-16 max-w-xl"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none mb-6 text-neutral-900">
+        {/* First Section - AboutMe (Sticky) - Modified for mobile responsiveness */}
+        <section id="about-section" className="relative bg-white sticky top-0 h-screen overflow-hidden">
+          <div className="flex flex-col h-full">
+            {/* Text Content - Always on top for mobile, side by side for desktop */}
+            <motion.div 
+              className="relative bg-white z-10 flex-shrink-0 p-8 md:p-16 md:w-1/2 md:h-full flex items-center"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="max-w-xl mx-auto md:mx-0">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none mb-6 text-neutral-900">
                   {Array.from("SHAPING THE FUTURE.").map((char, index) => (
                     <span key={index} className="transition duration-300 hover:text-primary">{char}</span>
                   ))}
                 </h2>
 
-                <p className="mt-8 text-neutral-700 text-xl">
+                <p className="mt-4 sm:mt-8 text-neutral-700 text-lg sm:text-xl">
                   {Array.from("Digital Innovator, Visual Storyteller, and Marketing Strategist. Transforming brands through bold creativity and cutting-edge design.").map((char, index) => (
                     <span key={index} className="transition duration-300 hover:text-primary">{char}</span>
                   ))}
                 </p>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
 
-
-            {/* Right Side - Large Image */}
-            <div className="md:w-1/2 relative">
-              <motion.div 
-                className="h-full"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative h-full">
+            {/* Image Container - Below text on mobile, side by side on desktop */}
+            <motion.div 
+              className="flex-grow md:absolute md:right-0 md:top-0 md:w-1/2 md:h-full"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative h-full min-h-[40vh] md:min-h-0">
                 <Image
                   src="/placeholder2.png" 
                   alt="Profile portrait"
                   fill
                   className="object-cover object-center filter grayscale hover:grayscale-0 transition duration-500 ease-in-out"
-                  sizes="50vw"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   priority
                 />
-                </div>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
