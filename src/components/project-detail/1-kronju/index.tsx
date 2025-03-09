@@ -496,43 +496,53 @@ export default function Kronju() {
         </section>
 
         {/* Approach Section - Minimal Split */}
-        <section ref={(el) => registerSection(el as HTMLDivElement | null, 4)} className="h-screen flex bg-stone-100">
-          {/* Image Section - Left */}
-          <div className="w-1/2 h-full relative">
+        <section 
+          ref={(el) => registerSection(el as HTMLDivElement | null, 4)} 
+          className="min-h-screen flex flex-col md:flex-row bg-stone-100"
+        >
+        {/* Image Section - Left on desktop, Top on mobile */}
+        <div className="w-full md:w-1/2 h-[40vh] md:h-screen relative">
             <Image
               src="/project/project-detail/1-kronju/cover-produk.jpg"
               alt="Marketing Campaign Preview"
-              layout="fill"
-              objectFit="cover"
-              className="object-center"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-center"
               priority={false}
             />
+            {/* Mobile overlay gradient for better text contrast when scrolling */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-stone-900/30 md:hidden"></div>
           </div>
 
-          {/* Text Section - Right */}
-          <div className="w-1/2 flex flex-col justify-center px-12">
-            <p className="text-amber-500 uppercase tracking-widest mb-3 text-sm">Method</p>
-            
-            {/* Menggunakan title dari brandData */}
-            <h2 className="text-4xl font-light text-stone-900 mb-6 relative">
-              {brandData.marketingMethod.title}
-              <span className="block absolute -bottom-2 left-0 h-px bg-amber-500 w-16"></span>
-            </h2>
+          {/* Text Section - Right on desktop, Bottom on mobile */}
+          <div className="w-full md:w-1/2 flex flex-col justify-center px-6 py-12 md:px-12 md:py-0">
+            <div className={`transition-all duration-700`}>
+              <p className="text-amber-500 uppercase tracking-widest mb-3 text-sm">Method</p>
+              
+              {/* Title with animated underline */}
+              <h2 className="text-3xl md:text-4xl font-light text-stone-900 mb-6 relative">
+                {brandData.marketingMethod.title}
+                <span className={`block absolute -bottom-2 left-0 h-px bg-amber-500 w-0 transition-all duration-1000`}></span>
+              </h2>
 
-            {/* Menggunakan description dari brandData */}
-            <p className="text-stone-600 font-light leading-relaxed mb-12">
-              {brandData.marketingMethod.description}
-            </p>
+              {/* Description with improved readability */}
+              <p className="text-stone-600 font-light leading-relaxed mb-8 md:mb-12">
+                {brandData.marketingMethod.description}
+              </p>
 
-            {/* Mapping steps dari brandData */}
-            <div className="space-y-12">
-              {brandData.marketingMethod.steps.map((step, index) => (
-                <div key={index} className="relative pl-12">
-                  <div className="absolute left-0 top-0 w-6 h-px bg-amber-500"></div>
-                  <h3 className="text-lg font-medium text-stone-900 mb-2">{step.title}</h3>
-                  <p className="text-stone-600 font-light">{step.description}</p>
-                </div>
-              ))}
+              {/* Steps with staggered animation */}
+              <div className="space-y-8 md:space-y-12">
+                {brandData.marketingMethod.steps.map((step, index) => (
+                  <div 
+                    key={index} 
+                    className={`relative pl-12 transition-all duration-700 delay-${index * 200}`}
+                  >
+                    <div className={`absolute left-0 top-0 w-0 h-px bg-amber-500 transition-all duration-700 delay-${index * 200}`}></div>
+                    <h3 className="text-lg font-medium text-stone-900 mb-2">{step.title}</h3>
+                    <p className="text-stone-600 font-light text-sm md:text-base">{step.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -629,74 +639,98 @@ export default function Kronju() {
           </div>
         </section>
 
-        {/* Next Project with Minimal */}
         <section 
-          ref={(el) => registerSection(el as HTMLDivElement | null, 6)}
-          className="min-h-screen flex items-center justify-center relative"
-        >
-          <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
-            <div className="hidden md:block bg-stone-100"></div>
-            <div 
-              className="relative cursor-pointer"
-              onMouseEnter={() => setNextProjectHovered(true)}
-              onMouseLeave={() => setNextProjectHovered(false)}
-              onClick={() => router.push('/project/ortist')}
-            >
-              <div className="z-50 absolute inset-0 overflow-hidden">
-                <Image
-                  src="/project/cover2.jpg"
-                  alt="Next Project"
-                  fill
-                  className={`object-cover object-center transition-all duration-1500 ${sectionViewed[6] ? 'scale-100' : 'scale-110'} ${nextProjectHovered ? 'scale-110' : 'scale-100'}`}
-                />
-                <div className={`absolute inset-0 bg-stone-900/20 transition-opacity duration-1000 ${sectionViewed[6] ? 'opacity-100' : 'opacity-0'}`}></div>
-              </div>
-              
-              {/* Reveal image on hover */}
-              <RevealImage 
-                isVisible={nextProjectHovered}
-                imageSrc="/project/reveal-cover/reveal-cover2.png"
-                imageAlt="Ortist Project Reveal"
-                initialScale={0.5}
-                finalScale={1}
-                width="200px"
-                height="200px"
-                transitionDuration={0.3}
-                className="z-50"
+        ref={(el) => registerSection(el as HTMLDivElement | null, 7)}
+        className="min-h-screen flex items-center justify-center relative"
+      >
+        {/* Desktop background layout */}
+        <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
+          <div className="hidden md:block bg-stone-100"></div>
+          <div 
+            className="relative cursor-pointer hidden md:block"
+            onMouseEnter={() => setNextProjectHovered(true)}
+            onMouseLeave={() => setNextProjectHovered(false)}
+            onClick={() => router.push('/project/ortist')}
+          >
+            <div className="z-10 absolute inset-0 overflow-hidden">
+              <Image
+                src="/project/cover2.jpg"
+                alt="Next Project"
+                fill
+                className={`object-cover object-center transition-all duration-1000 ${nextProjectHovered ? 'scale-110' : 'scale-100'}`}
+                priority
               />
+              <div className={`absolute inset-0 bg-stone-900/20 transition-opacity duration-700`}></div>
             </div>
+            
+            {/* Reveal image on hover */}
+            <RevealImage 
+              isVisible={nextProjectHovered}
+              imageSrc="/project/reveal-cover/reveal-cover2.png"
+              imageAlt="Ortist Project Reveal"
+              initialScale={0.5}
+              finalScale={1}
+              width="200px"
+              height="200px"
+              transitionDuration={0.3}
+              className="z-50"
+            />
+          </div>
+        </div>
+        
+        {/* Mobile background with overlay */}
+        <div className="absolute inset-0 md:hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/project/cover2.jpg"
+              alt="Next Project Background"
+              fill
+              className={`object-cover object-center transition-all duration-1000`}
+              priority
+            />
+            {/* Gradient overlay to make text readable */}
+            <div className={`absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-900/40 to-stone-900/20 transition-opacity duration-700`}></div>
+          </div>
+        </div>
+        
+        {/* Content container */}
+        <div className="relative max-w-6xl w-full px-6 grid md:grid-cols-2 gap-24">
+          <div className="flex flex-col justify-center md:order-1">
+            <p className={`text-amber-500 md:text-amber-500 uppercase tracking-widest mb-3 text-sm transition-all duration-500`}>Next Case</p>
+            <h2 className={`text-4xl md:text-5xl font-light text-white md:text-stone-900 mb-6 md:mb-8 max-w-md transition-all duration-500 delay-100`}>
+              Discover Our Next Project
+            </h2>
+            <Link 
+              href="/project/ortist" 
+              className={`group inline-flex items-center text-sm font-medium uppercase tracking-widest transition-all duration-500 delay-200`}
+            >
+              <span className="text-white md:text-stone-900 group-hover:text-amber-500 transition-colors duration-300">Ortist Specialist</span>
+              <span className="ml-3 w-8 h-px bg-white md:bg-stone-900 group-hover:w-12 group-hover:bg-amber-500 transition-all duration-300"></span>
+            </Link>
           </div>
           
-          <div className="relative max-w-6xl w-full px-6 grid md:grid-cols-2 gap-24">
-            <div className="flex flex-col justify-center">
-              <p className={`text-amber-500 uppercase tracking-widest mb-3 text-sm transition-all duration-700 ${sectionViewed[6] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>Next Case</p>
-              <h2 className={`text-5xl font-light text-stone-900 mb-8 max-w-md transition-all duration-700 delay-200 ${sectionViewed[6] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-                Discover Our Next Project
-              </h2>
-              <Link 
-                href="/project/ortist" 
-                className={`group inline-flex items-center text-sm font-medium uppercase tracking-widest transition-all duration-700 delay-400 ${sectionViewed[6] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
-              >
-                <span className="text-stone-900 group-hover:text-amber-500 transition-colors duration-300">Ortist Specialist</span>
-                <span className="ml-3 w-8 h-px bg-stone-900 group-hover:w-12 group-hover:bg-amber-500 transition-all duration-300"></span>
-              </Link>
-            </div>
+          {/* Mobile interactive element */}
+          <div className="md:hidden flex justify-center items-center mt-8">
             <div 
-              className={`md:hidden aspect-video relative overflow-hidden transition-all duration-700 delay-300 ${sectionViewed[6] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} cursor-pointer`}
+              className={`relative w-32 h-32 rounded-full overflow-hidden border-2 border-white/50 transition-all duration-500`}
               onMouseEnter={() => setNextProjectHovered(true)}
               onMouseLeave={() => setNextProjectHovered(false)}
               onClick={() => router.push('/project/ortist')}
             >
               <Image
-                src="/project/cover2.jpg"
-                alt="Next Project"
+                src="/project/reveal-cover/reveal-cover2.png"
+                alt="Ortist Project"
                 fill
-                className={`object-cover object-center transition-all duration-1500 ${sectionViewed[6] ? 'scale-100' : 'scale-110'} ${nextProjectHovered ? 'scale-110' : 'scale-100'}`}
+                className="object-cover object-center"
+                priority
               />
-              <div className={`absolute inset-0 bg-stone-900/20 transition-opacity duration-1000 ${sectionViewed[6] ? 'opacity-100' : 'opacity-0'}`}></div>
+              <div className="absolute inset-0 flex items-center justify-center bg-stone-900/30 hover:bg-stone-900/10 transition-all duration-300">
+                <span className="text-white text-xs font-medium uppercase tracking-wider">View</span>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
       </div>
     </ReactLenis>
   );
