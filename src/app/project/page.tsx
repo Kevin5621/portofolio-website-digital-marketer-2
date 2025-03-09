@@ -142,8 +142,26 @@ const ListProjectItem = ({
   onHover: () => void; 
   onLeave: () => void; 
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [, setIsHovered] = useState(false);
   const itemRef = useRef(null);
+  
+  // Map the project title to the appropriate reveal cover image
+  const getRevealCoverImage = (title: string) => {
+    switch(title) {
+      case 'Aerospace':
+        return '/project/reveal-cover/reveal-cover4.png';
+      case 'Benjasimen Samapta':
+        return '/project/reveal-cover/reveal-cover5.png';
+      case 'Ortist Specialist':
+        return '/project/reveal-cover/reveal-cover2.png';
+      case 'Kronju':
+        return '/project/reveal-cover/reveal-cover1.png';
+      case 'Rumah Bahasa Asing':
+        return '/project/reveal-cover/reveal-cover3.png';
+      default:
+        return project.image;
+    }
+  };
   
   const { scrollYProgress } = useScroll({
     target: itemRef,
@@ -168,37 +186,39 @@ const ListProjectItem = ({
       className="border-b border-gray-200 group"
     >
       <Link href={project.route}>
-        <div className="py-12 flex flex-col md:flex-row items-start md:items-center justify-between">
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
-            <div className="text-5xl font-bold text-black/20 group-hover:text-black transition-colors duration-300">
+        <div className="py-6 md:py-12 flex flex-col md:flex-row items-start md:items-center justify-between">
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="text-3xl md:text-5xl font-bold text-black/20 group-hover:text-black transition-colors duration-300">
               {(index + 1).toString().padStart(2, '0')}
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-black tracking-tight transform group-hover:translate-x-2 transition-transform duration-300">
-              {project.title}
-            </h2>
+            <div>
+              <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-black tracking-tight transform group-hover:translate-x-2 transition-transform duration-300">
+                {project.title}
+              </h2>
+              {/* Show description on mobile */}
+              <p className="text-sm text-stone-600 mt-1 pr-6 md:hidden">
+                {project.description}
+              </p>
+            </div>
           </div>
           
-          <div className="mt-4 md:mt-0 pl-16 md:pl-0 flex items-center gap-6">
+          <div className="flex items-center gap-4 md:gap-6 mt-4 md:mt-0">
+            {/* Hidden on mobile, visible on larger screens */}
             <p className="text-stone-600 max-w-md hidden md:block">
               {project.description}
             </p>
             
-            <motion.div 
-              className="w-12 h-12 rounded-full flex items-center justify-center border border-black overflow-hidden opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-              animate={{ 
-                borderRadius: isHovered ? 8 : 24
-              }}
-              transition={{ duration: 0.3 }}
-            >
+            {/* Logo image with no hover transform */}
+            <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center group-hover:opacity-100 transition-opacity duration-">
               <div className="relative w-full h-full overflow-hidden">
                 <Image
-                  src={project.image}
-                  alt={project.title}
+                  src={getRevealCoverImage(project.title)}
+                  alt={`${project.title} logo`}
                   fill
                   className="object-cover"
                 />
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </Link>
