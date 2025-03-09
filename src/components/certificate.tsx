@@ -110,7 +110,7 @@ const CertificateAndExperience = () => {
             {/* Timeline container */}
             <div className="relative">
               {/* Timeline line - centered for desktop, left-aligned for mobile */}
-              <div className="absolute left-4 md:left-1/2 h-full w-px bg-gray-300 transform md:-translate-x-1/2"></div>
+              <div className="absolute left-[17px] md:left-1/2 h-full w-px bg-gray-300 transform md:-translate-x-1/2"></div>
               
               {/* Experience items */}
               {experiences.map((exp, index) => (
