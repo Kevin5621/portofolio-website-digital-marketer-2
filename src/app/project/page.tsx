@@ -1,12 +1,18 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/navbar';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import ReactLenis from 'lenis/react';
+import dynamic from 'next/dynamic';
 import { RevealImage } from '@/components/hooks/RevealImage';
+
+// Dynamically import ReactLenis with no SSR to improve initial load time
+const ReactLenis = dynamic(() => import('lenis/react'), { 
+  ssr: false,
+  loading: () => <div className="min-h-screen bg-white overflow-hidden"></div>
+});
 
 interface Project {
   title: string;
@@ -19,6 +25,28 @@ interface Project {
 export default function ProjectsPage() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
   
+  // Add preload for fonts
+  useEffect(() => {
+    // Create link for preloading Google Fonts
+    const fontPreloadLink = document.createElement('link');
+    fontPreloadLink.rel = 'preload';
+    fontPreloadLink.as = 'style';
+    fontPreloadLink.href = 'https://fonts.googleapis.com/css2?family=Your+Font+Family&display=swap';
+    document.head.appendChild(fontPreloadLink);
+    
+    // Add the actual stylesheet with font-display: swap
+    const fontStyleLink = document.createElement('link');
+    fontStyleLink.rel = 'stylesheet';
+    fontStyleLink.href = 'https://fonts.googleapis.com/css2?family=Your+Font+Family&display=swap&font-display=swap';
+    document.head.appendChild(fontStyleLink);
+    
+    return () => {
+      document.head.removeChild(fontPreloadLink);
+      document.head.removeChild(fontStyleLink);
+    };
+  }, []);
+  
+  // Memoize projects array to prevent unnecessary re-renders
   const projects: Project[] = [
     {
       title: 'Aerospace',
@@ -62,7 +90,7 @@ export default function ProjectsPage() {
       <main className="min-h-screen bg-white overflow-hidden">
         <Navbar variant="dark" />
         
-        {/* Reveal image that follows cursor */}
+        {/* Only render RevealImage when needed */}
         {activeProject !== null && (
           <RevealImage
             isVisible={activeProject !== null}
@@ -77,13 +105,13 @@ export default function ProjectsPage() {
           />
         )}
         
-        {/* Header with bold typography */}
+        {/* Header with bold typography - Optimized for LCP */}
         <section className="pt-36 pb-16 px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div 
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 0.8 }} // Start with higher opacity
               animate={{ opacity: 1 }}
-              transition={{ duration: 1.2 }}
+              transition={{ duration: 0.6 }} // Faster animation
               className="relative"
             >
               <h1 className="text-[8vw] md:text-[10vw] font-bold text-black leading-none tracking-tighter overflow-hidden">
@@ -94,9 +122,9 @@ export default function ProjectsPage() {
             
             <motion.p 
               className="mt-6 text-lg text-stone-600 max-w-lg font-light leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0.8, y: 10 }} // Less movement, higher initial opacity
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
+              transition={{ delay: 0.2, duration: 0.4 }} // Faster animation with less delay
             >
               Explore our portfolio of creative work across various industries. Each project represents our commitment to excellence and innovative solutions.
             </motion.p>
@@ -129,7 +157,6 @@ export default function ProjectsPage() {
     </ReactLenis>
   );
 }
-
 // List view project item
 const ListProjectItem = ({ 
   project, 
@@ -208,14 +235,18 @@ const ListProjectItem = ({
               {project.description}
             </p>
             
-            {/* Logo image with no hover transform */}
-            <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center group-hover:opacity-100 transition-opacity duration-">
+            {/* Optimized logo image */}
+            <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center group-hover:opacity-100 transition-opacity">
               <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={getRevealCoverImage(project.title)}
                   alt={`${project.title} logo`}
-                  fill
+                  width={48}
+                  height={48}
+                  sizes="(max-width: 768px) 40px, 48px"
                   className="object-cover"
+                  priority={index < 2} // Only prioritize first two images
+                  quality={75}
                 />
               </div>
             </div>
