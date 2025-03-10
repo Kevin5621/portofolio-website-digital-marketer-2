@@ -217,8 +217,9 @@ export const VideoShowcaseSection = ({
                   <div className="col-span-12 md:col-span-6 flex flex-col justify-center">
                     <div className="relative pl-6 border-l-2 border-blue-100">
                       <h3 className="text-xl font-medium text-stone-800 mb-3">{video.title}</h3>
-                      <p className="text-stone-600 font-light leading-relaxed mb-5">{video.description}</p>
-                      
+                      <p className="text-stone-600 font-light leading-relaxed mb-5 whitespace-pre-line">
+                        {video.description}
+                      </p>                
                       {/* Video metrics with monospaced minimal styling */}
                       {video.metrics && video.metrics.likes && (
                         <div className="flex flex-wrap items-center gap-4 text-sm text-stone-500 font-light">
@@ -259,7 +260,9 @@ export const VideoShowcaseSection = ({
                   <div className="col-span-12 md:col-span-6 flex flex-col justify-center order-2 md:order-1">
                     <div className="relative pr-6 border-r-2 border-blue-100 text-right">
                       <h3 className="text-xl font-medium text-stone-800 mb-3">{video.title}</h3>
-                      <p className="text-stone-600 font-light leading-relaxed mb-5">{video.description}</p>
+                      <p className="text-stone-600 font-light leading-relaxed mb-5 whitespace-pre-line">
+                        {video.description}
+                      </p>       
                       
                       {/* Video metrics with monospaced minimal styling */}
                       {video.metrics && video.metrics.likes && (

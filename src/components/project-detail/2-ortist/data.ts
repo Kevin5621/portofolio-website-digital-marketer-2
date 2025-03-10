@@ -74,10 +74,9 @@ export const brandData = {
     videos: [
       {
         id: "video1",
-        title: "Funny Reel Video",
-        description: "This viral funny reel video encouraged people to visit Ortist Spesialist. With 1.8M plays, 258K likes, 5K comments, 33K shares, and 34K saves.",
-        thumbnail: "/project/project-detail/2-ortist/video-thumb-1.jpg",
-        videoUrl: "/project/project-detail/2-ortist/video-2-1.mp4",
+        title: "Deez siapa? Deezuatu hari tanpa sengaja...",
+        description: "Note: tidak ada maksud ataupun unsur penghinaan sama sekali pada video diatas, semua hanya hasil editan untuk meme/hiburan belaka. Terima Kasih.\n\nBuat #SahabatOrtist yang ingin mengatasi masalah seputar kerapian gigi, yuk konsultasikan ke Ortist Spesialist untuk wujudkan gigi rapi dan senyum percaya diri 🥰\n\nSong: Anji - DIA\nReferensi: @n4babil2\n.\n.\n.\n.\n.\n#meme #memes #shitpost #shitpostingmeme #memeindonesia #dailymemes #21stcenturyhumor #absurdhumor #viral #fyp",
+        videoUrl: "/project/project-detail/2-ortist/deez.mp4",
         metrics: {
           plays: "1.8M",
           likes: "258K",
@@ -88,10 +87,9 @@ export const brandData = {
       },
       {
         id: "video2",
-        title: "Educational Video",
-        description: "Educational video mixed with entertainment to engage the audience. Reached 766K plays, 92K likes, 3K comments, 4K shares, and 9K saves.",
-        thumbnail: "/project/project-detail/2-ortist/video-thumb-2.jpg",
-        videoUrl: "/project/project-detail/2-ortist/video-2-2.mp4",
+        title: "Gw jg mw tempe goreng pake sambel😋☝️",
+        description: "Note: tidak ada maksud ataupun unsur penghinaan sama sekali pada video diatas, semua hanya hasil editan untuk meme/hiburan belaka. Terima Kasih.\n\nBuat #SahabatOrtist yang ingin mengatasi masalah seputar kerapian gigi, yuk konsultasikan ke Ortist Spesialist untuk wujudkan gigi rapi dan senyum percaya diri 🥰\n\nSong: Avoid me by KUTE\n.\n.\n.\n.\n.\n#meme #memes #shitpost #shitpostingmeme #tempegoreng #memeindonesia #dailymemes #21stcenturyhumor #absurdhumor #viral #fyp",
+        videoUrl: "/project/project-detail/2-ortist/tempe.mp4",
         metrics: {
           plays: "766K",
           likes: "92K",
@@ -102,32 +100,33 @@ export const brandData = {
       },
       {
         id: "video3",
-        title: "Master!",
-        description: "Fun content that engages young audiences with entertaining dental health information.",
-        thumbnail: "/project/project-detail/2-ortist/video-thumb-3.jpg",
-        videoUrl: "/project/project-detail/2-ortist/video-2-3.mp4",
+        title: "Lu punya duid, lu bisa deketin Yae Miko 🥰",
+        description: "Note: tidak ada maksud ataupun unsur penghinaan sama sekali pada video diatas, semua hanya hasil editan untuk meme/hiburan belaka. Terima Kasih.\n\nBuat #SahabatOrtist yang ingin mengatasi masalah seputar kerapian gigi, yuk konsultasikan ke Ortist Spesialist untuk wujudkan gigi rapi dan senyum percaya diri 🥰\n\nSong:\nHans Zimmer - Oogway Ascend\n.\n.\n.\n.\n#meme #memes #kungfupanda #yaemiko #waifus #genshinimpactmeme #shitpost #shitpostingmeme #memeanime #memeindonesia #dailymemes #21stcenturyhumor #absurdhumor #viral #fyp",        videoUrl: "/project/project-detail/2-ortist/Master.mp4",
         metrics: {
-          plays: "43.8K"
+          plays: "436.8K",
+          likes: "53.4K",
+          comments: "2.7K",
+          shares: "2K",
+          saves: "6.2K"
         }
       },
       {
         id: "video4",
         title: "Before and After Transformation",
-        description: "Tambal Komposit Pasca Kecelakaan - Showcasing the before and after results of dental procedures.",
-        thumbnail: "/project/project-detail/2-ortist/video-thumb-4.jpg",
-        videoUrl: "/project/project-detail/2-ortist/video-2-4.mp4",
+        description: "Tidak perlu khawatir tentang penampilan behel yang mencolok! 😬✨ Pasang behel bahan silicon memberikan kamu tampilan yang lebih estetik lho!☺️\n\nYuk, #SahabatOrtist wujudkan gigi rapi dan senyum percaya diri hanya di Ortist Spesialist 🥰\n\n.\n.\n.\n.\n\n#dentist #dentistry #doktergigi #tambalgigi #kesehatangigi #beforeafter #semarang #ambarawa #ortistspesialistsemarang #ortistspesialistambarawa #reels #fyp",
+        videoUrl: "/project/project-detail/2-ortist/Before After 1.mp4",
         metrics: {
           plays: "23.9K"
         }
       },
       {
         id: "video5",
-        title: "Prep Content",
-        description: "Sebelum Pasang Behel - Educational content showing the preparation process before getting braces.",
-        thumbnail: "/project/project-detail/2-ortist/video-thumb-5.jpg",
+        title: "Before and After Transformation",
+        description: "Before-after setelah progress 10 bulan😍\nTetap berproses untuk hasil yang maksimal😄\n\nYuk, #SahabatOrtist wujudkan gigi rapi dan senyum percaya diri hanya di Ortist Spesialist 🥰\n.\n.\n.\n.\n#beforeafter #behel #behelgigi #behelmurah #semarang #ambarawa #kesehatangigi #gigirapi #ortistspesialist #fyp",
         videoUrl: "/project/project-detail/2-ortist/video-2-5.mp4",
         metrics: {
-          plays: "6.9K"
+          plays: "169.9K",
+          likes: "1650",
         }
       }
     ]
