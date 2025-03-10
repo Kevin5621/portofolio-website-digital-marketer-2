@@ -17,13 +17,13 @@ const projects: ProjectData[] = [
     title: 'Aerospacs', 
     image: '/project/cover4.jpg', 
     revealImage: '/project/reveal-cover/reveal-cover4.png',
-    route: '/project/4-aerospace'
+    route: '/project/aerospace'
   },
   { 
     title: 'Benjasimen Samapta', 
     image: '/project/cover5.jpg', 
     revealImage: '/project/reveal-cover/reveal-cover5.png',
-    route: '/project/5-benjasimen-samapta'
+    route: '/project/benjasimen-samapta'
   },
   { 
     title: 'Ortist Specialist', 
