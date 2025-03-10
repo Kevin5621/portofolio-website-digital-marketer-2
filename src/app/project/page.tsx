@@ -50,14 +50,14 @@ export default function ProjectsPage() {
   const projects: Project[] = [
     {
       title: 'Aerospace',
-      route: '/project/4-aerospace',
+      route: '/project/aerospace',
       image: '/project/cover4.jpg',
       backgroundImage: '/project/cover4.jpg',
       description: 'Premium men\'s underwear brand focusing on comfort and style'
     },
     {
       title: 'Benjasimen Samapta',
-      route: '/project/5-benjasimen-samapta',
+      route: '/project/benjasimen-samapta',
       image: '/project/cover5.jpg',
       backgroundImage: '/project/cover5.jpg', 
       description: 'Military preparation training services for aspiring soldiers'
@@ -78,7 +78,7 @@ export default function ProjectsPage() {
     },
     {
       title: 'Rumah Bahasa Asing',
-      route: '/project/3-rumah-bahasa-asing',
+      route: '/project/rumah-bahasa-asing',
       image: '/project/cover3.jpg',
       backgroundImage: '/project/cover3.jpg',
       description: 'Korean language learning services and cultural programs'

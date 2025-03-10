@@ -34,7 +34,7 @@ export const NextProjectSection = ({
           className="relative cursor-pointer hidden md:block"
           onMouseEnter={() => setNextProjectHovered(true)}
           onMouseLeave={() => setNextProjectHovered(false)}
-          onClick={() => router.push('/project/aerospace')}
+          onClick={() => router.push('/project/ortist')}
         >
           <div className="z-10 absolute inset-0 overflow-hidden">
             <Image
@@ -99,7 +99,7 @@ export const NextProjectSection = ({
             className={`relative w-32 h-32 rounded-full overflow-hidden border-2 border-white/50 transition-all duration-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'} cursor-pointer`}
             onMouseEnter={() => setNextProjectHovered(true)}
             onMouseLeave={() => setNextProjectHovered(false)}
-          onClick={() => router.push('/project/aerospace')}
+          onClick={() => router.push('/project/ortist')}
           >
             <Image
               src="/project/reveal-cover/reveal-cover4.png"
