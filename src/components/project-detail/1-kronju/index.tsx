@@ -323,12 +323,12 @@ export default function Kronju() {
                 className={`col-span-6 row-span-2 relative bg-stone-800 transition-all duration-700 delay-500 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} cursor-pointer`}
                 onMouseEnter={() => setBottomImageHovered(true)}
                 onMouseLeave={() => setBottomImageHovered(false)}
-                onClick={() => router.push('/project/ortist')}
+                onClick={() => router.push('/project/rumah-bahasa-asing')}
               >
                 <div className="h-full w-full relative overflow-hidden">
                   <Image
-                    src="/project/cover2.jpg"
-                    alt="Kronju Product"
+                    src="/project/cover3.jpg"
+                    alt="RBA Product"
                     fill
                     className={`object-cover transition-all duration-500 ${bottomImageHovered ? 'scale-110 opacity-100' : 'scale-100 opacity-80'}`}
                     loading="eager"
@@ -639,8 +639,9 @@ export default function Kronju() {
           </div>
         </section>
 
-        <section 
-        ref={(el) => registerSection(el as HTMLDivElement | null, 7)}
+      {/* next project */}
+      <section 
+        ref={(el) => registerSection(el as HTMLDivElement | null, 6)}
         className="min-h-screen flex items-center justify-center relative"
       >
         {/* Desktop background layout */}
@@ -650,24 +651,24 @@ export default function Kronju() {
             className="relative cursor-pointer hidden md:block"
             onMouseEnter={() => setNextProjectHovered(true)}
             onMouseLeave={() => setNextProjectHovered(false)}
-            onClick={() => router.push('/project/ortist')}
+            onClick={() => router.push('/project/rumah-bahasa-asing')}
           >
             <div className="z-10 absolute inset-0 overflow-hidden">
               <Image
-                src="/project/cover2.jpg"
+                src="/project/cover3.jpg"
                 alt="Next Project"
                 fill
-                className={`object-cover object-center transition-all duration-1000 ${nextProjectHovered ? 'scale-110' : 'scale-100'}`}
+                className={`object-cover object-center transition-all duration-1000`}
                 priority
               />
-              <div className={`absolute inset-0 bg-stone-900/20 transition-opacity duration-700`}></div>
+              <div className={`absolute inset-0 bg-stone-900/20 transition-opacity duration-700 `}></div>
             </div>
             
             {/* Reveal image on hover */}
             <RevealImage 
               isVisible={nextProjectHovered}
-              imageSrc="/project/reveal-cover/reveal-cover2.png"
-              imageAlt="Ortist Project Reveal"
+              imageSrc="/project/reveal-cover/reveal-cover3.png"
+              imageAlt="RBA"
               initialScale={0.5}
               finalScale={1}
               width="200px"
@@ -682,10 +683,10 @@ export default function Kronju() {
         <div className="absolute inset-0 md:hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="/project/cover2.jpg"
+              src="/project/cover3.jpg"
               alt="Next Project Background"
               fill
-              className={`object-cover object-center transition-all duration-1000`}
+              className={`object-cover object-center transition-all duration-1000 `}
               priority
             />
             {/* Gradient overlay to make text readable */}
@@ -696,15 +697,15 @@ export default function Kronju() {
         {/* Content container */}
         <div className="relative max-w-6xl w-full px-6 grid md:grid-cols-2 gap-24">
           <div className="flex flex-col justify-center md:order-1">
-            <p className={`text-amber-500 md:text-amber-500 uppercase tracking-widest mb-3 text-sm transition-all duration-500`}>Next Case</p>
-            <h2 className={`text-4xl md:text-5xl font-light text-white md:text-stone-900 mb-6 md:mb-8 max-w-md transition-all duration-500 delay-100`}>
+            <p className={`text-amber-500 md:text-amber-500 uppercase tracking-widest mb-3 text-sm transition-all duration-500 `}>Next Case</p>
+            <h2 className={`text-4xl md:text-5xl font-light text-white md:text-stone-900 mb-6 md:mb-8 max-w-md transition-all duration-500 delay-100 `}>
               Discover Our Next Project
             </h2>
             <Link 
-              href="/project/ortist" 
-              className={`group inline-flex items-center text-sm font-medium uppercase tracking-widest transition-all duration-500 delay-200`}
+              href="/project/rumah-bahasa-asing" 
+              className={`group inline-flex items-center text-sm font-medium uppercase tracking-widest transition-all duration-500 delay-200 `}
             >
-              <span className="text-white md:text-stone-900 group-hover:text-amber-500 transition-colors duration-300">Ortist Specialist</span>
+              <span className="text-white md:text-stone-900 group-hover:text-amber-500 transition-colors duration-300">Rumha Bahasa Asing</span>
               <span className="ml-3 w-8 h-px bg-white md:bg-stone-900 group-hover:w-12 group-hover:bg-amber-500 transition-all duration-300"></span>
             </Link>
           </div>
@@ -715,11 +716,11 @@ export default function Kronju() {
               className={`relative w-32 h-32 rounded-full overflow-hidden border-2 border-white/50 transition-all duration-500`}
               onMouseEnter={() => setNextProjectHovered(true)}
               onMouseLeave={() => setNextProjectHovered(false)}
-              onClick={() => router.push('/project/ortist')}
+              onClick={() => router.push('/project/rumah-bahasa-asing')}
             >
               <Image
-                src="/project/reveal-cover/reveal-cover2.png"
-                alt="Ortist Project"
+                src="/project/reveal-cover/reveal-cover3.png"
+                alt="RBA Project"
                 fill
                 className="object-cover object-center"
                 priority
