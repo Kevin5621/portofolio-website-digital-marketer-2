@@ -460,7 +460,7 @@ export default function Kronju() {
                             prefix={item.metric.includes('$') ? '$' : ''}
                             delay={0.5 + index * 0.2}
                           />
-                          <svg className="w-6 h-6 ml-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <svg className="w-6 h-6 ml-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                           </svg>
                         </>
@@ -514,35 +514,36 @@ export default function Kronju() {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-stone-900/30 md:hidden"></div>
           </div>
 
-          {/* Text Section - Right on desktop, Bottom on mobile */}
-          <div className="w-full md:w-1/2 flex flex-col justify-center px-6 py-12 md:px-12 md:py-0">
-            <div className={`transition-all duration-700`}>
-              <p className="text-amber-500 uppercase tracking-widest mb-3 text-sm">Method</p>
-              
-              {/* Title with animated underline */}
-              <h2 className="text-3xl md:text-4xl font-light text-stone-900 mb-6 relative">
-                {brandData.marketingMethod.title}
-                <span className={`block absolute -bottom-2 left-0 h-px bg-amber-500 w-0 transition-all duration-1000`}></span>
-              </h2>
+          {/* Text Section - Responsive (full width on mobile, half width on desktop) */}
+          <div className="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-12 py-12 md:py-0">
+            <p className={`text-amber-500 uppercase tracking-widest mb-3 text-sm transition-all `}>
+              Method
+            </p>
+            
+            {/* Using title from brandData with animation */}
+            <h2 className={`text-3xl md:text-4xl font-light text-stone-900 mb-6 relative transition-all `}>
+              {brandData.marketingMethod.title}
+              <span className="block absolute -bottom-2 left-0 h-px bg-amber-500 w-16"></span>
+            </h2>
 
-              {/* Description with improved readability */}
-              <p className="text-stone-600 font-light leading-relaxed mb-8 md:mb-12">
-                {brandData.marketingMethod.description}
-              </p>
+            {/* Using description from brandData with animation */}
+            <p className={`text-stone-600 font-light leading-relaxed mb-12 transition-all `}>
+              {brandData.marketingMethod.description}
+            </p>
 
-              {/* Steps with staggered animation */}
-              <div className="space-y-8 md:space-y-12">
-                {brandData.marketingMethod.steps.map((step, index) => (
-                  <div 
-                    key={index} 
-                    className={`relative pl-12 transition-all duration-700 delay-${index * 200}`}
-                  >
-                    <div className={`absolute left-0 top-0 w-0 h-px bg-amber-500 transition-all duration-700 delay-${index * 200}`}></div>
-                    <h3 className="text-lg font-medium text-stone-900 mb-2">{step.title}</h3>
-                    <p className="text-stone-600 font-light text-sm md:text-base">{step.description}</p>
-                  </div>
-                ))}
-              </div>
+            {/* Mapping steps from brandData with staggered animations */}
+            <div className="space-y-12">
+              {brandData.marketingMethod.steps.map((step, index) => (
+                <div 
+                  key={index} 
+                  className={`relative pl-8 md:pl-12 transition-all `}
+                  style={{ transitionDelay: `${300 + (index * 100)}ms` }}
+                >
+                  <div className="absolute left-0 top-0 w-4 md:w-6 h-px bg-amber-500"></div>
+                  <h3 className="text-lg font-medium text-stone-900 mb-2">{step.title}</h3>
+                  <p className="text-stone-600 font-light text-sm md:text-base">{step.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { BrandData } from '../types';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
@@ -15,8 +15,15 @@ export const ApproachSection = ({ brandData, sectionViewed, registerSection }: A
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   const isBeforeAfterInView = useInView(beforeAfterRef, { once: true, amount: 0.5 });
   
-  // Check if this section (index 4) has been viewed
-  const isVisible = sectionViewed[4];
+  // Register this section with parent component
+  useEffect(() => {
+    if (sectionRef.current) {
+      registerSection(sectionRef.current, 4);
+    }
+  }, [registerSection]);
+
+  // Check if section 3 is viewed to trigger result showcase rendering
+  const shouldRenderResultShowcase = sectionViewed && sectionViewed[2];
   
   // Scroll animation values
   const { scrollYProgress } = useScroll({
@@ -53,15 +60,15 @@ export const ApproachSection = ({ brandData, sectionViewed, registerSection }: A
 
   return (
     <section 
-    ref={(el) => registerSection(el as HTMLDivElement | null, 4)} 
-    className="py-24 bg-neutral-50 px-6"
+      ref={sectionRef}
+      className="py-24 bg-neutral-50 px-6"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-16 grid grid-cols-1 md:grid-cols-12 gap-12">
           <motion.div 
             initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
+            animate={isInView ? "visible" : "hidden"}
             variants={containerVariants}
             className="md:col-span-4 transition-all duration-700"
           >
@@ -162,9 +169,9 @@ export const ApproachSection = ({ brandData, sectionViewed, registerSection }: A
         <motion.div
           ref={beforeAfterRef}
           initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          animate={(isBeforeAfterInView || shouldRenderResultShowcase) ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className={` border-stone-200 pt-16 transition-all duration-700 delay-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          className={`border-stone-200 pt-16 transition-all duration-700 delay-700 ${(isBeforeAfterInView || shouldRenderResultShowcase) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <h3 className="text-2xl font-light text-neutral-800 mb-12 text-center">Results Showcase</h3>
           
@@ -173,8 +180,8 @@ export const ApproachSection = ({ brandData, sectionViewed, registerSection }: A
             <motion.div 
               className="absolute left-1/2 md:left-1/3 transform -translate-x-full perspective-1000 w-56 md:w-64"
               style={{ 
-                x: isBeforeAfterInView ? beforeX : "-100%",
-                opacity: isBeforeAfterInView ? 1 : 0,
+                x: (isBeforeAfterInView || shouldRenderResultShowcase) ? beforeX : "-100%",
+                opacity: (isBeforeAfterInView || shouldRenderResultShowcase) ? 1 : 0,
               }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
@@ -203,8 +210,8 @@ export const ApproachSection = ({ brandData, sectionViewed, registerSection }: A
             <motion.div 
               className="absolute right-1/2 md:right-1/3 transform translate-x-full perspective-1000 w-56 md:w-64"
               style={{ 
-                x: isBeforeAfterInView ? afterX : "100%",
-                opacity: isBeforeAfterInView ? 1 : 0,
+                x: (isBeforeAfterInView || shouldRenderResultShowcase) ? afterX : "100%",
+                opacity: (isBeforeAfterInView || shouldRenderResultShowcase) ? 1 : 0,
               }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
