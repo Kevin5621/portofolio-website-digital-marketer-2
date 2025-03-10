@@ -705,7 +705,7 @@ export default function Kronju() {
               href="/project/rumah-bahasa-asing" 
               className={`group inline-flex items-center text-sm font-medium uppercase tracking-widest transition-all duration-500 delay-200 `}
             >
-              <span className="text-white md:text-stone-900 group-hover:text-amber-500 transition-colors duration-300">Rumha Bahasa Asing</span>
+              <span className="text-white md:text-stone-900 group-hover:text-amber-500 transition-colors duration-300">Rumah Bahasa Asing</span>
               <span className="ml-3 w-8 h-px bg-white md:bg-stone-900 group-hover:w-12 group-hover:bg-amber-500 transition-all duration-300"></span>
             </Link>
           </div>

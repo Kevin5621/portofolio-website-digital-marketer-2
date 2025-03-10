@@ -34,11 +34,11 @@ export const NextProjectSection = ({
           className="relative cursor-pointer hidden md:block"
           onMouseEnter={() => setNextProjectHovered(true)}
           onMouseLeave={() => setNextProjectHovered(false)}
-          onClick={() => router.push('/project/ortist')}
+          onClick={() => router.push('/project/kronju')}
         >
           <div className="z-10 absolute inset-0 overflow-hidden">
             <Image
-              src="/project/cover2.jpg"
+              src="/project/cover1.jpg"
               alt="Next Project"
               fill
               className={`object-cover object-center transition-all duration-1000 ${isVisible ? 'scale-100' : 'scale-110'} ${nextProjectHovered ? 'scale-110' : 'scale-100'}`}
@@ -50,8 +50,8 @@ export const NextProjectSection = ({
           {/* Reveal image on hover */}
           <RevealImage 
             isVisible={nextProjectHovered}
-            imageSrc="/project/reveal-cover/reveal-cover2.png"
-            imageAlt="Ortist Project Reveal"
+            imageSrc="/project/reveal-cover/reveal-cover1.png"
+            imageAlt="RBA"
             initialScale={0.5}
             finalScale={1}
             width="200px"
@@ -66,7 +66,7 @@ export const NextProjectSection = ({
       <div className="absolute inset-0 md:hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/project/cover2.jpg"
+            src="/project/cover1.jpg"
             alt="Next Project Background"
             fill
             className={`object-cover object-center transition-all duration-1000 ${isVisible ? 'scale-100' : 'scale-110'}`}
@@ -85,10 +85,10 @@ export const NextProjectSection = ({
             Discover Our Next Project
           </h2>
           <Link 
-            href="/project/ortist" 
+            href="/project/kronju" 
             className={`group inline-flex items-center text-sm font-medium uppercase tracking-widest transition-all duration-500 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
           >
-            <span className="text-white md:text-stone-900 group-hover:text-blue-500 transition-colors duration-300">Ortist Specialist</span>
+            <span className="text-white md:text-stone-900 group-hover:text-blue-500 transition-colors duration-300">Kronju</span>
             <span className="ml-3 w-8 h-px bg-white md:bg-stone-900 group-hover:w-12 group-hover:bg-blue-500 transition-all duration-300"></span>
           </Link>
         </div>
@@ -99,11 +99,11 @@ export const NextProjectSection = ({
             className={`relative w-32 h-32 rounded-full overflow-hidden border-2 border-white/50 transition-all duration-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'} cursor-pointer`}
             onMouseEnter={() => setNextProjectHovered(true)}
             onMouseLeave={() => setNextProjectHovered(false)}
-            onClick={() => router.push('/project/ortist')}
+            onClick={() => router.push('/project/kronju')}
           >
             <Image
-              src="/project/reveal-cover/reveal-cover2.png"
-              alt="Ortist Project"
+              src="/project/reveal-cover/reveal-cover1.png"
+              alt="Kronju Project"
               fill
               className="object-cover object-center"
               priority

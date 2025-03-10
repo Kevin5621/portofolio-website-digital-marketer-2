@@ -104,12 +104,12 @@ export const IntroSection = ({
             className={`col-span-6 row-span-2 relative bg-stone-800 transition-all duration-700 delay-500 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} cursor-pointer`}
             onMouseEnter={() => setBottomImageHovered(true)}
             onMouseLeave={() => setBottomImageHovered(false)}
-            onClick={() => router.push('/project/ortist')}
+            onClick={() => router.push('/project/kronju')}
           >
             <div className="h-full w-full relative overflow-hidden">
               <Image
-                src="/project/cover3.jpg"
-                alt="Ortist Product"
+                src="/project/cover1.jpg"
+                alt="Kronju Product"
                 fill
                 className={`object-cover transition-all duration-500 ${bottomImageHovered ? 'scale-110 opacity-100' : 'scale-100 opacity-80'}`}
                 loading="eager"
