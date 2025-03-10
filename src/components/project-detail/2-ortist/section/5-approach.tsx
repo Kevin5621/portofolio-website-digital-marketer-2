@@ -5,13 +5,18 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 interface ApproachProps {
   brandData: BrandData;
+  sectionViewed: boolean[];
+  registerSection: (el: HTMLDivElement | null, index: number) => void;
 }
 
-export const ApproachSection = ({ brandData }: ApproachProps) => {
+export const ApproachSection = ({ brandData, sectionViewed, registerSection }: ApproachProps) => {
   const sectionRef = useRef(null);
   const beforeAfterRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   const isBeforeAfterInView = useInView(beforeAfterRef, { once: true, amount: 0.5 });
+  
+  // Check if this section (index 4) has been viewed
+  const isVisible = sectionViewed[4];
   
   // Scroll animation values
   const { scrollYProgress } = useScroll({
@@ -48,15 +53,15 @@ export const ApproachSection = ({ brandData }: ApproachProps) => {
 
   return (
     <section 
-      ref={sectionRef}
-      className="py-24 bg-neutral-50 px-6"
+    ref={(el) => registerSection(el as HTMLDivElement | null, 4)} 
+    className="py-24 bg-neutral-50 px-6"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-16 grid grid-cols-1 md:grid-cols-12 gap-12">
           <motion.div 
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            animate={isVisible ? "visible" : "hidden"}
             variants={containerVariants}
             className="md:col-span-4 transition-all duration-700"
           >
