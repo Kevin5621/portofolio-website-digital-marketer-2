@@ -34,7 +34,7 @@ export const NextProjectSection = ({
           className="relative cursor-pointer hidden md:block"
           onMouseEnter={() => setNextProjectHovered(true)}
           onMouseLeave={() => setNextProjectHovered(false)}
-          onClick={() => router.push('/project/benjasimen-samapta')}
+          onClick={() => router.push('/project/binjasiimen-samapta')}
         >
           <div className="z-10 absolute inset-0 overflow-hidden">
             <Image
@@ -88,7 +88,7 @@ export const NextProjectSection = ({
             href="/project/aerospace" 
             className={`group inline-flex items-center text-sm font-medium uppercase tracking-widest transition-all duration-500 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
           >
-            <span className="text-white md:text-stone-900 group-hover:text-purple-500 transition-colors duration-300">Benjasimen Samapta</span>
+            <span className="text-white md:text-stone-900 group-hover:text-purple-500 transition-colors duration-300">Binjasiimen Samapta</span>
             <span className="ml-3 w-8 h-px bg-white md:bg-stone-900 group-hover:w-12 group-hover:bg-purple-500 transition-all duration-300"></span>
           </Link>
         </div>
@@ -99,7 +99,7 @@ export const NextProjectSection = ({
             className={`relative w-32 h-32 rounded-full overflow-hidden border-2 border-white/50 transition-all duration-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'} cursor-pointer`}
             onMouseEnter={() => setNextProjectHovered(true)}
             onMouseLeave={() => setNextProjectHovered(false)}
-          onClick={() => router.push('/project/benjasimen-samapta')}
+          onClick={() => router.push('/project/binjasiimen-samapta')}
           >
             <Image
               src="/project/reveal-cover/reveal-cover5.png"

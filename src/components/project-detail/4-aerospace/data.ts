@@ -60,10 +60,12 @@ export const brandData = {
   },
 
   projects: [
-    { image: "/project/project-detail/5-aerospace/foto-1.png" },
-    { image: "/project/project-detail/5-aerospace/foto-2.png" },
-    { image: "/project/project-detail/5-aerospace/foto-3.png" },
-    { image: "/project/project-detail/5-aerospace/foto-4.png" },
+    { image: "/project/project-detail/4-aerospace/foto-4-1.jpg" },
+    { image: "/project/project-detail/4-aerospace/foto-4-2.jpg" },
+    { image: "/project/project-detail/4-aerospace/foto-4-3.jpg" },
+    { image: "/project/project-detail/4-aerospace/foto-4-4.jpg" },
+    { image: "/project/project-detail/4-aerospace/foto-4-5.jpg" },
+    { image: "/project/project-detail/4-aerospace/foto-4-6.jpg" },
   ],
   
   videoShowcase: {
@@ -74,8 +76,7 @@ export const brandData = {
         id: "-",
         title: "-",
         description: "-",
-        thumbnail: "-",
-        videoUrl: "-",
+        videoUrl: "/project/project-detail/4-aerospace/Aerospace - Edukatif.mp4",
         metrics: {
           plays: "-",
           likes: "-",
@@ -84,30 +85,6 @@ export const brandData = {
           saves: "-"
         }
       },
-      {
-        id: "-",
-        title: "-",
-        description: "-",
-        thumbnail: "-",
-        videoUrl: "-",
-        metrics: {
-          plays: "-",
-          likes: "-",
-          comments: "-",
-          shares: "-",
-          saves: "-"
-        }
-      },
-      {
-        id: "-",
-        title: "-",
-        description: "-",
-        thumbnail: "-",
-        videoUrl: "-",
-        metrics: {
-          plays: "-"
-        }
-      }
     ]
   },
   
