@@ -19,7 +19,6 @@ export function RevealImage({
   isVisible,
   imageSrc,
   imageAlt,
-  initialScale = 0.5,
   finalScale = 1,
   width = '200px',
   height = '200px',
@@ -27,7 +26,7 @@ export function RevealImage({
   className = '',
 }: RevealImageProps) {
   const [opacity, setOpacity] = useState(0);
-  const [scale, setScale] = useState(initialScale);
+  const [scale, setScale] = useState(finalScale); // Changed to start at finalScale
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const requestRef = useRef<number | null>(null);
@@ -84,13 +83,16 @@ export function RevealImage({
     }
 
     if (isVisible) {
+      // First set scale to final value immediately
+      setScale(finalScale);
+      
+      // Then animate opacity with a slight delay
       timeoutRef.current = setTimeout(() => {
         setOpacity(1);
-        setScale(finalScale);
       }, 50);
     } else {
+      // When hiding, just fade out with opacity
       setOpacity(0);
-      setScale(initialScale);
     }
 
     return () => {
@@ -98,7 +100,7 @@ export function RevealImage({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [isVisible, initialScale, finalScale]);
+  }, [isVisible, finalScale]);
 
   if (!isVisible) return null;
 
