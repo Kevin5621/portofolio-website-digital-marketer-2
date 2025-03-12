@@ -20,10 +20,10 @@ const projects: ProjectData[] = [
     route: '/project/aerospace'
   },
   { 
-    title: 'Benjasimen Samapta', 
+    title: 'Binjasiimen Samapta', 
     image: '/project/cover5.jpg', 
     revealImage: '/project/reveal-cover/reveal-cover5.png',
-    route: '/project/benjasimen-samapta'
+    route: '/project/binjasiimen-samapta'
   },
   { 
     title: 'Ortist Specialist', 

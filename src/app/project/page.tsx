@@ -56,8 +56,8 @@ export default function ProjectsPage() {
       description: 'Premium men\'s underwear brand focusing on comfort and style'
     },
     {
-      title: 'Benjasimen Samapta',
-      route: '/project/benjasimen-samapta',
+      title: 'Binjasiimen Samapta',
+      route: '/project/binjasiimen-samapta',
       image: '/project/cover5.jpg',
       backgroundImage: '/project/cover5.jpg', 
       description: 'Military preparation training services for aspiring soldiers'
@@ -177,7 +177,7 @@ const ListProjectItem = ({
     switch(title) {
       case 'Aerospace':
         return '/project/reveal-cover/reveal-cover4.png';
-      case 'Benjasimen Samapta':
+      case 'Binjasiimen Samapta':
         return '/project/reveal-cover/reveal-cover5.png';
       case 'Ortist Specialist':
         return '/project/reveal-cover/reveal-cover2.png';
