@@ -33,50 +33,53 @@ const AboutMe = () => {
   return (
     <ReactLenis root>
       <main>
-        {/* First Section - AboutMe (Sticky) - With full-screen text that doesn't get cut off */}
+        {/* First Section - AboutMe (Sticky) - Now with responsive mobile layout */}
         <section id="about-section" className="relative bg-white sticky top-0 h-screen overflow-hidden">
-          {/* Full-page text background with proper scaling */}
-          <motion.div 
-            className="absolute inset-0 z-0 flex items-center justify-center p-8 sm:p-12 md:p-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="relative w-full max-w-7xl mx-auto">
-              <div className="text-left">
-                <h2 className="text-[4vw] sm:text-[4.5vw] md:text-[5vw] lg:text-[6vw] xl:text-[7vw] font-extrabold tracking-tight leading-[0.9] text-neutral-900">
-                  <span className="text-primary">CREATIVITY</span> <br className="hidden sm:block" />
-                  ALONE CAPTURE <br className="hidden sm:block" />
-                  THE EYE. <br className="hidden sm:block" />
-                  <span className="text-primary">CREATIVITY</span> <br className="hidden sm:block" />
-                  WITH <span className="text-primary">STRATEGY</span> <br className="hidden sm:block" />
-                  CAPTURES THE <br className="hidden sm:block" />
-                  <span className="text-primary">MARKET.</span>
-                </h2>
+          {/* Flex container for mobile responsiveness */}
+          <div className="relative h-full w-full flex flex-col md:block">
+            {/* Text content - Full width on mobile, positioned normally on desktop */}
+            <motion.div 
+              className="relative z-10 flex-1 md:absolute md:inset-0 flex items-center justify-center p-8 sm:p-12 md:p-16"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative w-full max-w-7xl mx-auto">
+                <div className="text-left">
+                  <h2 className="text-[7vw] sm:text-[6vw] md:text-[5vw] lg:text-[6vw] xl:text-[7vw] font-extrabold tracking-tight leading-[0.9] text-neutral-900">
+                    <span className="text-primary">CREATIVITY</span> <br className="hidden sm:block" />
+                    ALONE CAPTURE <br className="hidden sm:block" />
+                    THE EYE. <br className="hidden sm:block" />
+                    <span className="text-primary">CREATIVITY</span> <br className="hidden sm:block" />
+                    WITH <span className="text-primary">STRATEGY</span> <br className="hidden sm:block" />
+                    CAPTURES THE <br className="hidden sm:block" />
+                    <span className="text-primary">MARKET.</span>
+                  </h2>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* Image Container - Overlapping the text */}
-          <motion.div 
-            className="absolute top-0 right-0 w-full md:w-1/2 h-full z-10"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-          >
-            <div className="relative h-full">
-              <Image
-                src="/placeholder2.png" 
-                alt="Profile portrait"
-                fill
-                className="object-cover object-right filter grayscale hover:grayscale-0 transition duration-500 ease-in-out"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            </div>
-          </motion.div>
+            {/* Image Container - Below text on mobile, right side on desktop */}
+            <motion.div 
+              className="relative flex-1 md:absolute md:top-0 md:right-0 md:w-1/2 md:h-full z-0 md:z-10"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative h-full">
+                <Image
+                  src="/placeholder2.png" 
+                  alt="Profile portrait"
+                  fill
+                  className="object-cover object-center md:object-right filter grayscale hover:grayscale-0 transition duration-500 ease-in-out"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
+              </div>
+            </motion.div>
+          </div>
         </section>
 
         {/* Second Section - Innovative - Unchanged */}
@@ -143,7 +146,7 @@ const AboutMe = () => {
           <div className="relative mt-[-100vh]">
             <Head>
               <title>Agency Experience</title>
-              <meta name="description" content="3+ Years of Agency Experience" />
+              <meta name="description" content="3+ Years of Experience" />
               <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -151,8 +154,7 @@ const AboutMe = () => {
             <div className="h-screen flex items-center justify-center">
               <main className="relative z-10 px-6 max-w-5xl mx-auto text-center">
                 <h1 className="font-space font-bold text-5xl md:text-7xl lg:text-8xl">
-                  <span className="text-secondary">3+ Years</span> <span className="text-white">of Strategic</span> <br className="hidden sm:block" />
-                  <span className="text-white">Agency Excellence</span>
+                  <span className="text-secondary">3+ Years</span> <span className="text-white">of Experience</span> <br className="hidden sm:block" />
                 </h1>
               </main>
             </div>
@@ -161,8 +163,8 @@ const AboutMe = () => {
             <div className="h-screen flex items-center justify-center">
               <main className="relative z-10 px-6 max-w-5xl mx-auto text-center">
                 <h2 className="font-space font-bold text-5xl md:text-7xl lg:text-8xl">
-                  <span className="text-white">Delivering</span> <span className="text-secondary">10+</span> <br className="hidden sm:block" />
-                  <span className="text-white">High-Impact Campaigns</span>
+                  <span className="text-white">Over</span> <span className="text-secondary">10+</span> <br className="hidden sm:block" />
+                  <span className="text-white"><span className="text-secondary">High-Impact</span> Campaigns</span>
                 </h2>
               </main>
             </div>
