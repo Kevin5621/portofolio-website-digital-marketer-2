@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useRef } from 'react';
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 
@@ -9,12 +10,13 @@ const CertificateAndExperience = () => {
   const experienceSectionRef = useRef(null);
   const experienceContentRef = useRef(null);
    
-  // Work experience data
+  // Work experience data with logo paths
   const experiences = [
     {
       period: "April 2023 - May 2023",
       role: "Branding Manager & Graphic Designer",
       company: "Kronju & TMI",
+      logo: "/project/reveal-cover/reveal-cover1.png",
       achievements: [
         "Designed brand positioning and storytelling to enhance product differentiation in the market.",
         "Developed a strong brand identity for Kronju."
@@ -24,6 +26,7 @@ const CertificateAndExperience = () => {
       period: "May 2023 - September 2023",
       role: "Social Media Marketing",
       company: "Ortist Spesialist & TMI",
+      logo: "/project/reveal-cover/reveal-cover2.png",
       achievements: [
         "Created and executed social media strategies for Ortist Spesialist.",
         "Managed Instagram and TikTok growth to improve brand awareness and customer engagement."
@@ -33,6 +36,7 @@ const CertificateAndExperience = () => {
       period: "September 2023 - January 2024",
       role: "Social Media Marketing",
       company: "Rumah Bahasa Asing & TMI",
+      logo: "/project/reveal-cover/reveal-cover3.png",
       achievements: [
         "Created and executed social media strategies for Rumah Bahasa Asing.",
         "Managed Instagram and TikTok growth to improve brand awareness and customer engagement."
@@ -42,6 +46,7 @@ const CertificateAndExperience = () => {
       period: "April 2024 - Present",
       role: "Content Creator & Marketing Consultant",
       company: "Binjasiimen Samapta & FiveX Studio",
+      logo: "/project/reveal-cover/reveal-cover5.png",
       achievements: [
         "Leading content creation and marketing consultation for Binjasiimen Samapta.",
         "Designed online strategies to enhance brand visibility."
@@ -137,7 +142,18 @@ const CertificateAndExperience = () => {
                         <>
                           <p className="text-sm text-gray-500 mb-1 uppercase tracking-wider">{exp.period}</p>
                           <h3 className="text-lg font-medium mb-1 text-gray-900">{exp.role}</h3>
-                          <p className="text-base mb-3 text-gray-700">{exp.company}</p>
+                          <div className="flex items-center justify-end mb-3">
+                            <div className="relative w-6 h-6 mr-2">
+                              <Image 
+                                src={exp.logo} 
+                                alt={`${exp.company} logo`} 
+                                width={24} 
+                                height={24} 
+                                className="object-contain"
+                              />
+                            </div>
+                            <p className="text-base text-gray-700">{exp.company}</p>
+                          </div>
                           <ul className="text-gray-600 text-sm space-y-1">
                             {exp.achievements.map((achievement, i) => (
                               <li key={i} className="flex justify-end">
@@ -155,7 +171,18 @@ const CertificateAndExperience = () => {
                         <>
                           <p className="hidden md:block text-sm text-gray-500 mb-1 uppercase tracking-wider">{exp.period}</p>
                           <h3 className="text-lg font-medium mb-1 text-gray-900">{exp.role}</h3>
-                          <p className="text-base mb-3 text-gray-700">{exp.company}</p>
+                          <div className="flex items-center mb-3">
+                            <p className="text-base text-gray-700">{exp.company}</p>
+                            <div className="relative w-6 h-6 ml-2">
+                              <Image 
+                                src={exp.logo} 
+                                alt={`${exp.company} logo`} 
+                                width={24} 
+                                height={24} 
+                                className="object-contain"
+                              />
+                            </div>
+                          </div>
                           <ul className="text-gray-600 text-sm space-y-1">
                             {exp.achievements.map((achievement, i) => (
                               <li key={i} className="flex">
