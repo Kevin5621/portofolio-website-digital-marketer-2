@@ -25,37 +25,20 @@ const Hero = () => {
     offset: ["start end", "end start"]
   });
 
-  // Transform values for the left side content based on scroll
-  const leftContentY = useTransform(section2Progress, [0, 0.2], [50, 0]);
-  const leftContentOpacity = useTransform(section2Progress, [0, 0.2], [0, 1]);
+  // Transform values for the typography content based on scroll
+  const textScale = useTransform(section2Progress, [0, 0.2], [0.9, 1]);
+  const textOpacity = useTransform(section2Progress, [0, 0.2], [0, 1]);
 
-  // Simplified text alternatives for brutalist style
-  const portfolioItems = [
-    {
-      image: "/filler/filler-1.jpg",
-      description: "BRAND AWARENESS ENHANCEMENT",
-      alt: "Portfolio image 1"
-    },
-    {
-      image: "/filler/filler-2.jpg",
-      description: "AUDIENCE ENGAGEMENT FOCUSED",
-      alt: "Portfolio image 2"
-    },
-    {
-      image: "/filler/filler-3.jpg",
-      description: "STORYTELLING WITH PURPOSE",
-      alt: "Portfolio image 3"
-    },
-    {
-      image: "/filler/filler-4.jpg",
-      description: "DATA-DRIVEN APPROACH",
-      alt: "Portfolio image 4"
-    }
+  const textWords = [
+    { text: "Turning", isDark: true },
+    { text: "Vision", isDark: false },
+    { text: "Into", isDark: true },
+    { text: "Motion", isDark: false }
   ];
 
   return (
     <ReactLenis root options={{ lerp: 0.1, duration: 2, smoothWheel: true }}>
-      <main className="font-sans" ref={containerRef}>
+      <main className="font-poppins" ref={containerRef}>
         {/* Hero section container */}
         <section className="relative min-h-screen overflow-hidden bg-zinc-900">
           {/* Background image with parallax effect - Responsive positioning */}
@@ -88,12 +71,12 @@ const Hero = () => {
             >
               {/* Name with refined typography */}
               <motion.h1 
-                className="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif tracking-tighter leading-none"
+                className="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-poppins font-bold tracking-tighter leading-none"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
               >
-                Adhara<span className="text-white opacity-80">,</span>
+                ADHARA<span className="text-white opacity-80">,</span>
               </motion.h1>
               
               <motion.div 
@@ -102,7 +85,7 @@ const Hero = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
               >
-                <h2 className="text-white text-xl sm:text-2xl md:text-3xl italic font-extralight">Eka</h2>
+                <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-extralight">EKA</h2>
               </motion.div>
               
               <motion.div 
@@ -118,160 +101,166 @@ const Hero = () => {
           </motion.div>
         </section>
 
-        {/* Second Section - Modified Version with Sticky Left Side */}
-        <section className="relative" ref={scrollContainerRef}>
-          <div className="flex flex-col md:flex-row min-h-screen">
-            {/* Left Side - Sticky Content */}
-            <div className="md:w-1/2 relative bg-white md:sticky md:top-0 md:h-screen">
-              <div className="h-full flex items-center">
-                <motion.div 
-                  className="p-8 md:p-16 max-w-xl"
-                  style={{ 
-                    y: leftContentY,
-                    opacity: leftContentOpacity
-                  }}
-                >
-                  {/* Certificate section instead of horizontal line */}
-                  <motion.div className="flex items-center gap-3 mb-8">
-                    <p className="text-neutral-500 text-xs uppercase tracking-wider font-medium">
-                      Certificate
-                    </p>
-                    {/* Small certificate images row */}
-                    <div className="flex items-center gap-2">
-                      {/* laurel left side */}
-                      <div className="h-8 w-8 md:h-10 md:w-10 relative">
-                        <Image 
-                          src="/laurel.png" 
-                          alt="Laurel certificate" 
-                          width={40} 
-                          height={40}
-                          className="object-contain"
-                        />
-                      </div>
-                      <div className="h-8 w-8 md:h-10 md:w-10 relative">
-                        <Image 
-                          src="/certificate/1.png" 
-                          alt="" 
-                          width={40} 
-                          height={40}
-                          className="object-contain"
-                        />
-                      </div>
-                      <div className="h-8 w-8 md:h-10 md:w-10 relative">
-                        <Image 
-                          src="/certificate/2.png" 
-                          alt="" 
-                          width={40} 
-                          height={40}
-                          className="object-contain"
-                        />
-                      </div>
-                      <div className="h-8 w-8 md:h-10 md:w-10 relative">
-                        <Image 
-                          src="/certificate/3.png" 
-                          alt="" 
-                          width={40} 
-                          height={40}
-                          className="object-contain"
-                        />
-                      </div>
-                      {/* laurel right side */}
-                      <div className="h-8 w-8 md:h-10 md:w-10 relative">
-                        <Image 
-                          src="/laurel.png" 
-                          alt="" 
-                          width={40} 
-                          height={40}
-                          className="object-contain scale-x-[-1]"
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
-                  
-                  {/* Main Headline */}
-                  <div className="space-y-2">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-space text-neutral-900 leading-tight font-bold">
-                      Turning <span className="text-primary">Vision</span>
-                    </h2>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-space text-neutral-900 leading-tight font-bold">
-                      Into <span className="text-primary">Motion</span>
-                    </h2>
-                  </div>
-                  
-                  {/* Added description */}
-                  <motion.p 
-                    className="mt-8 text-neutral-600 max-w-md text-sm sm:text-base"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.4, duration: 0.8 }}
-                    viewport={{ once: true }}
-                  >
-                    Creating impactful digital marketing strategies that convert vision into tangible results.
-                  </motion.p>
-                </motion.div>
-              </div>
-            </div>
-            
-            {/* Right Side - Scrollable Content */}
-            <div className="md:w-1/2 bg-white relative">
-              <div className="py-8 sm:py-16 px-4 sm:px-8 md:px-12">
-                <div className="grid grid-cols-1 border-[12px] sm:border-[24px] border-black">
-                  {portfolioItems.map((item, index) => (
-                    <div key={index} className="relative group film-strip">
-                      {/* Film Roll Border Effect */}
-                      <div className="absolute inset-0 pointer-events-none z-10 film-perforations">
-                        {/* Left Side Perforations */}
-                        <div className="absolute left-[-6px] sm:left-[-12px] top-0 bottom-0 w-2 sm:w-3 bg-black flex flex-col justify-between py-1">
-                          {[...Array(10)].map((_, i) => (
-                            <div 
-                              key={i} 
-                              className="w-2 sm:w-3 h-3 sm:h-6 bg-white border-black"
-                            ></div>
-                          ))}
-                        </div>
-                        
-                        {/* Right Side Perforations */}
-                        <div className="absolute right-[-6px] sm:right-[-12px] top-0 bottom-0 w-2 sm:w-3 bg-black flex flex-col justify-between py-1">
-                          {[...Array(10)].map((_, i) => (
-                            <div 
-                              key={i} 
-                              className="w-2 sm:w-3 h-3 sm:h-6 bg-white border-black"
-                            ></div>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      {/* Image Container with film-like border */}
-                      <div className="relative overflow-hidden border-[6px] sm:border-[12px] border-black">
-                        <motion.div
-                          className="aspect-[16/9] overflow-hidden"
-                          transition={{ duration: 0.3 }}
+        {/* Second Section - Bold Typography with Working Video Text Fill */}
+        <section 
+          className="relative min-h-screen bg-white" 
+          ref={scrollContainerRef}
+        >
+          {/* Bold Typography Container */}
+          <motion.div 
+            className="relative z-10 w-full h-screen flex items-center justify-center"
+            style={{ 
+              scale: textScale,
+              opacity: textOpacity
+            }}
+          >
+            <div className="text-center px-4 md:px-8">
+              {/* Laurel badges moved above the text */}
+              <motion.div 
+                className="mb-12 flex justify-center items-center gap-4 opacity-80"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 1 }}
+                viewport={{ once: true }}
+              >
+                <div className="h-8 w-8 md:h-10 md:w-10 relative">
+                  <Image 
+                    src="/laurel.png" 
+                    alt="Laurel certificate" 
+                    width={40} 
+                    height={40}
+                    className="object-contain"
+                  />
+                </div>
+                <div className="h-8 w-8 md:h-10 md:w-10 relative">
+                  <Image 
+                    src="/certificate/1.png" 
+                    alt="" 
+                    width={40} 
+                    height={40}
+                    className="object-contain"
+                  />
+                </div>
+                <div className="h-8 w-8 md:h-10 md:w-10 relative">
+                  <Image 
+                    src="/certificate/2.png" 
+                    alt="" 
+                    width={40} 
+                    height={40}
+                    className="object-contain"
+                  />
+                </div>
+                <div className="h-8 w-8 md:h-10 md:w-10 relative">
+                  <Image 
+                    src="/certificate/3.png" 
+                    alt="" 
+                    width={40} 
+                    height={40}
+                    className="object-contain"
+                  />
+                </div>
+                {/* laurel right side */}
+                <div className="h-8 w-8 md:h-10 md:w-10 relative">
+                  <Image 
+                    src="/laurel.png" 
+                    alt="" 
+                    width={40} 
+                    height={40}
+                    className="object-contain scale-x-[-1]"
+                  />
+                </div>
+              </motion.div>
+              
+              {/* Video Masked Through Text - Fixed Implementation */}
+              <div className="relative overflow-hidden">
+                <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-poppins font-black tracking-tighter leading-tight uppercase">
+                  {textWords.map((word, index) => (
+                    <div key={index} className="relative inline-block mt-4 mx-2">
+                      {word.isDark ? (
+                        // Dark text for "TURNING" and "INTO"
+                        <span className="inline-block text-dark">
+                          {word.text}
+                        </span>
+                      ) : (
+                        // Video text mask for "VISION" and "MOTION"
+                        <div 
+                          className="video-text-mask"
+                          style={{
+                            position: 'relative',
+                            display: 'inline-block',
+                          }}
                         >
-                          <Image
-                            src={item.image}
-                            alt={item.alt}
-                            width={800}
-                            height={450}
-                            className="w-full h-full object-cover transition-transform"
-                          />
-                        </motion.div>
-                      </div>
-                      
-                      {/* Brutalist Text Container */}
-                      <div className="bg-black flex items-center justify-center">
-                        <h3 className="text-white font-mono font-bold text-xs sm:text-base md:text-xl lg:text-4xl tracking-wider text-center leading-none p-2 sm:p-4">
-                          {item.description}
-                        </h3>
-                      </div>
-                      
-                      {/* No extra spacing between items */}
-                      {index < portfolioItems.length - 1 && <div className="h-0"></div>}
+                          {/* This is the visible text that masks the video */}
+                          <span 
+                            className="inline-block relative z-10"
+                            style={{
+                              background: `url('/filler/poster-frame.jpg')`, // Fallback background
+                              WebkitBackgroundClip: 'text',
+                              backgroundClip: 'text',
+                              color: 'transparent',
+                              WebkitTextFillColor: 'transparent',
+                              backgroundSize: 'cover',
+                              backgroundPosition: 'center'
+                            }}
+                          >
+                            {word.text}
+                          </span>
+                          
+                          {/* SVG mask method - more reliable across browsers */}
+                          <svg
+                            className="absolute top-0 left-0 w-full h-full"
+                            style={{ overflow: 'visible' }}
+                          >
+                            <defs>
+                              <mask id={`text-mask-${index}`}>
+                                <rect width="100%" height="100%" fill="black" />
+                                <text
+                                  x="50%"
+                                  y="50%"
+                                  dominantBaseline="middle"
+                                  textAnchor="middle"
+                                  fill="white"
+                                  fontSize="inherit"
+                                  fontWeight="inherit"
+                                  fontFamily="inherit"
+                                  letterSpacing="inherit"
+                                  style={{ 
+                                    fontSize: 'inherit', 
+                                    fontWeight: 'inherit', 
+                                    lineHeight: 'inherit',
+                                    textTransform: 'uppercase'
+                                  }}
+                                >
+                                  {word.text}
+                                </text>
+                              </mask>
+                            </defs>
+                            <foreignObject
+                              width="100%"
+                              height="100%"
+                              mask={`url(#text-mask-${index})`}
+                            >
+                              <div className="w-full h-full">
+                                <video
+                                  autoPlay
+                                  muted
+                                  loop
+                                  playsInline
+                                  className="w-full h-full object-cover"
+                                >
+                                  <source src="/filler/filler.mp4" type="video/mp4" />
+                                </video>
+                              </div>
+                            </foreignObject>
+                          </svg>
+                        </div>
+                      )}
                     </div>
                   ))}
-                </div>
+                </h2>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
     </ReactLenis>

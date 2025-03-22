@@ -17,8 +17,11 @@ const config: Config = {
         'gray-light': '#a3a3a3',
       },
       fontFamily: {
-        'space': ['Poppins', 'Sans-serif'],
-        'inter': ['Poppins', 'Sans-serif']
+        'sans': ['Poppins', 'sans-serif'],
+        'serif': ['Poppins', 'sans-serif'],
+        'mono': ['Poppins', 'sans-serif'],
+        'space': ['Poppins', 'sans-serif'],
+        'inter': ['Poppins', 'sans-serif']
       }
     },
   },
