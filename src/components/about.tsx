@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { ReactLenis } from 'lenis/react';
 import Head from 'next/head';
 
-// Add this at the top of your component
 const AboutMe = () => {
   // Generate fixed random values that will be consistent between server and client
   const generateFixedRandomValues = () => {
@@ -34,55 +33,53 @@ const AboutMe = () => {
   return (
     <ReactLenis root>
       <main>
-        {/* First Section - AboutMe (Sticky) - Modified for mobile responsiveness */}
+        {/* First Section - AboutMe (Sticky) - With full-screen text that doesn't get cut off */}
         <section id="about-section" className="relative bg-white sticky top-0 h-screen overflow-hidden">
-          <div className="flex flex-col h-full">
-            {/* Text Content - Always on top for mobile, side by side for desktop */}
-            <motion.div 
-              className="relative bg-white z-10 flex-shrink-0 p-8 md:p-16 md:w-1/2 md:h-full flex items-center"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="max-w-xl mx-auto md:mx-0">
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none mb-6 text-neutral-900">
-                  {Array.from("SHAPING THE FUTURE.").map((char, index) => (
-                    <span key={index} className="transition duration-300 hover:text-primary">{char}</span>
-                  ))}
+          {/* Full-page text background with proper scaling */}
+          <motion.div 
+            className="absolute inset-0 z-0 flex items-center justify-center p-8 sm:p-12 md:p-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative w-full max-w-7xl mx-auto">
+              <div className="text-left">
+                <h2 className="text-[4vw] sm:text-[4.5vw] md:text-[5vw] lg:text-[6vw] xl:text-[7vw] font-extrabold tracking-tight leading-[0.9] text-neutral-900">
+                  <span className="text-primary">CREATIVITY</span> <br className="hidden sm:block" />
+                  ALONE CAPTURE <br className="hidden sm:block" />
+                  THE EYE. <br className="hidden sm:block" />
+                  <span className="text-primary">CREATIVITY</span> <br className="hidden sm:block" />
+                  WITH <span className="text-primary">STRATEGY</span> <br className="hidden sm:block" />
+                  CAPTURES THE <br className="hidden sm:block" />
+                  <span className="text-primary">MARKET.</span>
                 </h2>
-
-                <p className="mt-4 sm:mt-8 text-neutral-700 text-lg sm:text-xl">
-                  {Array.from("Digital Innovator, Visual Storyteller, and Marketing Strategist. Transforming brands through bold creativity and cutting-edge design.").map((char, index) => (
-                    <span key={index} className="transition duration-300 hover:text-primary">{char}</span>
-                  ))}
-                </p>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
-            {/* Image Container - Below text on mobile, side by side on desktop */}
-            <motion.div 
-              className="flex-grow md:absolute md:right-0 md:top-0 md:w-1/2 md:h-full"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative h-full min-h-[40vh] md:min-h-0">
-                <Image
-                  src="/placeholder2.png" 
-                  alt="Profile portrait"
-                  fill
-                  className="object-cover object-center filter grayscale hover:grayscale-0 transition duration-500 ease-in-out"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                />
-              </div>
-            </motion.div>
-          </div>
+          {/* Image Container - Overlapping the text */}
+          <motion.div 
+            className="absolute top-0 right-0 w-full md:w-1/2 h-full z-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative h-full">
+              <Image
+                src="/placeholder2.png" 
+                alt="Profile portrait"
+                fill
+                className="object-cover object-right filter grayscale hover:grayscale-0 transition duration-500 ease-in-out"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          </motion.div>
         </section>
 
-        {/* Second Section - Innovative */}
+        {/* Second Section - Innovative - Unchanged */}
         <section className="relative">
           {/* Sticky Background */}
           <div className="sticky top-0 h-screen w-full bg-[#0A0C10] rounded-tr-2xl rounded-tl-2xl overflow-hidden">
