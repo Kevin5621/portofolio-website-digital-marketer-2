@@ -14,12 +14,6 @@ interface ProjectData {
 
 const projects: ProjectData[] = [
   { 
-    title: 'Aerospacs', 
-    image: '/project/cover4.jpg', 
-    revealImage: '/project/reveal-cover/reveal-cover4.png',
-    route: '/project/aerospace'
-  },
-  { 
     title: 'Binjasiimen Samapta', 
     image: '/project/cover5.jpg', 
     revealImage: '/project/reveal-cover/reveal-cover5.png',

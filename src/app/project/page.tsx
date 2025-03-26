@@ -59,13 +59,6 @@ export default function ProjectsPage() {
   // Memoize projects array to prevent unnecessary re-renders
   const projects: Project[] = [
     {
-      title: 'Aerospace',
-      route: '/project/aerospace',
-      image: '/project/cover4.jpg',
-      backgroundImage: '/project/cover4.jpg',
-      description: 'Premium men\'s underwear brand focusing on comfort and style'
-    },
-    {
       title: 'Binjasiimen Samapta',
       route: '/project/binjasiimen-samapta',
       image: '/project/cover5.jpg',
@@ -274,8 +267,6 @@ const ListProjectItem = ({
   // Map the project title to the appropriate reveal cover image
   const getRevealCoverImage = (title: string) => {
     switch(title) {
-      case 'Aerospace':
-        return '/project/reveal-cover/reveal-cover4.png';
       case 'Binjasiimen Samapta':
         return '/project/reveal-cover/reveal-cover5.png';
       case 'Ortist Specialist':
