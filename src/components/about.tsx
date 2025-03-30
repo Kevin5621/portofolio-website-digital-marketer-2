@@ -39,15 +39,21 @@ const AboutMe = () => {
           <div className="relative h-full w-full flex flex-col md:block">
             {/* Text content - Full width on mobile, positioned normally on desktop */}
             <motion.div 
-              className="relative z-10 flex-1 md:absolute md:inset-0 flex items-center justify-center p-8 sm:p-12 md:p-16"
+              className="relative z-10 flex-1 md:absolute md:inset-0 flex items-center p-8 sm:p-12 md:p-16"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="relative w-full max-w-7xl mx-auto">
+              <div className="relative w-full max-w-7xl" style={{ 
+                transform: 'scale(1)',
+                transformOrigin: 'left center',
+                textSizeAdjust: '100%'
+              }}>
                 <div className="text-left">
-                  <h2 className="text-[7vw] sm:text-[6vw] md:text-[5vw] lg:text-[6vw] xl:text-[7vw] font-extrabold tracking-tight leading-[0.9] text-neutral-900">
+                  <h2 className="font-extrabold tracking-tight leading-[0.9] text-neutral-900" style={{
+                    fontSize: 'clamp(2.5rem, 7vw, 7rem)'
+                  }}>
                     <span className="text-primary">CREATIVITY</span> <br className="hidden sm:block" />
                     ALONE CAPTURE <br className="hidden sm:block" />
                     THE EYE. <br className="hidden sm:block" />
