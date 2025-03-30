@@ -121,7 +121,7 @@ const Hero = () => {
             <div className="text-center px-4 md:px-8">
               {/* Laurel badges moved above the text */}
               <motion.div 
-                className="mb-12 flex justify-center items-center gap-4 opacity-80"
+                className="flex justify-center items-center gap-4 opacity-80"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 1 }}
@@ -136,7 +136,12 @@ const Hero = () => {
                     className="object-contain"
                   />
                 </div>
-                <div className="h-8 w-8 md:h-10 md:w-10 relative">
+                <a 
+                  href="https://drive.google.com/file/d/15FzNgVMhH2zgLhve8aKIqYRv5OC2-Ki7/view" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="h-8 w-8 md:h-10 md:w-10 relative"
+                >
                   <Image 
                     src="/certificate/1.png" 
                     alt="" 
@@ -144,8 +149,13 @@ const Hero = () => {
                     height={40}
                     className="object-contain"
                   />
-                </div>
-                <div className="h-8 w-8 md:h-10 md:w-10 relative">
+                </a>
+                <a 
+                  href="https://drive.google.com/file/d/19lkvbcmCJdqCP8r7qiGSCoywqiIvgk9g/view" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="h-8 w-8 md:h-10 md:w-10 relative"
+                >
                   <Image 
                     src="/certificate/2.png" 
                     alt="" 
@@ -153,8 +163,13 @@ const Hero = () => {
                     height={40}
                     className="object-contain"
                   />
-                </div>
-                <div className="h-8 w-8 md:h-10 md:w-10 relative">
+                </a>
+                <a 
+                  href="https://drive.google.com/file/d/1uingymnbEReMJEeBORdtlvSLag3b0Yz8/view" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="h-8 w-8 md:h-10 md:w-10 relative"
+                >
                   <Image 
                     src="/certificate/3.png" 
                     alt="" 
@@ -162,7 +177,7 @@ const Hero = () => {
                     height={40}
                     className="object-contain"
                   />
-                </div>
+                </a>
                 {/* laurel right side */}
                 <div className="h-8 w-8 md:h-10 md:w-10 relative">
                   <Image 
@@ -176,18 +191,28 @@ const Hero = () => {
               </motion.div>
               
               {/* Video Masked Through Text - Fixed Implementation */}
-              <div className="relative overflow-hidden">
-                <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-poppins font-black tracking-tighter leading-tight uppercase">
+              <div className="relative overflow-visible mx-auto" style={{ 
+                width: '90%',
+                maxWidth: '1600px',
+                transform: 'scale(1)',
+                transformOrigin: 'center center'
+              }}>
+                <h2 className="font-poppins font-black tracking-tighter leading-tight uppercase" style={{ 
+                  fontSize: '8vw',
+                  lineHeight: 1.2,
+                  padding: '0.5em 0',
+                  textSizeAdjust: '100%'
+                }}>
                   {textRows.map((row, rowIndex) => (
                     <div 
                       key={rowIndex} 
-                      className="flex justify-center items-center space-x-4 md:space-x-8 my-2 md:my-4"
+                      className="flex justify-center items-center space-x-4 md:space-x-8 my-4 md:my-6"
                     >
                       {row.map((word, index) => (
                         <div key={index} className="relative inline-block">
                           {word.isDark ? (
                             // Dark text for "TURNING" and "INTO"
-                            <span className="inline-block text-dark">
+                            <span className="inline-block" style={{ color: "#18181b" }}>
                               {word.text}
                             </span>
                           ) : (
