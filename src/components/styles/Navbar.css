@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 .menu-item {
   font-family: 'Roboto', sans-serif;
@@ -8,7 +9,7 @@
 }
 
 .menu-item:hover, .menu-item.active {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Great Vibes', cursive;
   color: #f0f0f0;
   transform: translateX(10px);
 }
@@ -38,24 +39,9 @@
   background: radial-gradient(circle at center, rgba(40, 40, 40, 0.7) 0%, rgba(0, 0, 0, 1) 70%);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-
-/* New styles for zoom-resistant menu */
+/* Fixed menu text responsiveness */
 .menu-text {
-  font-size: clamp(3rem, 8vw, 9rem);
+  font-size: clamp(2rem, 5vw, 4rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -66,12 +52,19 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .menu-content {
   flex: 1;
   display: flex;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .menu-text {
+    font-size: clamp(1.5rem, 8vw, 3rem);
+  }
 }
 
 /* Enhanced menu button styles */
