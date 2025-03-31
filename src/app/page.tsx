@@ -1,6 +1,5 @@
 import AboutMe from "@/components/about";
 import CertificateAndExperience from "@/components/certificate";
-import Contact from "@/components/contact";
 import Hero from "@/components/hero";
 import Navbar from "@/components/navbar";
 import { Portfolio } from "@/components/portofolio";
@@ -13,7 +12,6 @@ export default function Home() {
       <CertificateAndExperience  />
       <AboutMe />
       <Portfolio />
-      <Contact />
     </main>
   );
 }

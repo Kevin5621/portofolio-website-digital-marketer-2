@@ -130,9 +130,33 @@ const Navbar = ({ variant = 'light' }: NavbarProps) => {
     if (path === '/' && elementId) {
       // If we're already on the home page, just scroll to the element
       if (window.location.pathname === '/') {
-        const element = document.getElementById(elementId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Special case for contact section in portfolio
+        if (elementId === 'contact-section') {
+          // Find the portfolio section
+          const portfolioSection = document.querySelector('section[data-portfolio]');
+          if (portfolioSection) {
+            // Calculate the position to scroll to (last slide in portfolio)
+            const sectionHeight = portfolioSection.scrollHeight;
+            const viewportHeight = window.innerHeight;
+            const scrollPosition = portfolioSection.getBoundingClientRect().top + window.scrollY + sectionHeight - viewportHeight;
+            
+            window.scrollTo({
+              top: scrollPosition,
+              behavior: 'smooth'
+            });
+          } else {
+            // Fallback to regular ID-based scrolling
+            const element = document.getElementById(elementId);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        } else {
+          // Regular scrolling for other sections
+          const element = document.getElementById(elementId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
       } else {
         // If we're on another page, navigate to home first

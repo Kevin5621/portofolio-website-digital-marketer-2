@@ -4,43 +4,18 @@ import Image from 'next/image';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { RevealImage } from './hooks/RevealImage';
+import { projects } from '../data/projects-portofolio';
+import { ContactPage } from './ContactPage';
 
-interface ProjectData {
+export interface ProjectData {
   title: string;
   image: string;
   revealImage: string;
-  route: string; // Add route property for navigation
+  route: string;
 }
 
-const projects: ProjectData[] = [
-  { 
-    title: 'Binjasiimen Samapta', 
-    image: '/project/cover5.jpg', 
-    revealImage: '/project/reveal-cover/reveal-cover5.png',
-    route: '/project/binjasiimen-samapta'
-  },
-  { 
-    title: 'Ortist Specialist', 
-    image: '/project/cover2.jpg', 
-    revealImage: '/project/reveal-cover/reveal-cover2.png',
-    route: '/project/ortist'
-  },
-  { 
-    title: 'Kronju', 
-    image: '/project/cover1.jpg', 
-    revealImage: '/project/reveal-cover/reveal-cover1.png',
-    route: '/project/kronju'
-  },
-  { 
-    title: 'Rumah Bahasa Asing', 
-    image: '/project/cover3.jpg', 
-    revealImage: '/project/reveal-cover/reveal-cover3.png',
-    route: '/project/rumah-bahasa-asing'
-  },
-];
-
 export function Portfolio() {
-  const router = useRouter(); // Add router for navigation
+  const router = useRouter();
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const slidesRef = useRef<HTMLDivElement>(null);
@@ -52,7 +27,7 @@ export function Portfolio() {
   const [, setScale] = useState(0.5);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   
-  // Setup intersection observer to detect when portfolio section is in view
+  // Setup intersection observer
   useEffect(() => {
     if (!sectionRef.current) return;
     
@@ -76,11 +51,9 @@ export function Portfolio() {
   useEffect(() => {
     if (!sectionRef.current) return;
     
-    // Set section height based on number of projects
-    const sectionHeight = window.innerHeight * (projects.length + 1);
+    const sectionHeight = window.innerHeight * (projects.length + 2);
     setTotalScrollHeight(sectionHeight);
     
-    // Update section height
     sectionRef.current.style.height = `${sectionHeight}px`;
   }, []);
   
@@ -91,36 +64,35 @@ export function Portfolio() {
     const handleScroll = () => {
       if (!isInView || !sectionRef.current) return;
       
-      // Get section position
       const sectionTop = sectionRef.current.getBoundingClientRect().top;
       const sectionHeight = sectionRef.current.offsetHeight;
       const viewportHeight = window.innerHeight;
       
-      // Calculate progress through section (0 to 1)
       const scrollProgress = Math.max(0, Math.min(1, -sectionTop / (sectionHeight - viewportHeight)));
       
-      // Calculate which slide we should be on
+      const totalSlides = projects.length + 1;
       const targetSlide = Math.min(
-        projects.length - 1,
-        Math.floor(scrollProgress * projects.length)
+        totalSlides - 1,
+        Math.floor(scrollProgress * totalSlides)
       );
       
-      // Update current slide if needed
       if (targetSlide !== currentSlide) {
         setCurrentSlide(targetSlide);
+        
+        // Hide the RevealImage when on contact slide
+        if (targetSlide === projects.length) {
+          setHoveredProject(null);
+        }
       }
       
-      // Calculate smooth transition between slides
       const slideWidth = window.innerWidth;
-      const exactProgress = scrollProgress * (projects.length - 1);
+      const exactProgress = scrollProgress * (totalSlides - 1);
       const translateX = -exactProgress * slideWidth;
       
-      // Apply transform to slides container
       slidesRef.current!.style.transform = `translateX(${translateX}px)`;
       
       if (!slidesRef.current || !containerRef.current || !sectionRef.current) return;
       
-      // Add parallax effect to titles
       const titles = document.querySelectorAll('.project-title');
       titles.forEach((title, index) => {
         const titleEl = title as HTMLElement;
@@ -176,7 +148,9 @@ export function Portfolio() {
 
   // Handle project click for navigation
   const handleProjectClick = useCallback((index: number) => {
-    router.push(projects[index].route);
+    if (index < projects.length) {
+      router.push(projects[index].route);
+    }
   }, [router]);
 
   return (
@@ -185,6 +159,7 @@ export function Portfolio() {
       className="relative w-full"
       style={{ height: `${totalScrollHeight}px` }}
       onMouseLeave={handleMouseLeave}
+      data-portfolio="true"
     >
       <div 
         ref={containerRef} 
@@ -195,6 +170,7 @@ export function Portfolio() {
           className="absolute top-0 left-0 w-full h-screen flex will-change-transform"
           style={{ transition: 'transform 0.05s ease-out' }}
         >
+          {/* Project slides */}
           {projects.map((project, index) => (
             <div
               key={project.title}
@@ -221,20 +197,14 @@ export function Portfolio() {
                   quality={90}
                 />
               </div>
-              
-              {/* Bottom line indicator */}
-              <div
-                className="h-[2px] bg-white absolute bottom-0 left-0 transition-all duration-300 ease-linear"
-                style={{
-                  width: hoveredProject === index ? '100%' : '0'
-                }}
-              />
             </div>
           ))}
+
+          <ContactPage />
         </div>
         
         <RevealImage 
-          isVisible={hoveredProject !== null}
+          isVisible={hoveredProject !== null && currentSlide < projects.length}
           imageSrc={hoveredProject !== null ? projects[hoveredProject].revealImage : ''}
           imageAlt={hoveredProject !== null ? `${projects[hoveredProject].title} Reveal` : ''}
           initialScale={0.5}
