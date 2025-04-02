@@ -25,6 +25,7 @@ interface Project {
 export default function ProjectsPage() {
   const [activeProject, setActiveProject] = useState<number | null>(null);
   const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [, setHoveredLetter] = useState<number | null>(null);
   
   // Preload project images after main content is rendered
   useEffect(() => {
@@ -87,7 +88,7 @@ export default function ProjectsPage() {
       description: 'Korean language learning services and cultural programs'
     }
   ];
-
+  
   // Preload all reveal images
   const preloadedRevealImages = isPageLoaded ? (
     <div className="hidden">
@@ -131,16 +132,15 @@ export default function ProjectsPage() {
       }
     }
   };
-
+  
   return (
     <ReactLenis root options={{ lerp: 0.05, duration: 1.2, smoothWheel: true }}>
       <main className="min-h-screen bg-white overflow-hidden">
         <Navbar variant="dark" />
         
-        {/* Hidden preloaded reveal images */}
+        {/* Preloaded and visible reveal images remain the same */}
         {preloadedRevealImages}
         
-        {/* Visible reveal image when active */}
         {activeProject !== null && (
           <RevealImage
             isVisible={activeProject !== null}
@@ -155,63 +155,237 @@ export default function ProjectsPage() {
           />
         )}
         
-        {/* Header with bold typography - Optimized for LCP */}
+        {/* BOLD EXPERIMENTAL Header */}
         <section className="pt-36 pb-16 px-8">
           <div className="max-w-7xl mx-auto">
+            {/* Number indicator */}
             <motion.div 
-              initial="hidden"
-              animate="visible"
-              variants={headingVariants}
-              className="relative"
-            >
-              <motion.h1 
-                className="text-[8vw] md:text-[10vw] font-bold text-black leading-none tracking-tighter overflow-hidden"
-              >
-                <motion.span 
-                  className="block"
-                  initial={{ y: 40, opacity: 0 }}
-                  animate={{ 
-                    y: 0, 
-                    opacity: 1,
-                    transition: {
-                      duration: 0.8,
-                      ease: [0.25, 0.1, 0.25, 1.0]
-                    }
-                  }}
-                >
-                  MY
-                </motion.span>
-                <motion.span 
-                  className="block -mt-4"
-                  initial={{ y: 60, opacity: 0 }}
-                  animate={{ 
-                    y: 0, 
-                    opacity: 1,
-                    transition: {
-                      duration: 0.8,
-                      delay: 0.2,
-                      ease: [0.25, 0.1, 0.25, 1.0]
-                    }
-                  }}
-                >
-                  WORK.
-                </motion.span>
-              </motion.h1>
-            </motion.div>
-            
-            <motion.p 
-              className="mt-6 text-lg text-stone-600 max-w-lg font-light leading-relaxed"
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              transition={{
-                delay: 0.4,
-                duration: 0.8,
-                ease: [0.25, 0.1, 0.25, 1.0]
+              className="flex justify-between items-center mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                transition: {
+                  duration: 0.6,
+                  ease: [0.25, 0.1, 0.25, 1.0]
+                }
               }}
             >
-              Explore our portfolio of creative work across various industries. Each project represents our commitment to excellence and innovative solutions.
-            </motion.p>
+              <div className="flex items-center">
+                <div className="w-16 h-16 border border-black rounded-full flex items-center justify-center">
+                  <span className="text-primary font-bold">{projects.length}</span>
+                </div>
+                <div className="ml-4 hidden md:block">
+                  <span className="text-primary uppercase tracking-widest">Projects</span>
+                  <span className="block text-xs text-stone-500 mt-1">Showcase</span>
+                </div>
+              </div>
+              
+              <div className="hidden md:block">
+                <div className="relative w-32 h-8">
+                  <motion.div 
+                    className="absolute inset-0 bg-primary"
+                    initial={{ scaleX: 0, originX: 0 }}
+                    animate={{ 
+                      scaleX: 1,
+                      transition: {
+                        duration: 1,
+                        ease: [0.25, 0.1, 0.25, 1.0]
+                      }
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute inset-0 flex items-center justify-center text-white font-medium"
+                    initial={{ opacity: 0 }}
+                    animate={{ 
+                      opacity: 1,
+                      transition: {
+                        delay: 0.5,
+                        duration: 0.5
+                      }
+                    }}
+                  >
+                    PORTFOLIO
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Experimental title with interactive letters */}
+            <div className="relative">
+              {/* Background decorative element */}
+              <motion.div 
+                className="absolute -left-8 md:-left-16 top-1/4 w-16 h-16 md:w-32 md:h-32 rounded-full border-8 border-black bg-transparent opacity-10"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ 
+                  scale: [0, 1.2, 1],
+                  opacity: 0.1,
+                  transition: {
+                    duration: 1.2,
+                    ease: [0.34, 1.56, 0.64, 1]
+                  }
+                }}
+              />
+              
+              <motion.div 
+                className="relative z-10 flex flex-col md:flex-row items-start md:items-end"
+                initial="hidden"
+                animate="visible"
+                variants={headingVariants}
+              >
+                {/* MY text with interactive letters */}
+                <motion.div className="overflow-hidden">
+                  <motion.div
+                    className="flex items-center"
+                    initial={{ y: 60 }}
+                    animate={{ 
+                      y: 0,
+                      transition: {
+                        duration: 0.8,
+                        ease: [0.25, 0.1, 0.25, 1.0]
+                      }
+                    }}
+                  >
+                    {['M', 'Y'].map((letter, index) => (
+                      <motion.span
+                        key={`my-${index}`}
+                        className="text-[12vw] md:text-[14vw] font-bold text-black leading-none tracking-tighter inline-block"
+                        onMouseEnter={() => setHoveredLetter(index)}
+                        onMouseLeave={() => setHoveredLetter(null)}
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ 
+                          y: 0, 
+                          opacity: 1,
+                          transition: {
+                            duration: 0.7,
+                            delay: index * 0.15,
+                            ease: [0.25, 0.1, 0.25, 1.0]
+                          }
+                        }}
+                        whileHover={{
+                          y: -10,
+                          color: '#6676a3',
+                          transition: {
+                            duration: 0.3,
+                            ease: [0.25, 0.1, 0.25, 1.0]
+                          }
+                        }}
+                      >
+                        {letter}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                </motion.div>
+                
+                {/* Vertical line separator - only on medium screens and up */}
+                <motion.div 
+                  className="hidden md:block h-24 w-1 bg-black mx-6 mb-6"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ 
+                    height: 100,
+                    opacity: 0.6,
+                    transition: {
+                      duration: 0.8,
+                      delay: 0.4,
+                      ease: [0.25, 0.1, 0.25, 1.0]
+                    }
+                  }}
+                />
+                
+                {/* WORK. text with dot */}
+                <motion.div className="overflow-hidden relative">
+                  <motion.div
+                    className="flex items-center"
+                    initial={{ opacity: 1 }}
+                    animate={{ 
+                      opacity: 1,
+                      transition: {
+                        duration: 0.8,
+                        delay: 0.2,
+                        ease: [0.25, 0.1, 0.25, 1.0]
+                      }
+                    }}
+                  >
+                    {['W', 'O', 'R', 'K', '.'].map((letter, index) => (
+                      <motion.span
+                        key={`work-${index}`}
+                        className="text-[12vw] md:text-[14vw] font-bold text-black leading-none tracking-tighter inline-block"
+                        onMouseEnter={() => setHoveredLetter(index + 2)}
+                        onMouseLeave={() => setHoveredLetter(null)}
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ 
+                          y: 0, 
+                          opacity: 1,
+                          transition: {
+                            duration: 0.7,
+                            delay: (index + 2) * 0.15, // Continue the sequence after "MY"
+                            ease: [0.25, 0.1, 0.25, 1.0]
+                          }
+                        }}
+                        whileHover={{
+                          y: -10,
+                          color: '#6676a3',
+                          transition: {
+                            duration: 0.3,
+                            ease: [0.25, 0.1, 0.25, 1.0]
+                          }
+                        }}
+                      >
+                        {letter}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                  
+                  {/* Animated dot */}
+                  <motion.div
+                    className="absolute -right-3 -bottom-3 w-6 h-6 rounded-full bg-primary"
+                    initial={{ scale: 0 }}
+                    animate={{ 
+                      scale: [0, 1.2, 1],
+                      transition: {
+                        duration: 0.8,
+                        delay: 0.8,
+                        ease: [0.34, 1.56, 0.64, 1]
+                      }
+                    }}
+                  />
+                </motion.div>
+              </motion.div>
+            </div>
+            
+            {/* Description section with diagonal element */}
+            <div className="mt-12 md:mt-16 relative">
+              
+              <div className="md:pl-32">
+                <motion.p 
+                  className="text-lg text-stone-600 max-w-lg font-light leading-relaxed relative"
+                  variants={textVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{
+                    delay: 0.6,
+                    duration: 0.8,
+                    ease: [0.25, 0.1, 0.25, 1.0]
+                  }}
+                >
+                  <motion.span 
+                    className="absolute -left-6 top-0 text-xl font-bold opacity-40"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ 
+                      opacity: 0.4,
+                      x: 0,
+                      transition: {
+                        delay: 0.7,
+                        duration: 0.5
+                      }
+                    }}
+                  >
+                    &quot;
+                  </motion.span>
+                  Explore our portfolio of creative work across various industries. Each project represents our commitment to excellence and innovative solutions.
+                </motion.p>
+              </div>
+            </div>
           </div>
         </section>
         
