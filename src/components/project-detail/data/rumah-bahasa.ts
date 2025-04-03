@@ -135,7 +135,7 @@ export const rumahBahasaData: BrandData = {
   coverImage: "/project/cover3.jpg",
   revealImage: "/project/reveal-cover/reveal-cover3.png",
   nextProject: {
-    id: "binjasimen-samapta",
+    id: "binjasiimen-samapta",
     name: "Binjasiimen Samapta",
     coverImage: "/project/cover5.jpg",
     revealImage: "/project/reveal-cover/reveal-cover5.png"

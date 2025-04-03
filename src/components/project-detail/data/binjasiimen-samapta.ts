@@ -1,7 +1,7 @@
 import { BrandData } from '../common/types';
 
 export const binjasiimensamaptaData: BrandData = {
-  id: "binjasimen-samapta",
+  id: "binjasiimen-samapta",
   name: "Binjasiimen Samapta",
   tagline: "Test Preparation Institute",
   description: "Social media management for a test preparation institute specializing in training candidates for military, police, and government academy entrance exams in Indonesia.",

@@ -9,7 +9,7 @@ export const projectsData: { [key: string]: BrandData } = {
   'rumah-bahasa': rumahBahasaData,
   'ortist': ortistData,
   'kronju': kronjuData,
-  'binjasimen-samapta': binjasiimensamaptaData,
+  'binjasiimen-samapta': binjasiimensamaptaData,
 };
 
 // Function to get project data by ID
