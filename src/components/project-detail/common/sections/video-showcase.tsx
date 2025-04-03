@@ -58,7 +58,7 @@ export const VideoShowcaseSection = ({ brandData, sectionViewed, registerSection
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Video Thumbnails - Now on the left side for desktop */}
+          {/* Video Thumbnails - left side desktop */}
           <div className={`lg:col-span-3 order-2 lg:order-1 transition-all duration-700 delay-300 ${sectionViewed[6] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="space-y-4 lg:pr-4">
               <h4 className="text-lg font-medium text-stone-800 mb-4 hidden lg:block">More Videos</h4>

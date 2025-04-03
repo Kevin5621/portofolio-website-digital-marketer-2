@@ -94,7 +94,6 @@ export const binjasiimensamaptaData: BrandData = {
         id: "video1",
         title: "-",
         description: "-",
-        thumbnail: "/project/project-detail/5-binjasiimen/Binjasiimen.mp4",
         videoUrl: "/project/project-detail/5-binjasiimen/Binjasiimen.mp4",
         metrics: {
           plays: "101K",
