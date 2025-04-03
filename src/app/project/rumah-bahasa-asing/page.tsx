@@ -1,11 +1,5 @@
-import Navbar from '@/components/navbar';
-import RBA from '@/components/project-detail/3-rumah-bahasa';
+import ProjectDetail from '@/components/project-detail/project-detail';
 
-export default function RBAPage() {
-  return (
-    <main className="min-h-screen">
-      <Navbar variant="dark" />
-      <RBA />
-    </main>
-  );
+export default function RumahBahasaPage() {
+  return <ProjectDetail projectId="rumah-bahasa" />;
 }

@@ -1,11 +1,5 @@
-import Navbar from '@/components/navbar';
-import Ortist from '@/components/project-detail/2-ortist';
+import ProjectDetail from '@/components/project-detail/project-detail';
 
-export default function OrtistPage() {
-  return (
-    <main className="min-h-screen">
-      <Navbar variant="dark" />
-      <Ortist />
-    </main>
-  );
+export default function RumahBahasaPage() {
+  return <ProjectDetail projectId="ortist" />;
 }

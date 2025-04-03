@@ -1,11 +1,5 @@
-import Navbar from '@/components/navbar';
-import Binjasiimen from '@/components/project-detail/5-binjasiimen-samapta';
+import ProjectDetail from '@/components/project-detail/project-detail';
 
-export default function BinjasiimenPage() {
-  return (
-    <main className="min-h-screen">
-      <Navbar variant="dark" />
-      <Binjasiimen />
-    </main>
-  );
+export default function RumahBahasaPage() {
+  return <ProjectDetail projectId="binjasimen" />;
 }

@@ -1,11 +1,5 @@
-import Navbar from '@/components/navbar';
-import Kronju from '@/components/project-detail/1-kronju';
+import ProjectDetail from '@/components/project-detail/project-detail';
 
-export default function KronjuPage() {
-  return (
-    <main className="min-h-screen">
-      <Navbar variant="dark"/>
-      <Kronju />
-    </main>
-  );
+export default function RumahBahasaPage() {
+  return <ProjectDetail projectId="kronju" />;
 }

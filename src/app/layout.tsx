@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-dark text-light">
+      <body className="min-h-screen bg-gray-dark text-light">
         <ZoomPrevention />
         {children}
       </body>

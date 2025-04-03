@@ -74,7 +74,7 @@ export function ContactPage({
         </div>
       )}
       
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 sm:px-8">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 sm:px-8 bg-gray-dark">
         {/* Content container with responsive width */}
         <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-16">
           {/* Left side - Title section */}
