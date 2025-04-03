@@ -31,14 +31,18 @@ export const brandData = {
     "Compiled monthly performance reports and adjusted strategies"
   ],
 
-  results: [
-    "+386,677 Instagram Reach (9,220% increase)",
-    "+5,050 Instagram Followers (47% increase)",
-    "+144,273 Instagram Interactions (20,356% increase)",
-    "+6,597,000 TikTok Views (13,725% increase)",
-    "+21,000 TikTok Followers (2,650% increase)",
-    "+721,089 TikTok Likes (114,594% increase)"
-  ],
+  results: {
+    instagram: [
+      { metric: "+386,677", description: "Instagram Reach", percentage: "9,220% increase" },
+      { metric: "+5,050", description: "Instagram Followers", percentage: "47% increase" },
+      { metric: "+144,273", description: "Instagram Interactions", percentage: "20,356% increase" },
+    ],
+    tiktok: [
+      { metric: "+6,597,000", description: "TikTok Views", percentage: "13,725% increase" },
+      { metric: "+21,000", description: "TikTok Followers", percentage: "2,650% increase" },
+      { metric: "+721,089", description: "TikTok Likes", percentage: "114,594% increase" },
+    ]
+  },
 
   skills: ["MARKET ANALYSIS", "SCHEDULING", "CONTENT STRATEGY", "CONTENT PRODUCTION"],
 

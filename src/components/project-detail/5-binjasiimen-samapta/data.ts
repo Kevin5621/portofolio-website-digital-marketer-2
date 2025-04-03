@@ -32,20 +32,23 @@ export const brandData = {
     "Tracked performance metrics (engagement, CTR) to adjust content strategies"
   ],
 
-  results: [
-    "+32,127 Instagram Reach (1,199% increase)",
-    "+23,062 Instagram Followers (0.74% increase)",
-    "+4,562 Instagram Interactions (574% increase)",
-    "+3,675 Profile Visits (370% increase)",
-    "+382 Click Links (409% increase)",
-    "+373,000 TikTok Views (1,863% increase)",
-    "+14,500 TikTok Followers (45% increase)",
-    "+23,597 TikTok Likes (3,281% increase)",
-    "+230 TikTok Comments (11,400% increase)",
-    "+902 TikTok Shares (11,175% increase)",
-    "+10,013 TikTok Profile Visits (278% increase)"
-  ],
-
+  results: {
+    instagram: [
+      { metric: "+32,127", description: "Instagram Reach", percentage: "1,199% increase" },
+      { metric: "+23,062", description: "Instagram Followers", percentage: "0.74% increase" },
+      { metric: "+4,562", description: "Instagram Interactions", percentage: "574% increase" },
+      { metric: "+3,675", description: "Profile Visits", percentage: "370% increase" },
+      { metric: "+382", description: "Click Links", percentage: "409% increase" },
+    ],
+    tiktok: [
+      { metric: "+373,000", description: "TikTok Views", percentage: "1,863% increase" },
+      { metric: "+14,500", description: "TikTok Followers", percentage: "45% increase" },
+      { metric: "+23,597", description: "TikTok Likes", percentage: "3,281% increase" },
+      { metric: "+230", description: "TikTok Comments", percentage: "11,400% increase" },
+      { metric: "+902", description: "TikTok Shares", percentage: "11,175% increase" },
+      { metric: "+10,013", description: "TikTok Profile Visits", percentage: "278% increase" },
+    ]
+  },
   skills: ["MARKET ANALYSIS", "SCHEDULING", "CONTENT STRATEGY", "CONTENT PRODUCTION"],
 
   marketingMethod: {

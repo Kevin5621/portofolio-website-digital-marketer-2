@@ -36,6 +36,17 @@ export interface Achievement {
   description: string;
 }
 
+export interface ResultItem {
+  metric: string;
+  description: string;
+  percentage: string;
+}
+
+export interface Results {
+  instagram: ResultItem[];
+  tiktok: ResultItem[];
+}
+
 export interface VideoShowcase {
   title: string;
   description: string;
@@ -52,7 +63,7 @@ export interface BrandData {
   objectives: string[];
   campaignStrategy: string[];
   executionHighlights: string[];
-  results: string[];
+  results: Results;
   skills: string[];
   marketingMethod: MarketingMethod;
   projects: Project[];

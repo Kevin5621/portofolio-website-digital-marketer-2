@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { RevealImage } from '@/components/hooks/RevealImage';
-import { useRouter } from 'next/navigation';
 import { BrandData } from '../types';
 
 interface IntroSectionProps {
@@ -17,9 +16,7 @@ export const IntroSection = ({
   registerSection, 
   navigateToSection 
 }: IntroSectionProps) => {
-  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
-  const [bottomImageHovered, setBottomImageHovered] = useState(false);
 
   return (
     <section 
@@ -32,9 +29,6 @@ export const IntroSection = ({
         <div className={`md:col-span-5 flex items-center p-8 md:pl-24 md:pr-12 relative transition-all duration-1000 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="space-y-8 max-w-md">
             <div className="space-y-4">
-              <div className={`inline-block py-1 px-2 border border-red-500 text-red-500 text-xs uppercase tracking-widest transition-all duration-700 delay-300 ${sectionViewed[0] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
-                Digital Marketing Campaign
-              </div>
               
               <h1 className={`text-6xl md:text-7xl font-light text-stone-900 leading-none transition-all duration-700 delay-500 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 <span className="block">{brandData.name}</span>
@@ -57,17 +51,15 @@ export const IntroSection = ({
                 className="group relative inline-flex items-center text-sm font-medium uppercase tracking-widest"
                 onClick={() => navigateToSection(1)}
               >
-                <span className="text-stone-900 group-hover:text-red-500 transition-colors duration-300">View Case Study</span>
-                <span className="ml-3 w-8 h-px bg-stone-900 group-hover:w-12 group-hover:bg-red-500 transition-all duration-300"></span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Right Side - Asymmetric Grid */}
-        <div className="md:col-span-7 grid grid-cols-12 grid-rows-6 h-screen">
+        {/* Right Side */}
+        <div className="md:col-span-7 h-screen relative">
           <div 
-            className={`col-span-12 row-span-4 relative bg-stone-200 transition-all duration-1000 overflow-hidden ${sectionViewed[0] ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 bg-stone-200 transition-all duration-1000 overflow-hidden ${sectionViewed[0] ? 'opacity-100' : 'opacity-0'}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -94,27 +86,6 @@ export const IntroSection = ({
               transitionDuration={0.3}
               className="z-50"
             />
-          </div>
-          <div className={`col-span-6 row-span-2 relative bg-red-500 transition-all duration-700 delay-300 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="h-full w-full flex items-center justify-center">
-              <div className="font-light text-white text-3xl tracking-widest">{brandData.name}</div>
-            </div>
-          </div>
-          <div 
-            className={`col-span-6 row-span-2 relative bg-stone-800 transition-all duration-700 delay-500 ${sectionViewed[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} cursor-pointer`}
-            onMouseEnter={() => setBottomImageHovered(true)}
-            onMouseLeave={() => setBottomImageHovered(false)}
-            onClick={() => router.push('/project/ortist')}
-          >
-            <div className="h-full w-full relative overflow-hidden">
-              <Image
-                src="/project/cover2.jpg"
-                alt="binjasiimen Product"
-                fill
-                className={`object-cover transition-all duration-500 ${bottomImageHovered ? 'scale-110 opacity-100' : 'scale-100 opacity-80'}`}
-                loading="eager"
-              />
-            </div>
           </div>
         </div>
       </div>

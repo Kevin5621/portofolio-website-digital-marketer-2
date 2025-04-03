@@ -32,14 +32,19 @@ export const brandData = {
     "Tracked performance metrics (engagement, CTR) to adjust content strategies"
   ],
 
-  results: [
-    "+32,127 Instagram Reach (1,199% increase)",
-    "+23,062 Instagram Followers (0.74% increase)",
-    "+4,562 Instagram Interactions (574% increase)",
-    "+373,000 TikTok Views (1,863% increase)",
-    "+14,500 TikTok Followers (45% increase)",
-    "+23,597 TikTok Likes (3,281% increase)"
-  ],
+  // Modified results structure to match the expected format in components
+  results: {
+    instagram: [
+      { metric: "+32,127", description: "Instagram Reach", percentage: "1,199% increase" },
+      { metric: "+23,062", description: "Instagram Followers", percentage: "0.74% increase" },
+      { metric: "+4,562", description: "Instagram Interactions", percentage: "574% increase" },
+    ],
+    tiktok: [
+      { metric: "+373,000", description: "TikTok Views", percentage: "1,863% increase" },
+      { metric: "+14,500", description: "TikTok Followers", percentage: "45% increase" },
+      { metric: "+23,597", description: "TikTok Likes", percentage: "3,281% increase" },
+    ]
+  },
 
   skills: ["MARKET ANALYSIS", "SCHEDULING", "CONTENT STRATEGY", "CONTENT PRODUCTION"],
 

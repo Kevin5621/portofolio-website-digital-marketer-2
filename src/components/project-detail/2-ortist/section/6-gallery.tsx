@@ -61,7 +61,7 @@ export const GallerySection = ({
               onTouchEnd={handleTouchEnd}
             >
               
-              <div className={`coverflow-container ${isDragging ? 'dragging' : ''}`} ref={coverflowRef}>
+              <div className={`coverflow-container flex justify-center items-center ${isDragging ? 'dragging' : ''}`} ref={coverflowRef}>
                 {(() => {
                   // Calculate the median index
                   const projects = brandData.projects as Project[];
@@ -103,18 +103,26 @@ export const GallerySection = ({
                           transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`,
                           zIndex,
                           opacity,
-                          transition: `all 0.5s ${index * 0.1}s`, // Staggered
+                          transition: `all 0.5s ${index * 0.1}s`, // Staggeblue
                         }}
                       >
-                        <Image
-                          src={project.image}
-                          alt={`Album cover ${index + 1}`}
-                          width={240}
-                          height={240}
-                          className={`rounded shadow-lg transition-all duration-500 ${sectionViewed[5] ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
-                          style={{ transitionDelay: `${0.3 + index * 0.1}s` }}
-                          loading='lazy'
-                        />
+                        <div className="w-[240px] h-[240px] flex items-center justify-center">
+                          <Image
+                            src={project.image}
+                            alt={`Album cover ${index + 1}`}
+                            width={240}
+                            height={240}
+                            className={`rounded shadow-lg transition-all duration-500 ${sectionViewed[5] ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
+                            style={{ 
+                              transitionDelay: `${0.3 + index * 0.1}s`,
+                              objectFit: 'contain',
+                              maxHeight: '240px',
+                              width: 'auto',
+                              height: 'auto'
+                            }}
+                            loading='lazy'
+                          />
+                        </div>
                       </div>
                     );
                   });

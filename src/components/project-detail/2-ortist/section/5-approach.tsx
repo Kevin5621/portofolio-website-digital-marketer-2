@@ -103,13 +103,14 @@ export const ApproachSection = ({ brandData, sectionViewed, registerSection }: A
           className="py-16 bg-gradient-to-br from-gray-50 to-white"
         >
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Center-aligned flex container with fixed width cards */}
+            <div className="flex flex-row justify-center items-stretch gap-6 md:gap-10 overflow-visible">
               {brandData.marketingMethod.steps.map((step, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}
                   custom={index}
-                  className="group relative overflow-hidden"
+                  className="group relative w-[300px] md:w-[320px] transform transition-transform duration-300 hover:scale-105 hover:z-10"
                 >
                   {/* Top Corner Accent */}
                   <div className="absolute -top-10 -right-10 w-20 h-20 bg-blue-50 opacity-0 
