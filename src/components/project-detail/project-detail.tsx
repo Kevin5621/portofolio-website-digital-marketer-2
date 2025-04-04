@@ -28,13 +28,22 @@ export default function ProjectDetail({ projectId }: ProjectDetailProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [currentX, setCurrentX] = useState(0);
-  const [dragThreshold] = useState(50);
+  const [dragThreshold] = useState(30); // Reduced threshold for easier slide changes
   const coverflowRef = useRef<HTMLDivElement>(null);
   const [currentSection, setCurrentSection] = useState(0);
   const sectionsRef = useRef<(HTMLDivElement | null)[]>([]);
   const sectionTitles = ["Intro", "Expertise", "Strategy", "Results", "Approach", "Gallery", "Video", "Next"];
   const [nextProjectHovered, setNextProjectHovered] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0); // Will be set properly if brandData exists
+  
+  // Initialize activeSlide properly
+  const [activeSlide, setActiveSlide] = useState(() => {
+    // If brandData exists, set to median index, otherwise default to 0
+    if (brandData && brandData.projects) {
+      return Math.floor(brandData.projects.length / 2);
+    }
+    return 0;
+  });
+  
   const [sectionViewed, setSectionViewed] = useState<boolean[]>(
     Array(sectionTitles.length).fill(false)
   );
@@ -114,23 +123,21 @@ export default function ProjectDetail({ projectId }: ProjectDetailProps) {
 
   // Now we can safely use brandData
   const projects = brandData.projects;
-  const medianIndex = Math.floor(projects.length / 2);
-  
-  // Update activeSlide based on medianIndex if it's the initial render
-  if (activeSlide === 0 && medianIndex > 0) {
-    setActiveSlide(medianIndex);
-  }
   
   // Handle mouse drag events
   const handleDragStart = (e: React.MouseEvent) => {
     setIsDragging(true);
     setStartX(e.clientX);
     setCurrentX(e.clientX);
+    
+    // Prevent default behavior to avoid text selection during drag
+    e.preventDefault();
   };
 
   const handleDragMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
     setCurrentX(e.clientX);
+    e.preventDefault();
   };
 
   const handleDragEnd = () => {
@@ -150,6 +157,11 @@ export default function ProjectDetail({ projectId }: ProjectDetailProps) {
     }
     
     setIsDragging(false);
+    
+    // Reset transform on the coverflow container
+    if (coverflowRef.current) {
+      coverflowRef.current.style.transform = '';
+    }
   };
 
   // Handle touch events for mobile
@@ -171,16 +183,16 @@ export default function ProjectDetail({ projectId }: ProjectDetailProps) {
     handleDragEnd();
   };
 
-  // Change slide function (improved to handle drag)
+  // Change slide function 
   const handleSlideChange = (index: number) => {
     // Ensure index is within bounds
     const newIndex = Math.max(0, Math.min(index, projects.length - 1));
     setActiveSlide(newIndex);
   };
 
-  // Handle direct click on an item (avoid triggering on drag end)
+  // Handle direct click on an item 
   const handleSlideClick = (index: number) => {
-    if (Math.abs(currentX - startX) < 10) { // Only treat as click if barely moved
+    if (Math.abs(currentX - startX) < 10) {
       handleSlideChange(index);
     }
   };

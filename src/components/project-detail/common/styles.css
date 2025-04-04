@@ -9,11 +9,14 @@
   perspective: 1000px;
   transform-style: preserve-3d;
   transition: transform 0.3s ease-out;
+  will-change: transform;
+  overflow: visible !important;
 }
 
 .coverflow-container.dragging {
   cursor: grabbing;
   transition: none;
+  overflow: visible !important;
 }
 
 .coverflow-item {
@@ -24,6 +27,9 @@
   cursor: pointer;
   transition: all 0.5s ease-out;
   backface-visibility: hidden;
+  will-change: transform, opacity;
+  transform-origin: center center;
+  overflow: visible !important;
 }
 
 .coverflow-item img {
@@ -33,9 +39,16 @@
   border-radius: 4px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   pointer-events: none;
+  user-select: none;
 }
 
 /* Perspective container */
 .perspective-1000 {
   perspective: 1000px;
+  overflow: visible !important;
+}
+
+/* Ensure parent containers don't clip */
+section, div {
+  overflow: visible;
 }
