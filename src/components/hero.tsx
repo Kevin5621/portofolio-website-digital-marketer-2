@@ -13,7 +13,6 @@ const Hero = () => {
   const { scrollYProgress } = useScroll();
   
   // This will make the background scroll at a slower rate than the content
-  // Creating the "lagging behind" effect
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "300%"]);
   
   // Maintain the existing opacity effect but tie it to scroll progress
@@ -48,7 +47,7 @@ const Hero = () => {
           {/* Background image with parallax effect - Responsive positioning */}
           <motion.div 
             className="absolute inset-0 md:left-[-90px] md:top-[-100px]"
-            style={{ y: backgroundY }} // This creates the lag effect
+            style={{ y: backgroundY }}
           >
             <Image 
               src="/placeholder.png" 
@@ -190,104 +189,104 @@ const Hero = () => {
                 </div>
               </motion.div>
               
-              {/* Video Masked Through Text - Fixed Implementation */}
-              <div className="relative overflow-visible mx-auto" style={{ 
-                width: '90%',
-                maxWidth: '1600px',
-                transform: 'scale(1)',
-                transformOrigin: 'center center'
-              }}>
-                <h2 className="font-poppins font-black tracking-tighter leading-tight uppercase" style={{ 
-                  fontSize: '8vw',
-                  lineHeight: 1.2,
-                  padding: '0.5em 0',
-                  textSizeAdjust: '100%'
-                }}>
+              {/* Fixed Typography Section */}
+              <div className="relative mx-auto mt-8 overflow-visible" style={{ maxWidth: '1600px' }}>
+                <h2 className="font-poppins font-black tracking-tighter uppercase text-[8vw] leading-[1.2]">
                   {textRows.map((row, rowIndex) => (
-                    <div 
-                      key={rowIndex} 
-                      className="flex justify-center items-center space-x-4 md:space-x-8 my-4 md:my-6"
-                    >
+                    <div key={rowIndex} className="flex justify-center items-center my-4 md:my-6">
                       {row.map((word, index) => (
-                        <div key={index} className="relative inline-block">
+                        <div key={index} className="relative mx-2 md:mx-4 flex items-center">
                           {word.isDark ? (
-                            // Dark text for "TURNING" and "INTO"
-                            <span className="inline-block" style={{ color: "#18181b" }}>
+                            // Dark text with same styling as video text
+                            <span 
+                              className="inline-block" 
+                              style={{ 
+                                color: "#18181b",
+                                lineHeight: "1",
+                                fontSize: "8vw",
+                                fontWeight: "900"
+                              }}
+                            >
                               {word.text}
                             </span>
                           ) : (
-                            // Video text mask for "VISION" and "MOTION"
-                            <div 
-                              className="video-text-mask"
-                              style={{
-                                position: 'relative',
-                                display: 'inline-block',
-                              }}
-                            >
-                              {/* Similar video text mask implementation as before */}
+                            // Video text container
+                            <div className="relative" style={{ fontSize: "8vw", lineHeight: "1" }}>
+                              {/* Hidden text for layout */}
                               <span 
-                                className="inline-block relative z-10"
-                                style={{
-                                  background: `url('/filler/poster-frame.jpg')`,
-                                  WebkitBackgroundClip: 'text',
-                                  backgroundClip: 'text',
-                                  color: 'transparent',
-                                  WebkitTextFillColor: 'transparent',
-                                  backgroundSize: 'cover',
-                                  backgroundPosition: 'center'
+                                className="invisible"
+                                style={{ 
+                                  fontSize: "8vw",
+                                  fontWeight: "900",
+                                  lineHeight: "1"
                                 }}
                               >
                                 {word.text}
                               </span>
                               
-                              {/* SVG mask method */}
-                              <svg
-                                className="absolute top-0 left-0 w-full h-full"
-                                style={{ overflow: 'visible' }}
-                              >
-                                {/* Same SVG mask implementation as before */}
-                                <defs>
-                                  <mask id={`text-mask-${rowIndex}-${index}`}>
-                                    <rect width="100%" height="100%" fill="black" />
-                                    <text
-                                      x="50%"
-                                      y="50%"
-                                      dominantBaseline="middle"
-                                      textAnchor="middle"
-                                      fill="white"
-                                      fontSize="inherit"
-                                      fontWeight="inherit"
-                                      fontFamily="inherit"
-                                      letterSpacing="inherit"
-                                      style={{ 
-                                        fontSize: 'inherit', 
-                                        fontWeight: 'inherit', 
-                                        lineHeight: 'inherit',
-                                        textTransform: 'uppercase'
-                                      }}
-                                    >
-                                      {word.text}
-                                    </text>
-                                  </mask>
-                                </defs>
-                                <foreignObject
-                                  width="100%"
-                                  height="100%"
-                                  mask={`url(#text-mask-${rowIndex}-${index})`}
+                              {/* SVG mask for video */}
+                              <div className="absolute inset-0 flex items-center justify-center" style={{ height: "100%" }}>
+                                <svg width="100%" height="100%" style={{ overflow: "visible" }}>
+                                  <defs>
+                                    <mask id={`text-mask-${rowIndex}-${index}`}>
+                                      <rect width="100%" height="100%" fill="black" />
+                                      <text
+                                        x="50%"
+                                        y="50%"
+                                        dominantBaseline="central"
+                                        textAnchor="middle"
+                                        fill="white"
+                                        style={{ 
+                                          fontSize: "8vw", 
+                                          fontWeight: "900",
+                                          fontFamily: "Poppins, sans-serif",
+                                          letterSpacing: "-0.05em",
+                                          textTransform: "uppercase"
+                                        }}
+                                      >
+                                        {word.text}
+                                      </text>
+                                    </mask>
+                                  </defs>
+                                  <foreignObject
+                                    width="100%"
+                                    height="100%"
+                                    mask={`url(#text-mask-${rowIndex}-${index})`}
+                                  >
+                                    <div style={{ width: "100%", height: "100%" }}>
+                                      <video
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                      >
+                                        <source src="/filler/filler.mp4" type="video/mp4" />
+                                      </video>
+                                    </div>
+                                  </foreignObject>
+                                </svg>
+                              </div>
+                              
+                              {/* Fallback for video background */}
+                              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <span
+                                  style={{
+                                    background: `url('/filler/poster-frame.jpg')`,
+                                    WebkitBackgroundClip: 'text',
+                                    backgroundClip: 'text',
+                                    color: 'transparent',
+                                    WebkitTextFillColor: 'transparent',
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                    fontSize: "8vw",
+                                    fontWeight: "900",
+                                    lineHeight: "1"
+                                  }}
                                 >
-                                  <div className="w-full h-full">
-                                    <video
-                                      autoPlay
-                                      muted
-                                      loop
-                                      playsInline
-                                      className="w-full h-full object-cover"
-                                    >
-                                      <source src="/filler/filler.mp4" type="video/mp4" />
-                                    </video>
-                                  </div>
-                                </foreignObject>
-                              </svg>
+                                  {word.text}
+                                </span>
+                              </div>
                             </div>
                           )}
                         </div>
