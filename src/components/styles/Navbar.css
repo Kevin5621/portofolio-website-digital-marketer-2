@@ -1,15 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 .menu-item {
-  font-family: 'Roboto', sans-serif;
-  transition: font-family 0.5s ease, color 0.3s ease, transform 0.3s ease;
+  font-family: var(--font-primary);
+  transition: color 0.3s ease, transform 0.3s ease;
   position: relative;
   display: inline-block;
 }
 
 .menu-item:hover, .menu-item.active {
-  font-family: 'Great Vibes', cursive;
   color: #f0f0f0;
   transform: translateX(10px);
 }

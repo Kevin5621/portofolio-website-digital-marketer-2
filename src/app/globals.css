@@ -6,6 +6,9 @@
 :root {
   --foreground-rgb: 245, 245, 245;
   --background-rgb: 18, 18, 18;
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Poppins', sans-serif;
+  --font-accent: 'Poppins', sans-serif;
 }
 
 * {
@@ -24,14 +27,18 @@ html::-webkit-scrollbar {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-primary);
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-primary);
+}
+
+p, span, div, a, button, input, textarea {
+  font-family: var(--font-primary);
 }
 
 .container-custom {
