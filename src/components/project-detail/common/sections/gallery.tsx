@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { BrandData } from '../types';
 
@@ -33,8 +33,15 @@ export const GallerySection = ({
   handleSlideClick,
   coverflowRef
 }: GallerySectionProps) => {
+  const [hoveredSlide, setHoveredSlide] = useState<number | null>(null);
   const colorClass = `${brandData.primaryColor}-500`;
   const projects = brandData.projects;
+
+  const handleMouseEnter = (index: number) => {
+    setHoveredSlide(index); // Set the hover state to the image index
+  };
+
+  const slideToShow = hoveredSlide !== null ? hoveredSlide : activeSlide; // Use hoveredSlide if set, else fallback to activeSlide
 
   return (
     <section 
@@ -58,7 +65,6 @@ export const GallerySection = ({
         {/* Cover Flow Gallery */}
         <div 
           className={`relative h-96 w-full perspective-1000 transition-all duration-1000 overflow-visible ${sectionViewed[5] ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-          style={{ overflow: 'visible' }}
           onMouseDown={handleDragStart}
           onMouseMove={handleDragMove}
           onMouseUp={handleDragEnd}
@@ -70,34 +76,29 @@ export const GallerySection = ({
           <div 
             className={`coverflow-container flex justify-center items-center overflow-visible ${isDragging ? 'dragging' : ''}`} 
             ref={coverflowRef}
-            style={{ overflow: 'visible' }}
           >
             {projects.map((project, index) => {
-              const position = index - activeSlide;
+              const position = index - slideToShow;
               let zIndex = 10 - Math.abs(position);
-              
-              const translateX = position * 200; 
-              
-              const maxRotation = 35; 
+              const translateX = position * 200;
+              const maxRotation = 35;
               const rotateY = position > 0 
                 ? -Math.min(position * 35, maxRotation) 
                 : Math.min(Math.abs(position) * 35, maxRotation);
-              
               const translateZ = position === 0 ? 180 : -Math.abs(position) * 15;
-              
               let opacity = 1 - (Math.abs(position) * 0.15);
               opacity = Math.max(opacity, 0.6);
-              
+
               if (position === 0) {
                 zIndex = 20;
                 opacity = 1;
               }
-              
+
               return (
                 <div 
                   key={index}
                   className="coverflow-item overflow-visible"
-                  onClick={() => handleSlideClick(index)}
+                  onClick={() => handleSlideClick(index)} 
                   style={{
                     transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`,
                     zIndex,
@@ -105,10 +106,18 @@ export const GallerySection = ({
                     transition: isDragging ? 'none' : `all 0.5s ${index * 0.05}s`,
                     width: '260px',
                     height: '260px',
-                    overflow: 'visible'
+                    cursor: 'pointer'
                   }}
                 >
-                  <div className="w-full h-full flex items-center justify-center">
+                  <div 
+                    className="w-full h-full flex items-center justify-center relative" 
+                    onMouseEnter={() => handleMouseEnter(index)} 
+                    style={{
+                      transition: 'transform 0.3s ease-out', 
+                      display: 'inline-block',
+                      position: 'relative',
+                    }}
+                  >
                     <Image
                       src={project.image}
                       alt={project.title || `Project image ${index + 1}`}
@@ -122,9 +131,18 @@ export const GallerySection = ({
                         width: 'auto',
                         height: 'auto',
                         border: 'none',
-                        boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)'
+                        boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
+                        display: 'block', 
+                        cursor: 'pointer',
                       }}
                       loading='lazy'
+                    />
+                    {/* Hover effect area */}
+                    <div 
+                      className="absolute inset-0 bg-transparent"
+                      style={{
+                        transition: 'background-color 0.2s ease-out', 
+                      }}
                     />
                   </div>
                 </div>
